@@ -40,7 +40,10 @@
             height: 45px;
             width: 45px;
         }
-
+        #bar>ul>li>a {
+            text-decoration: none;
+            color: white;
+        }
         #bar>ul>li:hover {
             background-color: #333;
             cursor: pointer;
@@ -88,7 +91,11 @@
             text-shadow: 0px 0px 5px #72BFFFFF;
             color: white;
         }
-
+        #Dlogin>p{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         #Dlogin>button {
             width: 120px;
             height: 40px;
@@ -101,7 +108,8 @@
             box-shadow: 0px 0px 5px 5px #72BFFFFF;
             font-size: 16px;
         }
-        #qrlogin{
+
+        #qrlogin {
             width: 280px;
             height: 280px;
             position: relative;
@@ -110,6 +118,7 @@
             border-radius: 5px;
 
         }
+
         .Dclose {
             width: 20px;
             height: 20px;
@@ -144,7 +153,7 @@
             </div>
             <div id="bar" class="inline">
                 <ul class="inline">
-                    <li><a>主页</a></li>
+                    <li><a href="/Home">主页</a></li>
                     <li><a>关于</a></li>
                     <li><a>联系</a></li>
                 </ul>
@@ -164,6 +173,7 @@
             </svg>
             <div>登录</div>
             <div id="qrlogin" style="width: 280px;height: 280px;"></div>
+            <p>打开VV账号中心扫码功能，扫码登录</p>
             <button id="Slogin">登录</button>
         </dialog>
     </div>
