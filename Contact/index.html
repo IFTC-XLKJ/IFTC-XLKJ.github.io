@@ -40,10 +40,12 @@
             height: 45px;
             width: 45px;
         }
+
         #bar>ul>li>a {
             text-decoration: none;
             color: white;
         }
+
         #bar>ul>li:hover {
             background-color: #333;
             cursor: pointer;
@@ -68,11 +70,13 @@
             text-shadow: 0px 0px 5px #72BFFFFF;
             color: white;
         }
-        #Dlogin>p{
+
+        #Dlogin>p {
             display: flex;
             justify-content: center;
             align-items: center;
         }
+
         #Dlogin>button {
             width: 120px;
             height: 40px;
@@ -101,6 +105,10 @@
             height: 20px;
             float: right;
         }
+        #main > a{
+            text-decoration: none;
+            color: #333;
+        }
     </style>
     <script src="./login.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -110,7 +118,7 @@
             console.log(a);
             a.click();
             var div = document.querySelector("#main > div");
-            div.innerHTML = '已跳转至邮箱APP,发送邮件以联系官方'
+            div.innerHTML = '已跳转至邮箱APP，发送邮件以联系官方（如未成功跳转可点击上方邮箱地址手动跳转）';
         }
     </script>
 </head>
@@ -130,7 +138,7 @@
                 </ul>
             </div>
             <div id="main">
-                <a href="mailto:iftcceo@139.com?subject=联系官方&body=-在此键入要发送的内容-"></a>
+                <a href="mailto:iftcceo@139.com?subject=联系官方&body=-在此键入要发送的内容-">iftcceo@139.com</a>
                 <div>正在跳转到邮箱APP...</div>
             </div>
         </div>
