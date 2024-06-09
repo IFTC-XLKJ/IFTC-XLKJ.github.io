@@ -1,0 +1,220 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=360px, initial-scale=1.0">
+    <script src="https://static.pgaot.com/Assets/js/jquery-2.2.4.min.js"></script>
+    <script src="https://static.pgaot.com/Assets/js/sipg_jcokxlcsd9.js"></script>
+    <script src="https://static.pgaot.com/Assets/js.class/pgdbs.class.js"></script>
+    <script src="https://shequ.pgaot.com/AdminPages/pages/Mysqldb/vip/pickduckDBJQ.a6b2a4d6c02022e831626d31ab805a468a151b90d5161660485a73cc6e1ea902.js"></script>
+    <style>
+        #root {
+            position: fixed;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            margin: auto;
+            width: 360px;
+            height: 640px;
+            user-select: none;
+        }
+        
+        .loader {
+            width: 60px;
+            aspect-ratio: 4;
+            --c: #FFFFFFFF 90%, #0000;
+            background: radial-gradient(circle closest-side at left 6px top 50%, var(--c)), radial-gradient(circle closest-side, var(--c)), radial-gradient(circle closest-side at right 6px top 50%, var(--c));
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            animation: l4 1s infinite alternate;
+        }
+        
+        @keyframes l4 {
+            to {
+                width: 25px;
+                aspect-ratio: 1
+            }
+        }
+        
+        #mask {
+            position: relative;
+            top: 0px;
+            left: 0px;
+            width: 360px;
+            height: 640px;
+            display: flex;
+        }
+        
+        #loading {
+            width: 120px;
+        }
+        
+        #tip_signed,
+        #tip_success {
+            width: 180px;
+        }
+        
+        #loading,
+        #tip_signed,
+        #tip_success {
+            background-color: #333;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            function dialogcenter(e) {
+                e.style.top = `${320 - (loading.offsetHeight / 2)}px`;
+            }
+            dialogcenter(loading);
+            var vvzh = new pgdbs(dbs_a6b2a4d6c02022e831626d31ab805a468a151b90d5161660485a73cc6e1ea902);
+            console.log(vvzh);
+            var urlParams = new URLSearchParams(window.location.search);
+            var params = {};
+            for (const [key, value] of urlParams) {
+                params[key] = value;
+            }
+            var jsonData = params;
+            jsonData.ID = 258240228;
+            console.log(jsonData);
+            var userData;
+
+            function getYear(timestamp) {
+                var date = new Date(timestamp);
+                var year = date.getFullYear();
+                return year;
+            }
+
+            function getMonth(timestamp) {
+                var date = new Date(timestamp);
+                var month = date.getMonth() + 1;
+                return month;
+            }
+
+            function getDay(timestamp) {
+                var date = new Date(timestamp);
+                var day = date.getDate();
+                return day;
+            }
+
+            function isSigned(timestamp0, timestamp1) {
+                var date = new Date();
+                var year0 = getYear(timestamp0);
+                var year1 = getYear(timestamp1);
+                console.log('年', year0, year1)
+                if (year0 == year1) {
+                    var month0 = getMonth(timestamp0);
+                    var month1 = getMonth(timestamp1);
+                    console.log('月', month0, month1)
+                    if (month0 == month1) {
+                        var day0 = getDay(timestamp0);
+                        var day1 = getDay(timestamp1);
+                        console.log('日', day0, day1)
+                        if (day0 == day1) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            }
+
+            function getUserData() {
+                vvzh.onGetData((json, id, url) => {
+                    if (id == "getUserData") {
+                        if (json.code == 200) {
+                            console.log(json);
+                            var userData = json.fields[0];
+                            localStorage.setItem('V币', userData.V币)
+                            console.log(userData);
+                            console.log('当前时间戳', Date.now())
+                            console.log(isSigned(userData.签到, Date.now()));
+                            if (userData.签到 == 0) {
+                                console.log("还没签到")
+                                sign();
+                            } else {
+                                if (!isSigned(userData.签到, Date.now())) {
+                                    console.log("还没签到");
+                                    sign();
+                                } else {
+                                    console.log("已签过到");
+                                    dialogcenter(tip_signed);
+                                    tip_signed.show();
+                                    loading.close();
+                                }
+                            }
+                        } else {
+                            getUserData();
+                        }
+                    }
+                });
+                setTimeout(() => {
+                    vvzh.getTableData({
+                        page:1,
+                        limit:30,
+                        filter:`ID='${jsonData.ID}'`,
+                        id:'getUserData'
+                    });
+                }, 200)
+            }
+
+            function sign() {
+                vvzh.onGetData((json, id, url) => {
+                    if (id == "sign") {
+                        console.log(json)
+                        if (json.code == 200) {
+                            console.log("签到成功");
+                            dialogcenter(tip_success);
+                            loading.close();
+                            tip_success.show();
+                        } else {
+                            console.log("签到失败");
+                            sign();
+                        }
+                    }
+                })
+                setTimeout(() => {
+                    //var date = new Date();
+                    console.log(Date.now())
+                    vvzh.setTableData({
+                        type:"UPDATE",
+                        filter:`ID='${jsonData.ID}'`,
+                        fields:`签到='${Date.now()}',V币='${parseInt(localStorage.getItem('V币')) + 5}'`,
+                        id:"sign"
+                    });
+                }, 200)
+            }
+            setTimeout(getUserData(), 1800);
+        }
+    </script>
+</head>
+
+<body style="margin: 0px;width: 100vw;height: 100vh;">
+    <div id="root">
+        <dialog id="tip_signed">
+            <h1 style="color: white;text-align: center;">提示</h1>
+            <p style="color: white;text-align: center;">你已签过到了</p>
+        </dialog>
+        <dialog id="tip_success">
+            <h1 style="color: white;text-align: center;">提示</h1>
+            <p style="color: white;text-align: center;">签到成功</p>
+        </dialog>
+        <div id="mask">
+            <dialog id="loading" open>
+                <div style="display: flex;justify-content: center;align-items: center;margin: 20px;height: 30px;">
+                    <div class="loader" id="loader"></div>
+                </div>
+                <div style="color: white;text-align: center;user-select: none;">loading</div>
+            </dialog>
+        </div>
+    </div>
+</body>
+
+</html>
