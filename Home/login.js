@@ -60,7 +60,6 @@ document.addEventListener('DOMContentLoaded', function () {
 						width: 250,
 						height: 250,
 					});
-					qrlogin.style.display = "flex important";
 				} else {
 					alert('请点击黑色方框内重试');
 				}
@@ -89,7 +88,6 @@ document.addEventListener('DOMContentLoaded', function () {
 						width: 250,
 						height: 250,
 					});
-					qrlogin.style.display = "flex important";
 				} else {
 					alert('请点击黑色方框内重试');
 				}
