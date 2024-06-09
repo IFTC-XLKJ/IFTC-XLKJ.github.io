@@ -74,11 +74,11 @@ document.addEventListener('DOMContentLoaded', function () {
 	})
 	qrlogin.addEventListener('click', function () {
 		console.log("click", ms);
-		qrlogin.innerHTML = "";
 		weblogin.onGetData((json, id, url) => {
 			if (id == 'add') {
 				console.log(json);
 				if (json.code == 200) {
+					qrlogin.innerHTML = "";
 					const qrcodeDiv = document.getElementById('qrlogin');
 					localStorage.setItem('qrtime', Date.now());
 					const text = `{"time":${localStorage.getItem('qrtime')},"type":"login"}`;
