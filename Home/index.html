@@ -89,17 +89,6 @@
             color: white;
         }
 
-        #Dlogin>input {
-            width: 280px;
-            height: 48px;
-            margin: 20px 0 0 0;
-            border: none;
-            border-radius: 5px;
-            outline: none;
-            box-shadow: 0px 0px 5px 5px #72BFFFFF;
-            font-size: 18px;
-        }
-
         #Dlogin>button {
             width: 120px;
             height: 40px;
@@ -112,7 +101,15 @@
             box-shadow: 0px 0px 5px 5px #72BFFFFF;
             font-size: 16px;
         }
+        #qrlogin{
+            width: 280px;
+            height: 280px;
+            position: relative;
+            left: 10px;
+            border: 1px solid #333;
+            border-radius: 5px;
 
+        }
         .Dclose {
             width: 20px;
             height: 20px;
@@ -120,6 +117,7 @@
         }
     </style>
     <script src="./login.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script>
         window.onload = function () {
             document.getElementById("Blogin").addEventListener('click', function () {
@@ -129,6 +127,8 @@
             });
             document.getElementById("Dclose").addEventListener('click', function () {
                 var login = document.getElementById('Dlogin');
+                var qrlogin = document.getElementById('qrlogin');
+                qrlogin.innerHTML = "";
                 login.close();
             });
         }
@@ -155,7 +155,7 @@
         </div>
     </header>
     <div id="dialog">
-        <dialog id="Dlogin">
+        <dialog id="Dlogin" style="user-select: none;">
             <svg t="1717818234949" class="icon Dclose" id="Dclose" viewBox="0 0 1024 1024" version="1.1"
                 xmlns="http://www.w3.org/2000/svg" p-id="4285" width="200" height="200">
                 <path
@@ -163,8 +163,7 @@
                     p-id="4286" fill="#515151"></path>
             </svg>
             <div>登录</div>
-            <input type="text" placeholder="用户名" id="id">
-            <input type="password" placeholder="密码" id="pw">
+            <div id="qrlogin" style="width: 280px;height: 280px;"></div>
             <button id="Slogin">登录</button>
         </dialog>
     </div>
