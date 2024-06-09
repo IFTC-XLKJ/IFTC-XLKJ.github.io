@@ -2,7 +2,7 @@ var document = this.document;
 var window = this.window;
 console.log(window);
 console.log(document);
-window.onload = function () {
+document.addEventListener('DOMContentLoaded', function() {
 	console.log("onload");
     var Slogin = document.getElementById('Slogin');
     console.log(Slogin);
@@ -30,4 +30,4 @@ window.onload = function () {
     		document.write('Error:', error);
 		});
     })
-}
+});
