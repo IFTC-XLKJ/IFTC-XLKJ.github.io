@@ -1,6 +1,9 @@
 var document = this.document;
 var window = this.window;
+console.log(window);
+console.log(document);
 window.onload = function () {
+	console.log("onload");
     var Slogin = document.getElementById('Slogin');
     console.log(Slogin);
     Slogin.addEventListener('click', function () {
