@@ -106,17 +106,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script>
         window.onload = function () {
-            document.getElementById("Blogin").addEventListener('click', function () {
-                var login = document.getElementById('Dlogin');
-                console.log(login);
-                login.showModal();
-            });
-            document.getElementById("Dclose").addEventListener('click', function () {
-                var login = document.getElementById('Dlogin');
-                var qrlogin = document.getElementById('qrlogin');
-                qrlogin.innerHTML = "";
-                login.close();
-            });
+            var a = document.querySelector("#main > a");
+            console.log(a);
+            a.click();
+            var div = document.querySelector("#main > div");
+            div.innerHTML = '已跳转至邮箱APP'
         }
     </script>
 </head>
@@ -134,6 +128,10 @@
                     <li><a href="/About">关于</a></li>
                     <li><a href="/Contact">联系</a></li>
                 </ul>
+            </div>
+            <div id="main">
+                <a href="mailto:iftcceo@139.com?subject=联系官方&body=    -在此键入要发送的内容-"></a>
+                <div>正在跳转到邮箱APP...</div>
             </div>
         </div>
     </header>
