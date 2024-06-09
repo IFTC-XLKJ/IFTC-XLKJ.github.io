@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>IFTC</title>
+    <style>
+        #nav {
+            width: calc(100vw - 16px);
+            height: 60px;
+            background-color: black;
+        }
+
+        #logo,
+        #logo>img {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            border-radius: 25px;
+        }
+
+        #bar {
+            margin-top: 50%;
+        }
+
+        #bar>ul {
+            list-style-type: none;
+            color: white;
+            padding: 10px;
+            margin: 0px;
+            user-select: none;
+            position: relative;
+            top: -25px;
+        }
+
+        #bar>ul>li {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            height: 45px;
+            width: 45px;
+        }
+        #bar>ul>li>a {
+            text-decoration: none;
+            color: white;
+        }
+        #bar>ul>li:hover {
+            background-color: #333;
+            cursor: pointer;
+        }
+
+        .inline {
+            display: inline;
+        }
+
+        #Dlogin {
+            width: 300px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #Dlogin>div {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            text-shadow: 0px 0px 5px #72BFFFFF;
+            color: white;
+        }
+        #Dlogin>p{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #Dlogin>button {
+            width: 120px;
+            height: 40px;
+            position: relative;
+            left: 30%;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: white;
+            box-shadow: 0px 0px 5px 5px #72BFFFFF;
+            font-size: 16px;
+        }
+
+        #qrlogin {
+            width: 280px;
+            height: 280px;
+            position: relative;
+            left: 10px;
+            border: 1px solid #333;
+            border-radius: 5px;
+
+        }
+
+        .Dclose {
+            width: 20px;
+            height: 20px;
+            float: right;
+        }
+    </style>
+    <script src="./login.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        window.onload = function () {
+            document.getElementById("Blogin").addEventListener('click', function () {
+                var login = document.getElementById('Dlogin');
+                console.log(login);
+                login.showModal();
+            });
+            document.getElementById("Dclose").addEventListener('click', function () {
+                var login = document.getElementById('Dlogin');
+                var qrlogin = document.getElementById('qrlogin');
+                qrlogin.innerHTML = "";
+                login.close();
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <div id="nav">
+            <div id="logo" class="inline">
+                <img class="inline"
+                    src="https://creation.codemao.cn//490/YW5kXzEwMDFfMjU4MjQwMjI4XzBfMTcxMzA5NzI1MzU1MF8zcVI5Sk1Ycw==.jpg">
+            </div>
+            <div id="bar" class="inline">
+                <ul class="inline">
+                    <li><a href="/Home">主页</a></li>
+                    <li><a href="/About">关于</a></li>
+                    <li><a>联系</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div id="dialog">
+    </div>
+</body>
+
+</html>
