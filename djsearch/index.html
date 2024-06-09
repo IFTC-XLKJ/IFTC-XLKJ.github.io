@@ -379,7 +379,7 @@
                         document.getElementById('results').innerHTML = 'An error occurred while fetching all short dramas data';
                     });
             }
-            if (urlParams.s) {
+            if (urlParams.s && urlParams.s != '') {
                 console.log(urlParams.s);
                 var searchText = document.getElementById('searchText');
                 searchText.value = urlParams.s;
