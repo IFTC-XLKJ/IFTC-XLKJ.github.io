@@ -11,20 +11,47 @@ document.addEventListener('DOMContentLoaded', function () {
 	console.log(weblogin);
 	Slogin.addEventListener('click', function () {
 		console.log("click");
-		weblogin.onGetData((json, id ,url) =>{
-			alert(JSON.stringify(json));
+		weblogin.onGetData((json, id, url) => {
+			if (id == 'login') {
+				console.log(json);
+				if (json.code == 200) {
+					if (json.fields.length == 0) {
+						alert('登录失败');
+					} else {
+						alert('登录成功');
+					}
+				} else {
+					alert('登录失败');
+				}
+			}
 		});
-		weblogin.getTableData({page:1,limit:30,id:'getTableData'})
+		weblogin.getTableData({ page: 1, limit: 100, id: 'login', filter: `time='${localStorage.getItem('qrtime')}'` })
 	})
 	Blogin.addEventListener('click', function () {
 		console.log("click");
-		const qrcodeDiv = document.getElementById('qrlogin');
-		const text = `{"time":${Date.now()},"type":"login"}`;
-		console.log(JSON.parse(text));
-		new QRCode(qrcodeDiv, {
-			text: text,
-			width: 250,
-			height: 250,
-		});
+		function AddLD() {
+			weblogin.onGetData((json, id, url) => {
+				if (id == 'add') {
+					console.log(json);
+					if (json.code == 200) {
+						const qrcodeDiv = document.getElementById('qrlogin');
+						localStorage.setItem('qrtime', Date.now());
+						const text = `{"time":${localStorage.getItem('qrtime')},"type":"login"}`;
+						console.log(JSON.parse(text));
+						new QRCode(qrcodeDiv, {
+							text: text,
+							width: 250,
+							height: 250,
+						});
+					} else {
+						AddLD();
+					}
+				}
+			});
+			setTimeout(() => {
+				weblogin.setTableData({ type: 'INSERT', filter: `('${localStorage.getItem('qrtime')}')`, fields: 'time', id: 'add' });
+			}, 200);
+		}
+		AddLD();
 	})
 });
