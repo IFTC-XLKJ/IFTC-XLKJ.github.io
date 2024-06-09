@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const urlParams = getURLParameters();
-    console.log(urlParams);;
+    console.log(urlParams);
     if (urlParams['page']) {
         console.log(urlParams['page']);
         window.location.href = `./${urlParams['page']}`;
