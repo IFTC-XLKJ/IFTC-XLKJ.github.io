@@ -176,7 +176,7 @@
     <script>
 
         function getURLParameters() {
-            const queryString = window.location.search.substring(1); // 移除问号
+            const queryString = window.location.search.substring(1);
             const params = {};
 
             if (queryString) {
@@ -191,7 +191,6 @@
 
         const urlParams = getURLParameters();
         function searchAPI() {
-            // 清除“全部短剧”页面的查询结果
             allShortDramasData = [];
             currentPage = -1;
             document.getElementById('pagination').innerHTML = '';
@@ -224,9 +223,9 @@
             dailyUpdate();
 
             setTimeout(() => {
-                const content = "这里是每日更新内容，可以根据实际情况修改"; // 可以根据实际情况修改每日更新内容
+                const content = "这里是每日更新内容，可以根据实际情况修改";
                 downloadTxtFile("update.txt", content);
-            }, 2000); // 等待2秒，确保更新完成后再生成文件并下载
+            }, 2000);
         }
 
         function downloadTxtFile(filename, content) {
@@ -234,13 +233,12 @@
             const file = new Blob([content], { type: 'text/plain' });
             element.href = URL.createObjectURL(file);
             element.download = filename;
-            document.body.appendChild(element); // 兼容Firefox
+            document.body.appendChild(element);
             element.click();
             document.body.removeChild(element);
         }
 
         function dailyUpdate() {
-            // 清除“全部短剧”页面的查询结果
             allShortDramasData = [];
             currentPage = -1;
             document.getElementById('pagination').innerHTML = '';
@@ -249,7 +247,7 @@
                 .then(response => response.json())
                 .then(data => {
                     const resultsDiv = document.getElementById('results');
-                    resultsDiv.innerHTML = ''; // 清空先前的结果
+                    resultsDiv.innerHTML = '';
 
                     if (data.code === 1) {
                         if (data.data && Array.isArray(data.data)) {
@@ -284,7 +282,7 @@
             const currentPageData = allShortDramasData.slice(startIndex, endIndex);
 
             const resultsDiv = document.getElementById('results');
-            resultsDiv.innerHTML = ''; // 清空之前的结果
+            resultsDiv.innerHTML = '';
 
             currentPageData.forEach(item => {
                 const name = item.name;
