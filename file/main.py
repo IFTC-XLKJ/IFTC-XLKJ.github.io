@@ -4,9 +4,9 @@ import os
 import json
 
 from vika import Vika
-vika = Vika("uskWED5bEniUSC8nyCmavZ3")
+vika = Vika("API Token")
 #通过 datasheetId 来指定要从哪张维格表操作数据。
-datasheet = vika.datasheet("dstEB3X1XcovJko4WR", field_key="id")
+datasheet = vika.datasheet("表ID", field_key="id")
 
 root = tk.Tk()
 root.withdraw()
