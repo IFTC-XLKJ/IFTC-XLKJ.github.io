@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 success: function (data) {
                                     console.log(data);
                                     var cover = document.querySelector('#player-cover > img');
-                                    cover.src = data.cover;
+                                    cover.src = data.data.cover;
                                 },
                                 error: function (data) {
                                     console.log(data);
