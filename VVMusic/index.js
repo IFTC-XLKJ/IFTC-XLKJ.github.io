@@ -2,7 +2,7 @@ var docuemnt = this.document;
 var window = this.window;
 
 function SearchAPI(name, pagesize, page, n) {
-    return `https://api.xingzhige.com/API/NetEase_CloudMusic_new/?name=${name}&pagesize=${pagesize}&page=${page}${n > 0 && 0 % 1 === 0 ? `&n=${n}` : ''}`
+    return `https://api.xingzhige.com/API/NetEase_CloudMusic_new/?name=${name}&pagesize=${pagesize}&page=${page}${n > 0 && 0 % 1 === 0 ? `&n=${n}` : ''}`;
 }
 document.addEventListener('DOMContentLoaded', () => {
     var search = document.querySelector('#s > button');
@@ -18,9 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 success: function(data) {
                     var result = data.data;
-                    console.log(result);
+                    console.log('结果：', result);
                     var music = document.getElementById('music');
                     music.innerHTML = '';
+                    if(result.code){console.log(true);}
                     result.forEach(item => {
                         music.innerHTML += `
                         <div class="music-item">
