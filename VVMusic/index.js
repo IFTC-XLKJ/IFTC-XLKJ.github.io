@@ -6,6 +6,8 @@ function SearchAPI(name, pagesize, page, n) {
     return `https://api.xingzhige.com/API/NetEase_CloudMusic_new/?name=${name}&pagesize=${pagesize}&page=${page}${n > 0 && 0 % 1 === 0 ? `&n=${n}` : ''}`;
 }
 document.addEventListener('DOMContentLoaded', () => {
+    var winwidth = window.innerWidth;
+    var winheight = window.innerHeight;
     var search = document.querySelector('#s > button');
     function getMusic() {
         var keyword = document.querySelector('#s > input').value;
