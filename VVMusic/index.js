@@ -34,9 +34,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                         `;
                     });
+                    var page = docuemnt.getElementById('page');
+                    page.innerHTML = `<button class='page'></button>`;
                 },
                 error: function(err) {
-                    console.log(err);
+                    var page = docuemnt.getElementById('page');
+                    page.innerHTML = ``;
+                    var music = document.getElementById('music');
+                    music.innerHTML = `Error:${err}`;
                 }
             });
         }
