@@ -8,6 +8,12 @@ function SearchAPI(name, pagesize, page, n) {
 document.addEventListener('DOMContentLoaded', () => {
     var winwidth = window.innerWidth;
     var winheight = window.innerHeight;
+    var app = document.querySelector('#app');
+    app.style.width = winwidth + 'px';
+    app.style.height = (winheight - 60) + 'px';
+    var player = document.querySelector('#player');
+    player.style.width = winwidth + 'px';
+    player.style.height = 60 + 'px';
     var search = document.querySelector('#s > button');
     function getMusic() {
         var keyword = document.querySelector('#s > input').value;
@@ -75,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     music.innerHTML = `Error:${err}`;
                 }
             });
-            window.scrollTo({
+            app.scrollTo({
                 top: 0, 
                 behavior: 'smooth'
             });
@@ -92,6 +98,12 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 window.addEventListener('resize', function () {
-    var newWidth = window.innerWidth;
-    console.log('窗口大小发生了变化！', `宽：${newWidth}px`);
+    var winwidth = window.innerWidth;
+    var winheight = window.innerHeight;
+    var app = document.querySelector('#app');
+    app.style.width = winwidth + 'px';
+    app.style.height = (winheight - 60) + 'px';
+    var player = document.querySelector('#player');
+    player.style.width = winwidth + 'px';
+    player.style.height = 60 + 'px';
 });
