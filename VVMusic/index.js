@@ -1,3 +1,6 @@
+var docuemnt = this.document;
+var window = this.window;
+
 function SearchAPI(name, pagesize, page, n) {
     return `https://api.xingzhige.com/API/NetEase_CloudMusic_new/?name=${name}&pagesize=${pagesize}&page=${page}${n > 0 && 0 % 1 === 0 ? `&n=${n}` : ''}`
 }
@@ -47,3 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 })
+
+window.addEventListener('resize', function() {
+    console.log('窗口大小发生了变化！');
+});
