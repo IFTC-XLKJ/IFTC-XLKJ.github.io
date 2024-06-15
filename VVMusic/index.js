@@ -3,7 +3,10 @@ var window = this.window;
 var pageNum = 1;
 var pagesize = 100;
 function SearchAPI(name, pagesize, page, n) {
-    return `https://api.xingzhige.com/API/NetEase_CloudMusic_new/?name=${name}&pagesize=${pagesize}&page=${page}${n > 0 && 0 % 1 === 0 ? `&n=${n}` : ''}`;
+    return `https://api.xingzhige.com/API/NetEase_CloudMusic_new/?name=${name}&pagesize=${pagesize}&page=${page}`;
+}
+function getURLAPI(ID){
+    return `https://api.xingzhige.com/API/NetEase_CloudMusic_new/?songid=${ID}`;
 }
 document.addEventListener('DOMContentLoaded', () => {
     var winwidth = window.innerWidth;
@@ -33,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (result.code) { console.log(true); }
                     result.forEach(item => {
                         music.innerHTML += `
-                        <div class="music-item" data-id="${item.id}" data-name='${item.songname}' data-pagesize='${pagesize}' data-page='${pageNum}'>
+                        <div class="music-item" data-id="${item.id}" data-name='${item.songname}' data-pagesize='${pagesize}' data-page='${pageNum}' data-author='${item.name}'>
                             <div class="music-item-img">
                                 <img src="${item.cover}" alt="${item.songname}" title="${item.songname} - ${item.name}">
                             </div>
@@ -70,7 +73,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     Array.from(musiclist).forEach(function (item) {
                         item.addEventListener('click', function () {
                             var ID = Number(this.dataset.id);
-                            console.log(item, ID);
+                            var name = this.dataset.name;
+                            var author = this.dataset.author;
+                            console.log(item, ID, name, author);
+                            $.ajax({
+                                url: getURLAPI(ID),
+                                type: 'GET',
+                                success: function (data) {
+                                    console.log(data);
+                                    var cover = document.querySelector('#player-cover > img');
+                                    cover.src = data.cover;
+                                },
+                                error: function (data) {
+                                    console.log(data);
+                                }
+                            })
                         })
                     })
                 },
