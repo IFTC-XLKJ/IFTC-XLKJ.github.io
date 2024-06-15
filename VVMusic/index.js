@@ -25,6 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <img src="${item.cover}" alt="${item.songname}" title="${item.songname} - ${item.name}">
                             </div>
                             <div class="music-item-info">
+                                <div class="music-item-name">${item.songname}</div>
+                                <div class="music-item-author">${item.name}</div>
                             </div>
                         </div>
                         `;
