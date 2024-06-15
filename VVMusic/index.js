@@ -58,5 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 window.addEventListener('resize', function() {
-    console.log('窗口大小发生了变化！');
+    var newWidth = window.innerWidth;
+    console.log('窗口大小发生了变化！', `宽：${newWidth}px`);
 });
