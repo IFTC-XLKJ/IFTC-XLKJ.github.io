@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(keyword){
             console.log(keyword);
             $.ajax({
-                url: SearchAPI(keyword, 10, 1),
+                url: SearchAPI(keyword, 100, 1),
                 type: 'GET',
                 data: {
                     keyword: keyword
