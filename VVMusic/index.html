@@ -7,11 +7,12 @@
     <script src="./index.js"></script>
     <script src="//iftc-xlkj.github.io/jquery-2.2.4.min.js"></script>
     <style>
-        body{
+        body {
             user-select: none;
             -webkit-user-drag: none;
             user-zoom: none;
         }
+
         #s {
             width: 100vw;
             height: 100px;
@@ -49,7 +50,7 @@
             display: grid;
             grid-template-columns: 120px 1fr;
             grid-template-rows: auto auto;
-            grid-gap: 10px; 
+            grid-gap: 10px;
             transition: transform 0.7s;
         }
 
@@ -59,11 +60,15 @@
             border-radius: 5px;
             border: 1px solid #333;
         }
-        .music-item:hover{
+
+        .music-item:hover {
             box-shadow: 0px 0px 5px 5px rgba(51, 51, 51, 0.5);
             cursor: pointer;
             border-radius: 5px;
             transform: scale(1.03);
+        }
+        .music-item-name{
+            font-size: 24px;
         }
     </style>
 </head>
