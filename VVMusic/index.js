@@ -1,6 +1,7 @@
 var docuemnt = this.document;
 var window = this.window;
-
+var pageNum = 1;
+var pagesize = 100;
 function SearchAPI(name, pagesize, page, n) {
     return `https://api.xingzhige.com/API/NetEase_CloudMusic_new/?name=${name}&pagesize=${pagesize}&page=${page}${n > 0 && 0 % 1 === 0 ? `&n=${n}` : ''}`;
 }
@@ -11,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (keyword) {
             console.log(keyword);
             $.ajax({
-                url: SearchAPI(keyword, 100, 1),
+                url: SearchAPI(keyword, pagesize, pageNum),
                 type: 'GET',
                 data: {
                     keyword: keyword
@@ -24,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (result.code) { console.log(true); }
                     result.forEach(item => {
                         music.innerHTML += `
-                        <div class="music-item">
+                        <div class="music-item" data-id="${item.id}" data-name='${item.songname}' data-pagesize='${pagesize}' data-page='${pageNum}'>
                             <div class="music-item-img">
                                 <img src="${item.cover}" alt="${item.songname}" title="${item.songname} - ${item.name}">
                             </div>
@@ -37,14 +38,31 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                     var page = docuemnt.getElementById('page');
                     page.innerHTML = `
-                    <button class='page' id='previous'>上一页</button>
-                    <input type='number' id='page-input' value='${pageNum}'>
-                    <button class='page' id='next'>下一页</button>
+                    <button class='page left' id='previous'>上一页</button>
+                    <input type='number' min='1' id='page-input' value='${pageNum}'>
+                    <button class='page right' id='next'>下一页</button>
                     `;
+                    var pageInput = document.getElementById('page-input');
+                    pageInput.oninput = () => {
+                        if (pageInput.value <= 0) {
+                            pageInput.value = pageNum;
+                        } else if (pageInput.value > pageNum) {
+                            pageNum = pageInput.value;
+                        }
+                    };
+                    pageInput.addEventListener('keyup', (e) => {
+                        if (e.key == 'Enter') {
+                            getMusic();
+                        }
+                    })
+                    pageInput.addEventListener('change', (e) => {
+                        getMusic();
+                    })
                     var musiclist = document.getElementsByClassName('music-item');
-                    musiclist.forEach(function (item) {
+                    Array.from(musiclist).forEach(function (item) {
                         item.addEventListener('click', function () {
-                            console.log(item);
+                            var ID = Number(this.dataset.id);
+                            console.log(item, ID);
                         })
                     })
                 },
@@ -55,13 +73,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     music.innerHTML = `Error:${err}`;
                 }
             });
+            window.scrollTo({
+                top: 0, 
+                behavior: 'smooth'
+            });
         }
     }
     search.addEventListener('click', () => {
         getMusic();
     })
     document.querySelector('#s > input').addEventListener('keyup', (e) => {
-        if (e.keyCode == 13) {
+        if (e.key == 'Enter') {
             getMusic();
         }
     })
