@@ -105,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                         name.innerHTML = data.songname;
                                         author.innerHTML = data.name;
                                         audio.src = data.src;
+                                        audio.loop = true;
                                         audio.play();
                                         console.log(audio);
                                     }
