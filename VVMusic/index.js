@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 type: 'GET',
                                 success: function (data) {
                                     console.log(data);
-                                    if (data.code) {
+                                    if (data.code == 0) {
                                         var data = data.data;
                                         var cover = document.querySelector('#player-cover > img');
                                         cover.src = data.cover;
