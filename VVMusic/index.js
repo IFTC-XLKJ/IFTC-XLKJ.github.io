@@ -118,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                         cover.src = data.cover;
                                         var favicon = document.getElementById('favicon');
                                         console.log(favicon);
+                                        favicon.href = data.cover;
                                         cover.alt = `${data.songname} - ${data.name}`;
                                         cover.title = `${data.songname} - ${data.name}`;
                                         docuemnt.title = `${data.songname} - ${data.name}`;
