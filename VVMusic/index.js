@@ -118,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                         cover.src = data.cover;
                                         cover.alt = `${data.songname} - ${data.name}`;
                                         cover.title = `${data.songname} - ${data.name}`;
+                                        docuemnt.title = `${data.songname} - ${data.name}`;
                                         var name = document.querySelector('#player-name');
                                         var author = document.querySelector('#player-author');
                                         name.innerHTML = data.songname;
