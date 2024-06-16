@@ -81,10 +81,11 @@ document.addEventListener('DOMContentLoaded', () => {
                                 type: 'GET',
                                 success: function (data) {
                                     console.log(data);
+                                    var data = data.data;
                                     var cover = document.querySelector('#player-cover > img');
-                                    cover.src = data.data.cover;
-                                    cover.alt = `${data.data.songname} - ${data.data.name}`;
-                                    cover.title = `${data.data.songname} - ${data.data.name}`;
+                                    cover.src = data.cover;
+                                    cover.alt = `${data.songname} - ${data.name}`;
+                                    cover.title = `${data.songname} - ${data.name}`;
                                 },
                                 error: function (data) {
                                     console.log(data);
