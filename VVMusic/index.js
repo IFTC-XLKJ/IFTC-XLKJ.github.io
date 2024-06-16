@@ -2,12 +2,29 @@ var docuemnt = this.document;
 var window = this.window;
 var pageNum = 1;
 var pagesize = 100;
+var playicon = '<svg t="1718518330674" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4283" width="200" height="200"><path d="M128 138.666667c0-47.232 33.322667-66.666667 74.176-43.562667l663.146667 374.954667c40.96 23.168 40.853333 60.8 0 83.882666L202.176 928.896C161.216 952.064 128 932.565333 128 885.333333v-746.666666z" fill="#3D3D3D" p-id="4284"></path></svg>';
+var pauseicon = '<svg t="1718518409100" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5269" width="200" height="200"><path d="M128 106.858667C128 94.976 137.621333 85.333333 149.12 85.333333h85.76c11.648 0 21.12 9.6 21.12 21.525334V917.12c0 11.882667-9.621333 21.525333-21.12 21.525333H149.12A21.290667 21.290667 0 0 1 128 917.141333V106.88z m640 0c0-11.882667 9.621333-21.525333 21.12-21.525334h85.76c11.648 0 21.12 9.6 21.12 21.525334V917.12c0 11.882667-9.621333 21.525333-21.12 21.525333h-85.76a21.290667 21.290667 0 0 1-21.12-21.525333V106.88z" fill="#3D3D3D" p-id="5270"></path></svg>';
 var audio = new Audio();
 function SearchAPI(name, pagesize, page, n) {
     return `https://api.xingzhige.com/API/NetEase_CloudMusic_new/?name=${name}&pagesize=${pagesize}&page=${page}`;
 }
 function getURLAPI(ID) {
     return `https://api.xingzhige.com/API/NetEase_CloudMusic_new/?songid=${ID}`;
+}
+
+function updatetime(){
+    var time = document.getElementById('player-progress-time');
+    audio.ontimeupdate = function () {
+        var currentTime = Math.ceil(audio.currentTime);
+        time.innerHTML = currentTime;
+    };
+}
+function totaltime(){
+    var totaltime = document.getElementById('player-progress-time-total');
+    audio.onloadedmetadata = function () {
+        var duration = Math.ceil(audio.duration);
+        totaltime.innerHTML = duration;
+    };
 }
 document.addEventListener('DOMContentLoaded', () => {
     var winwidth = window.innerWidth;
@@ -107,6 +124,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                         audio.src = data.src;
                                         audio.loop = true;
                                         audio.play();
+                                        totaltime();
+                                        updatetime();
                                         console.log(audio);
                                     }
                                 },
