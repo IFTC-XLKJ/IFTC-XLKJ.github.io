@@ -2,6 +2,7 @@ var docuemnt = this.document;
 var window = this.window;
 var pageNum = 1;
 var pagesize = 100;
+var audio = new Audio();
 function SearchAPI(name, pagesize, page, n) {
     return `https://api.xingzhige.com/API/NetEase_CloudMusic_new/?name=${name}&pagesize=${pagesize}&page=${page}`;
 }
@@ -103,6 +104,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                         var author = document.querySelector('#player-author');
                                         name.innerHTML = data.songname;
                                         author.innerHTML = data.name;
+                                        audio.src = data.src;
+                                        audio.play();
+                                        console.log(audio);
                                     }
                                 },
                                 error: function (data) {
