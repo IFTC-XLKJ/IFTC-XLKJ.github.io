@@ -5,7 +5,7 @@ var pagesize = 100;
 function SearchAPI(name, pagesize, page, n) {
     return `https://api.xingzhige.com/API/NetEase_CloudMusic_new/?name=${name}&pagesize=${pagesize}&page=${page}`;
 }
-function getURLAPI(ID){
+function getURLAPI(ID) {
     return `https://api.xingzhige.com/API/NetEase_CloudMusic_new/?songid=${ID}`;
 }
 document.addEventListener('DOMContentLoaded', () => {
@@ -69,6 +69,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     pageInput.addEventListener('change', (e) => {
                         getMusic();
                     })
+                    var previous = document.getElementById('previous');
+                    previous.addEventListener('click', (e) => {
+                        if (pageNum > 1) {
+                            pageNum--;
+                            getMusic();
+                        }
+                    })
+                    var next = document.getElementById('next');
+                    next.addEventListener('click', (e) => {
+                        pageNum++;
+                        getMusic();
+                    })
                     var musiclist = document.getElementsByClassName('music-item');
                     Array.from(musiclist).forEach(function (item) {
                         item.addEventListener('click', function () {
@@ -108,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
             app.scrollTo({
-                top: 0, 
+                top: 0,
                 behavior: 'smooth'
             });
         }
