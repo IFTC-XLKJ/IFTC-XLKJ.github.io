@@ -13,14 +13,14 @@ function getURLAPI(ID) {
     return `https://api.xingzhige.com/API/NetEase_CloudMusic_new/?songid=${ID}`;
 }
 
-function updatetime(){
+function updatetime() {
     var time = document.getElementById('player-progress-time');
     audio.ontimeupdate = function () {
         var currentTime = Math.ceil(audio.currentTime);
         time.innerHTML = currentTime;
     };
 }
-function totaltime(){
+function totaltime() {
     var totaltime = document.getElementById('player-progress-time-total');
     audio.onloadedmetadata = function () {
         var duration = Math.ceil(audio.duration);
@@ -128,11 +128,25 @@ document.addEventListener('DOMContentLoaded', () => {
                                         totaltime();
                                         updatetime();
                                         console.log(audio);
+                                        var play = document.getElementById("player-play");
+                                        play.addEventListener('click', () => {
+                                            if (isPlay) {
+                                                audio.pause();
+                                                isPlay = false;
+                                            } else {
+                                                audio.play();
+                                                isPlay = true;
+                                            }
+                                            console.log('状态：', isPlay);
+                                        })
+                                        play.innerHTML = pauseicon;
                                         audio.onplay = function () {
-                                            play = true;
+                                            isPlay = true;
+                                            play.innerHTML = pauseicon;
                                         }
                                         audio.onpause = function () {
-                                            play = false;
+                                            isPlay = false;
+                                            play.innerHTML = playicon;
                                         }
                                     }
                                 },
@@ -162,16 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#s > input').addEventListener('keyup', (e) => {
         if (e.key == 'Enter') {
             getMusic();
-        }
-    })
-    var play = document.querySelector('#plaer-play');
-    play.addEventListener('click', () => {
-        if(isPlay){
-            player.pause();
-            isPlay = false;
-        } else {
-            player.play();
-            isPlay = true;
         }
     })
 })
