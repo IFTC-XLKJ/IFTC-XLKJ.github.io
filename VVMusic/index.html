@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>VV音乐（使用网易云音乐API）</title>
     <script src="./index.js"></script>
+    <script src="./audioplayer.js"></script>
     <script src="//iftc-xlkj.github.io/jquery-2.2.4.min.js"></script>
     <style>
         body {
@@ -117,7 +118,7 @@
             background-color: #F0F0F0FF;
             border-radius: 20px;
             display: grid;
-            grid-template-columns: 50px 1fr;
+            grid-template-columns: 50px 12vw 0.99fr;
             grid-template-rows: auto auto;
             grid-gap: 10px;
         }
@@ -130,7 +131,11 @@
             left: 2.5px;
         }
         #player-info{
-
+            width: 12vw;
+            margin-top: 10px;
+        }
+        #player-controls {
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -151,6 +156,14 @@
         <div id="player-info">
             <div id="player-name">default</div>
             <div id="player-author">default</div>
+        </div>
+        <div id="player-controls">
+            <div id="player-progress">
+                <div id="player-progress-bar"></div>
+                <div id="player-progress-time">00:00</div>
+                <div id="player-progress-time-total">00:00</div>
+                <div id="player-progress-position"></div>
+            </div>
         </div>
     </div>
 </body>
