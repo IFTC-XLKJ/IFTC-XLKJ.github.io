@@ -117,8 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                         var cover = document.querySelector('#player-cover > img');
                                         cover.src = data.cover;
                                         var favicon = document.getElementById('favicon');
-                                        favicon.href = data.cover;
-
+                                        console.log(favicon);
                                         cover.alt = `${data.songname} - ${data.name}`;
                                         cover.title = `${data.songname} - ${data.name}`;
                                         docuemnt.title = `${data.songname} - ${data.name}`;
