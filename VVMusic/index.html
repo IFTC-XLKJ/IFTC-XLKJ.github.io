@@ -181,6 +181,15 @@
                 transform: rotate(360deg);
             }
         }
+        
+        #dialog{
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: none;
+        }
     </style>
 </head>
 
@@ -218,6 +227,10 @@
                 <div id="player-progress-position"></div>
             </div>
         </div>
+    </div>
+    <div id="dialog">
+        <dialog id="loading"></dialog>
+        <dialog id="tips"></dialog>
     </div>
 </body>
 
