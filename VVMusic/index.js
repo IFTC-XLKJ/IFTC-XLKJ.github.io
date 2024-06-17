@@ -36,16 +36,17 @@ document.addEventListener('DOMContentLoaded', () => {
     var player = document.querySelector('#player');
     player.style.width = winwidth + 'px';
     player.style.height = 60 + 'px';
-    var search = document.querySelector('#s > button');
+    var search = document.querySelector('#search');
+    var clear = document.querySelector('#clear');
+    var keyword = document.querySelector('#s > input');
     function getMusic() {
-        var keyword = document.querySelector('#s > input').value;
-        if (keyword) {
-            console.log(keyword);
+        if (keyword.value) {
+            console.log(keyword.value);
             $.ajax({
-                url: SearchAPI(keyword, pagesize, pageNum),
+                url: SearchAPI(keyword.value, pagesize, pageNum),
                 type: 'GET',
                 data: {
-                    keyword: keyword
+                    keyword: keyword.value
                 },
                 success: function (data) {
                     var result = data.data;
@@ -174,6 +175,9 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
+    clear.addEventListener('click', () => {
+        keyword.value = null;
+    })
     search.addEventListener('click', () => {
         getMusic();
     })
