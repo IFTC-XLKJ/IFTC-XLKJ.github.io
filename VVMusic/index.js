@@ -6,23 +6,26 @@ var playicon = '<svg t="1718518330674" class="icon" viewBox="0 0 1024 1024" vers
 var pauseicon = '<svg t="1718518409100" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5269" width="30" height="30"><path d="M128 106.858667C128 94.976 137.621333 85.333333 149.12 85.333333h85.76c11.648 0 21.12 9.6 21.12 21.525334V917.12c0 11.882667-9.621333 21.525333-21.12 21.525333H149.12A21.290667 21.290667 0 0 1 128 917.141333V106.88z m640 0c0-11.882667 9.621333-21.525333 21.12-21.525334h85.76c11.648 0 21.12 9.6 21.12 21.525334V917.12c0 11.882667-9.621333 21.525333-21.12 21.525333h-85.76a21.290667 21.290667 0 0 1-21.12-21.525333V106.88z" fill="#3D3D3D" p-id="5270"></path></svg>';
 var audio = new Audio();
 var isPlay = false;
+
 function SearchAPI(name, pagesize, page, n) {
     return `https://api.xingzhige.com/API/NetEase_CloudMusic_new/?name=${name}&pagesize=${pagesize}&page=${page}`;
 }
+
 function getURLAPI(ID) {
     return `https://api.xingzhige.com/API/NetEase_CloudMusic_new/?songid=${ID}`;
 }
 
 function updatetime() {
     var time = document.getElementById('player-progress-time');
-    audio.ontimeupdate = function () {
+    audio.ontimeupdate = function() {
         var currentTime = Math.ceil(audio.currentTime);
         time.innerHTML = currentTime;
     };
 }
+
 function totaltime() {
     var totaltime = document.getElementById('player-progress-time-total');
-    audio.onloadedmetadata = function () {
+    audio.onloadedmetadata = function() {
         var duration = Math.ceil(audio.duration);
         totaltime.innerHTML = duration;
     };
@@ -39,7 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
     var search = document.querySelector('#search');
     var clear = document.querySelector('#clear');
     var keyword = document.querySelector('#s > input');
+    var dialog = document.getElementById('dialog');
+    var loading = document.getElementById('loading');
+
     function getMusic() {
+        dialog.style.display = 'flex';
+        loading.showModal();
         if (keyword.value) {
             console.log(keyword.value);
             $.ajax({
@@ -48,12 +56,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 data: {
                     keyword: keyword.value
                 },
-                success: function (data) {
+                success: function(data) {
+                    dialog.style.display = 'none';
+                    loading.close();
                     var result = data.data;
                     console.log('结果：', result);
                     var music = document.getElementById('music');
                     music.innerHTML = '';
-                    if (result.code) { console.log(true); }
+                    if (result.code) {
+                        console.log(true);
+                    }
                     result.forEach(item => {
                         music.innerHTML += `
                         <div class="music-item" data-id="${item.id}" data-name='${item.songname}' data-pagesize='${pagesize}' data-page='${pageNum}' data-author='${item.name}'>
@@ -102,8 +114,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         getMusic();
                     })
                     var musiclist = document.getElementsByClassName('music-item');
-                    Array.from(musiclist).forEach(function (item) {
-                        item.addEventListener('click', function () {
+                    Array.from(musiclist).forEach(function(item) {
+                        item.addEventListener('click', function() {
                             var ID = Number(this.dataset.id);
                             var name = this.dataset.name;
                             var author = this.dataset.author;
@@ -111,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             $.ajax({
                                 url: getURLAPI(ID),
                                 type: 'GET',
-                                success: function (data) {
+                                success: function(data) {
                                     console.log(data);
                                     if (data.code == 0) {
                                         var data = data.data;
@@ -145,24 +157,26 @@ document.addEventListener('DOMContentLoaded', () => {
                                             console.log('状态：', isPlay);
                                         })
                                         play.innerHTML = pauseicon;
-                                        audio.onplay = function () {
+                                        audio.onplay = function() {
                                             isPlay = true;
                                             play.innerHTML = pauseicon;
                                         }
-                                        audio.onpause = function () {
+                                        audio.onpause = function() {
                                             isPlay = false;
                                             play.innerHTML = playicon;
                                         }
                                     }
                                 },
-                                error: function (data) {
+                                error: function(data) {
                                     console.log(data);
                                 }
                             })
                         })
                     })
                 },
-                error: function (err) {
+                error: function(err) {
+                    dialog.style.display = 'none';
+                    loading.close();
                     var page = docuemnt.getElementById('page');
                     page.innerHTML = ``;
                     var music = document.getElementById('music');
@@ -188,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 })
 
-window.addEventListener('resize', function () {
+window.addEventListener('resize', function() {
     var winwidth = window.innerWidth;
     var winheight = window.innerHeight;
     var app = document.querySelector('#app');
