@@ -120,10 +120,14 @@ document.addEventListener('DOMContentLoaded', () => {
                             var name = this.dataset.name;
                             var author = this.dataset.author;
                             console.log(item, ID, name, author);
+                            dialog.style.display = 'flex';
+                            loading.showModal();
                             $.ajax({
                                 url: getURLAPI(ID),
                                 type: 'GET',
                                 success: function(data) {
+                                    dialog.style.display = 'none';
+                                    loading.close();
                                     console.log(data);
                                     if (data.code == 0) {
                                         var data = data.data;
@@ -169,6 +173,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                 },
                                 error: function(data) {
                                     console.log(data);
+                                    dialog.style.display = 'none';
+                                    loading.close();
                                 }
                             })
                         })
