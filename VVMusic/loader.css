@@ -1,0 +1,31 @@
+.loader {
+    width: 60px;
+    height: 30px;
+    padding: 5px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    background: #fff;
+    filter: blur(2.5px) contrast(5) hue-rotate(30deg);
+    mix-blend-mode: darken;
+}
+
+.loader:before,
+.loader:after {
+    content: "";
+    width: 20px;
+    border-radius: 50%;
+    background: #333;
+    animation: loader 0.9s infinite alternate;
+}
+
+.loader:after {
+    --s: -1;
+}
+
+@keyframes loader {
+    90%,
+    100% {
+        transform: translate(calc(var(--s, 1)*15px))
+    }
+}
