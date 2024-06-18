@@ -15,7 +15,7 @@
     content: "";
     width: 20px;
     border-radius: 50%;
-    background: #333;
+    background: white;
     animation: loader 0.9s infinite alternate;
 }
 
