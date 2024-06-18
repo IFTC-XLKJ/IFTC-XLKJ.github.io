@@ -7,6 +7,7 @@
     <link id="favicon" rel="icon" href="https://iftc-xlkj.github.io/file/favicon.jpg" type="image/jpeg">
     <script src="./index.js"></script>
     <script src="https://iftc-xlkj.github.io/jquery-2.2.4.min.js"></script>
+    <link href="./loader.css" rel="stylesheet">
     <style>
         body {
             user-select: none;
@@ -14,7 +15,7 @@
             user-zoom: none;
             margin: 0;
         }
-
+        
         #s {
             width: 100vw;
             height: 100px;
@@ -22,7 +23,7 @@
             justify-content: center;
             align-items: center;
         }
-
+        
         #s input {
             width: 280px;
             height: 40px;
@@ -32,7 +33,7 @@
             border-right: none;
             border-radius: 5px 0 0 5px;
         }
-
+        
         #search {
             width: 80px;
             height: 47.34px;
@@ -44,7 +45,7 @@
             cursor: pointer;
         }
         
-        #clear{
+        #clear {
             width: 10px;
             height: 47.34px;
             background-color: white;
@@ -56,7 +57,7 @@
             padding-left: 0;
             padding-right: 0;
         }
-
+        
         .music-item {
             width: 500px;
             height: 150px;
@@ -68,40 +69,40 @@
             grid-gap: 10px;
             transition: transform 0.7s;
         }
-
+        
         .music-item-img>img {
             width: 120px;
             height: 120px;
             border-radius: 5px;
             border: 1px solid #333;
         }
-
+        
         .music-item:hover {
             box-shadow: 0px 0px 5px 5px rgba(51, 51, 51, 0.5);
             cursor: pointer;
             border-radius: 5px;
             transform: scale(1.03);
         }
-
+        
         .music-item-name {
             font-size: 24px;
         }
-
+        
         .page {
             border: none;
             width: 80px;
             height: 25px;
             padding: 0;
         }
-
+        
         .left {
             border-radius: 5px 0 0 5px;
         }
-
+        
         .right {
             border-radius: 0 5px 5px 0;
         }
-
+        
         #page-input {
             width: 50px;
             height: 25px;
@@ -111,23 +112,23 @@
             background-color: #F0F0F0FF;
             text-align: center;
         }
-
+        
         #page {
             display: flex;
             justify-content: center;
             margin: 10px;
         }
-
+        
         #music {
             width: calc(100vw - 16px);
         }
-
+        
         #app {
             width: 200px;
             text-align: center;
             overflow-x: hidden;
         }
-
+        
         #player {
             background-color: #F0F0F0FF;
             border-radius: 20px;
@@ -136,7 +137,7 @@
             grid-template-rows: auto auto;
             grid-gap: 10px;
         }
-
+        
         #player-cover,
         #player-cover>img {
             width: 45px;
@@ -146,49 +147,64 @@
             top: 3px;
             left: 5px;
         }
+        
         #player-cover>img {
             animation: rotation 2s linear infinite;
         }
+        
         #player-info {
             width: 12vw;
             margin-top: 10px;
         }
-
+        
         #player-controls {
             margin-top: 10px;
-
         }
-
+        
         #player-progress {
             display: grid;
             grid-template-columns: 50px 1fr 50px 50px 50px;
             grid-template-rows: auto;
         }
-
+        
         #player-play {
             width: 30px;
             height: 30px;
             margin-top: 5px;
             cursor: pointer;
         }
-
+        
         @keyframes rotation {
             from {
                 transform: rotate(0deg);
             }
-
             to {
                 transform: rotate(360deg);
             }
         }
         
-        #dialog{
+        #dialog {
             width: 100vw;
             height: 100vh;
             position: fixed;
             top: 0;
             left: 0;
             display: none;
+        }
+        
+        dialog {
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+        }
+        #loading{
+            width: 120px;
+            height: 20px;
+        }
+        .loader{
+            margin: auto;
+            position: relative;
+            top: -30px;
         }
     </style>
 </head>
@@ -214,8 +230,7 @@
         <div id="player-controls">
             <div id="player-progress">
                 <div id="player-play">
-                    <svg t="1718518330674" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                        xmlns="http://www.w3.org/2000/svg" p-id="4283" width="30" height="30">
+                    <svg t="1718518330674" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4283" width="30" height="30">
                         <path
                             d="M128 138.666667c0-47.232 33.322667-66.666667 74.176-43.562667l663.146667 374.954667c40.96 23.168 40.853333 60.8 0 83.882666L202.176 928.896C161.216 952.064 128 932.565333 128 885.333333v-746.666666z"
                             fill="#3D3D3D" p-id="4284"></path>
@@ -229,7 +244,21 @@
         </div>
     </div>
     <div id="dialog">
-        <dialog id="loading"></dialog>
+        <dialog id="loading">
+            <div class="loader">
+                <div class="loader-inner">
+                    <div class="loader-block"></div>
+                    <div class="loader-block"></div>
+                    <div class="loader-block"></div>
+                    <div class="loader-block"></div>
+                    <div class="loader-block"></div>
+                    <div class="loader-block"></div>
+                    <div class="loader-block"></div>
+                    <div class="loader-block"></div>
+                </div>
+            </div>
+
+        </dialog>
         <dialog id="tips"></dialog>
     </div>
 </body>
