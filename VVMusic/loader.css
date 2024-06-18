@@ -5,7 +5,7 @@
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
-    background: #fff;
+    background: #333;
     filter: blur(2.5px) contrast(5) hue-rotate(30deg);
     mix-blend-mode: darken;
 }
