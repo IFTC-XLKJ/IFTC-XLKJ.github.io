@@ -44,6 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
     var keyword = document.querySelector('#s > input');
     var dialog = document.getElementById('dialog');
     var loading = document.getElementById('loading');
+    var tips = document.getElementById('tip');
+    var tiptext = document.getElementById('tiptext');
 
     function getMusic() {
         dialog.style.display = 'flex';
@@ -169,12 +171,24 @@ document.addEventListener('DOMContentLoaded', () => {
                                             isPlay = false;
                                             play.innerHTML = playicon;
                                         }
+                                    } else {
+                                        tiptext.innerHTML = `Error:${data.msg}`;
+                                        tips.showModal();
+                                        setTimeout(() => {
+                                            tips.close();
+                                            dialog.style.display = 'none';
+                                        }, 2000);
                                     }
                                 },
                                 error: function(data) {
                                     console.log(data);
-                                    dialog.style.display = 'none';
                                     loading.close();
+                                    tiptext.innerHTML = `Error:${data}`;
+                                    tips.showModal();
+                                    setTimeout(() => {
+                                        tips.close();
+                                        dialog.style.display = 'none';
+                                    }, 2000);
                                 }
                             })
                         })
@@ -204,6 +218,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#s > input').addEventListener('keyup', (e) => {
         if (e.key == 'Enter') {
             getMusic();
+        } else if (e.key == 'Delete') {
+            keyword.value = null;
         }
     })
 })
@@ -217,4 +233,5 @@ window.addEventListener('resize', function() {
     var player = document.querySelector('#player');
     player.style.width = winwidth + 'px';
     player.style.height = 60 + 'px';
+    console.log(winwidth, winheight)
 });
