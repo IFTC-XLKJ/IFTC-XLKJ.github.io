@@ -7,6 +7,7 @@ var pauseicon = '<svg t="1718518409100" class="icon" viewBox="0 0 1024 1024" ver
 var audio = new Audio();
 var isPlay = false;
 var isSIFocus = false;
+var isPIFocus = false;
 
 function SearchAPI(name, pagesize, page, n) {
     return `https://api.xingzhige.com/API/NetEase_CloudMusic_new/?name=${name}&pagesize=${pagesize}&page=${page}`;
@@ -92,6 +93,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     <button class='page right' id='next'>下一页</button>
                     `;
                     var pageInput = document.getElementById('page-input');
+                    pageInput.addEventListener('blur', (e) => {
+                        isPIFocus = false;
+                        check.focus();
+                    })
+                    pageInput.addEventListener('focus', (e) => {
+                        isPIFocus = true;
+                        check.blur();
+                    })
                     pageInput.oninput = () => {
                         if (pageInput.value <= 0) {
                             pageInput.value = pageNum;
@@ -249,12 +258,19 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     docuemnt.body.addEventListener('click', (e) => {
         console.log(e.target, isSIFocus);
+        var pageInput = document.getElementById('page-input');
         if (isSIFocus) {
             searchinput.focus();
             check.blur();
+            pageInput.blur();
+        } else if (isPIFocus) {
+            searchinput.blur();
+            check.blur();
+            pageInput.focus();
         } else {
             searchinput.blur();
             check.focus();
+            pageInput.blur();
         }
     })
 })
