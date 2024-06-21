@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var loading = document.getElementById('loading');
     var tips = document.getElementById('tip');
     var tiptext = document.getElementById('tiptext');
+    var searchinput = document.querySelector('#s > input')
 
     function getMusic() {
         dialog.style.display = 'flex';
@@ -215,12 +216,16 @@ document.addEventListener('DOMContentLoaded', () => {
     search.addEventListener('click', () => {
         getMusic();
     })
-    document.querySelector('#s > input').addEventListener('keyup', (e) => {
+    searchinput.addEventListener('keyup', (e) => {
+        console.log(e.key);
         if (e.key == 'Enter') {
             getMusic();
         } else if (e.key == 'Delete') {
             keyword.value = null;
         }
+    })
+    searchinput.addEventListener('blur', (e) => {
+
     })
 })
 
