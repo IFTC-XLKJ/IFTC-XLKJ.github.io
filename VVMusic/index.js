@@ -8,7 +8,11 @@ var audio = new Audio();
 var isPlay = false;
 var isSIFocus = false;
 var isPIFocus = false;
-
+function isPC() {
+    var userAgent = navigator.userAgent;
+    var mobileRegex = /(Android|webOS|iPhone|iPad|iPod|SymbianOS|BlackBerry|Windows Phone)/;
+    return !mobileRegex.test(userAgent);
+}
 function SearchAPI(name, pagesize, page, n) {
     return `https://api.xingzhige.com/API/NetEase_CloudMusic_new/?name=${name}&pagesize=${pagesize}&page=${page}`;
 }
@@ -258,6 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     docuemnt.body.addEventListener('click', (e) => {
         console.log(e.target, isSIFocus);
+        if (!isPC) return;
         var pageInput = document.getElementById('page-input');
         if (isSIFocus) {
             searchinput.focus();
