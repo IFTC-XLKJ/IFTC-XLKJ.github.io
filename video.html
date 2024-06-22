@@ -33,7 +33,7 @@
 
     function draw() {
         backcontext.drawImage(video, 0, 0, back.width, back.height);
-        setTimeout(draw, 1000 / 120); // 根据帧率调整延迟时间
+        setTimeout(draw, 0); // 根据帧率调整延迟时间
     }
 
     var success = function(stream) {
