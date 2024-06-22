@@ -197,10 +197,18 @@
 
         #player-progress-bar-inner {
             height: 10px;
-            background-color: #FfFfFfFF;
+            background-color: rgb(255, 255, 255);
             border-radius: 5px;
             position: relative;
             top: 45%;
+        }
+
+        #player-progress-bar-outer {
+            height: 8px;
+            background-color: rgb(200, 200, 200);
+            border-radius: 5px;
+            position: relative;
+            top: calc(20% - 1px);
         }
 
         #dialog {
@@ -268,6 +276,7 @@
                 </div>
                 <div id="player-progress-bar">
                     <div id="player-progress-bar-inner"></div>
+                    <div id="player-progress-bar-outer"></div>
                 </div>
                 <div id="player-progress-time">0</div>
                 <div id="player-progress-time-total">0</div>
