@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        video{
+            width: 300px;
+            height: 300px;
+            border: 1px solid #ccc;
+        }
+        canvas{
+            width: 300px;
+            height: 300px;
+            border: 1px solid red;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    视频框
+    <video autoplay id='video'></video>
+    <br>
+    画布&#9;
+    <canvas id="output"></canvas>
+</body>
+</html>
+<script>
+    var video = $("#video").get(0);
+    var back = $("#output").get(0);
+    var backcontext = back.getContext('2d');
+
+    function draw() {
+        backcontext.drawImage(video, 0, 0, back.width, back.height);
+        setTimeout(draw, 0); // 根据帧率调整延迟时间
+    }
+
+    var success = function(stream) {
+        console.log('摄像头开启成功');
+        video.srcObject = stream;
+
+        // 设置视频轨道的帧率为120fps
+        var videoTrack = stream.getVideoTracks()[0];
+        if (videoTrack) {
+            videoTrack.applyConstraints({
+                frameRate: {
+                    ideal: 120,
+                    max: 120 
+                },
+                width: {
+                    ideal: 3000
+                },
+                height: {
+                    ideal: 3000
+                },
+                facingMode: 'environment'
+            })
+            .then(() => {
+                console.log('帧率设置成功');
+                draw();
+            })
+            .catch(error => {
+                console.error('无法设置帧率:', error);
+            });
+        }
+    };
+
+    var error = function(error) {
+        alert('调用失败');
+    };
+
+    // 使用navigator.mediaDevices.getUserMedia替代已废弃的navigator.getUserMedia
+    navigator.mediaDevices.getUserMedia({ video: { frameRate: { ideal: 120, max: 120 } }, audio: true })
+    .then(success)
+    .catch(error);
+</script>
