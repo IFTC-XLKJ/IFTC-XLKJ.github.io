@@ -10,14 +10,25 @@
     <style>
         @font-face {
             font-family: Bondi Regular;
-            src: url("https://IFTC-XLKJ.github.io/fonts/Bondi Regular.ttf");
+            src: url('//resource.hellofont.cn/fonts/poem/7457.ttf') format('TrueType'), url('//resource.hellofont.cn/fonts/poem/7457.woff') format('woff'), url('/resource/fonts/poem/7457.ttf') format('TrueType'), url('/resource/fonts/poem/7457.woff') format('woff');
+            font-display: swap;
         }
+
+        /* 字体：https://IFTC-XLKJ.github.io/fonts/Bondi%20Regular.ttf */
+
+        @font-face {
+            font-family: YouSheShenTiHao;
+            src: url('//resource.hellofont.cn/fonts/poem/7211.ttf') format('TrueType'), url('//resource.hellofont.cn/fonts/poem/7211.woff') format('woff'), url('/resource/fonts/poem/7211.ttf') format('TrueType'), url('/resource/fonts/poem/7211.woff') format('woff');
+            font-display: swap;
+        }
+
         body {
             user-select: none;
             -webkit-user-drag: none;
             user-zoom: none;
             margin: 0;
         }
+
         #page {
             position: fixed;
             display: flex;
@@ -28,16 +39,40 @@
             width: 100vw;
             height: 100vh;
         }
+
+        #main {
+            text-align: center;
+        }
+
         #headtitle {
             font-size: 100px;
             color: #333;
+            font-family: Bondi Regular;
+            display: block;
+        }
+
+        #headmsg {
+            font-size: 40px;
+            color: #333;
+            font-family: Bondi Regular;
+            display: block;
+        }
+
+        #body {
+            font-size: 24px;
+            font-family: YouSheShenTiHao;
         }
     </style>
 </head>
 
 <body>
     <div id="page">
-        <div id="headtitle">404</div>
+        <ul id="main">
+            <li id="headtitle">404</li>
+            <li id="headmsg">Not Found</li>
+            <li id="body">没有找到任何内容，请检查链接输入是否有误</li>
+        </ul>
+
     </div>
 </body>
 
