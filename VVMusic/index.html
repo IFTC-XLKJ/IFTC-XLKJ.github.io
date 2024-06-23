@@ -201,15 +201,27 @@
             background-color: rgb(255, 255, 255);
             border-radius: 5px;
             position: relative;
-            top: 45%;
+            top: 5px;
         }
 
         #player-progress-bar-outer {
+            width: 0%;
             height: 8px;
             background-color: rgb(200, 200, 200);
             border-radius: 5px;
             position: relative;
-            top: calc(20% - 1px);
+            top: -4px;
+        }
+
+        #player-progress-bar-position {
+            width: 10px;
+            height: 10px;
+            background-color: rgb(120, 120, 120);
+            border-radius: 5px;
+            position: relative;
+            top: 15px;
+            z-index: 3;
+            left: 0%;
         }
 
         #dialog {
@@ -276,12 +288,12 @@
                     </svg>
                 </div>
                 <div id="player-progress-bar">
+                    <div id="player-progress-bar-position"></div>
                     <div id="player-progress-bar-inner"></div>
                     <div id="player-progress-bar-outer"></div>
                 </div>
                 <div id="player-progress-time">0</div>
                 <div id="player-progress-time-total">0</div>
-                <div id="player-progress-position"></div>
             </div>
         </div>
     </div>
@@ -304,7 +316,8 @@
             <div id="tiptext">default</div>
         </dialog>
     </div>
-    <input id="check" style="position: fixed;top: 0;left: 0;width: 0;height: 0;margin: 0;padding: 0;outline: none;border: none;">
+    <input id="check"
+        style="position: fixed;top: 0;left: 0;width: 0;height: 0;margin: 0;padding: 0;outline: none;border: none;">
 </body>
 
 </html>

@@ -55,6 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
     var searchinput = document.querySelector('#s > input');
     var check = document.getElementById('check');
     check.focus();
+    var barposition = document.getElementById('player-progress-bar-position');
+    var bar = document.getElementById('player-progress-bar-inner');
+    var barprogress = document.getElementById('player-progress-bar-outer');
 
     function getMusic() {
         dialog.style.display = 'flex';
@@ -232,6 +235,20 @@ document.addEventListener('DOMContentLoaded', () => {
     search.addEventListener('click', () => {
         getMusic();
     })
+    barposition.addEventListener('mousedown', () => {
+        barposition.style.transform = 'scale(1.2)';
+    })
+    barposition.addEventListener('mouseup', () => {
+        barposition.style.transform = 'scale(1)';
+    })
+    barposition.addEventListener('mousemove', function(event) {
+        var xCoordInElement = event.clientX - this.getBoundingClientRect().left;
+        var barwidth = bar.offsetWidth;
+        barposition.style.left = xCoordInElement / barwidth * 100 + '%';
+        barprogress.style.width = `cacl(${xCoordInElement / barwidth * 100}% - ${10 * (xCoordInElement / barwidth * 100)}%)`;
+        console.log('barwidth:', barwidth);
+        console.log('Mouse X coordinate inside the element:', xCoordInElement);
+    });
     searchinput.addEventListener('keyup', (e) => {
         console.log(e.key);
         if (e.key == 'Enter') {
