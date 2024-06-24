@@ -10,7 +10,8 @@
     <script src="https://iftc-xlkj.github.io/jquery-2.2.4.min.js"></script>
     <script src="https://static.pgaot.com/Assets/js/sipg_jcokxlcsd9.js"></script>
     <script src="https://static.pgaot.com/Assets/js.class/pgdbs.class.js"></script>
-    <script src="https://shequ.pgaot.com/AdminPages/pages/Mysqldb/vip/pickduckDBJQ.3568fe5b83b522f9bbdf30a05205eef2d885d97956c78f565f2d7edb605f05eb.js"></script>
+    <script
+        src="https://shequ.pgaot.com/AdminPages/pages/Mysqldb/vip/pickduckDBJQ.3568fe5b83b522f9bbdf30a05205eef2d885d97956c78f565f2d7edb605f05eb.js"></script>
     <link href="./loader.css" rel="stylesheet">
     <style>
         body {
@@ -240,6 +241,14 @@
             border-radius: 5px;
             margin-top: 17.5px;
         }
+
+        #player-progress-time-container {
+            display: grid;
+            grid-template-columns: 1fr 5px 1fr;
+            grid-template-rows: auto;
+            grid-gap: 5px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -274,8 +283,11 @@
                 <div id="player-progress-bar">
                     <input id="progress" type="range" min="0" max="0" value="0">
                 </div>
-                <div id="player-progress-time">0</div>
-                <div id="player-progress-time-total">0</div>
+                <div id="player-progress-time-container">
+                    <div id="player-progress-time">00:00</div>
+                    <div id="player-progress-time-divider">/</div>
+                    <div id="player-progress-time-total">00:00</div>
+                </div>
             </div>
         </div>
     </div>
