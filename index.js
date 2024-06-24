@@ -1,7 +1,7 @@
 var window = this.window;
 document.addEventListener('DOMContentLoaded', function () {
     function getURLParameters() {
-        const queryString = window.location.search.substring(1); // 移除问号
+        const queryString = window.location.search.substring(1);
         const params = {};
 
         if (queryString) {
