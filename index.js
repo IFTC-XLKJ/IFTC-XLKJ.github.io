@@ -16,10 +16,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const urlParams = getURLParameters();
     console.log(urlParams);
-    if (urlParams['page']) {
-        console.log(urlParams['page']);
-        window.location.href = `./${urlParams['page']}`;
-    } else {
-        window.location.href = `./Home`;
-    }
+    setTimeout(() => {
+        if (urlParams['page']) {
+            console.log(urlParams['page']);
+            window.location.href = `./${urlParams['page']}`;
+        } else {
+            window.location.href = `./Home`;
+        }
+    }, 1000);
 });
