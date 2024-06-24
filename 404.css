@@ -1,0 +1,67 @@
+@font-face {
+    font-family: Bondi Regular;
+    src: url('https://resource.hellofont.cn/fonts/poem/7457.ttf') format('TrueType'), url('https://resource.hellofont.cn/fonts/poem/7457.woff') format('woff'), url('https://www.hellofont.cn/resource/fonts/poem/7457.ttf') format('TrueType'), url('https://www.hellofont.cn/resource/fonts/poem/7457.woff') format('woff');
+    font-display: swap;
+}
+
+/* 字体：https://IFTC-XLKJ.github.io/fonts/Bondi%20Regular.ttf */
+
+/*@font-face {
+    font-family: YouSheShenTiHao;
+    src: url('https://resource.hellofont.cn/fonts/poem/7211.ttf') format('TrueType'), url('https://resource.hellofont.cn/fonts/poem/7211.woff') format('woff'), url('https://www.hellofont.cn/resource/fonts/poem/7211.ttf') format('TrueType'), url('https://www.hellofont.cn/resource/fonts/poem/7211.woff') format('woff');
+    font-display: swap;
+}*/
+
+/* 字体：https://IFTC-XLKJ.github.io\fonts\YouSheShenTiHao.ttf */
+
+@font-face {
+    font-family: ZhanKuKuaiLeTi;
+    src: url('https://resource.hellofont.cn/fonts/poem/2523.ttf') format('TrueType'), url('https://resource.hellofont.cn/fonts/poem/2523.woff') format('woff'), url('https://www.hellofont.cn/resource/fonts/poem/2523.ttf') format('TrueType'), url('https://www.hellofont.cn/resource/fonts/poem/2523.woff') format('woff');
+    font-display: swap;
+}
+
+body {
+    user-select: none;
+    -webkit-user-drag: none;
+    user-zoom: none;
+}
+
+#page {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+#main {
+    text-align: center;
+    padding: 0;
+}
+
+#headtitle {
+    font-size: 100px;
+    color: #333;
+    font-family: Bondi Regular;
+    display: block;
+}
+
+#headmsg {
+    font-size: 40px;
+    color: #333;
+    font-family: Bondi Regular;
+    display: block;
+}
+
+#body {
+    list-style-type: none;
+}
+
+#bodymsg {
+    font-size: 24px;
+    color: #333;
+    font-family: ZhanKuKuaiLeTi;
+}
