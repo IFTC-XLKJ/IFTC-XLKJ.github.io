@@ -296,7 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     docuemnt.body.addEventListener('click', (e) => {
         console.log(e.target, isSIFocus);
-        if (!isPC) return;
+        if (!isPC()) return;
         var pageInput = document.getElementById('page-input');
         if (isSIFocus) {
             searchinput.focus();
