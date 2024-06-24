@@ -8,6 +8,29 @@
     <link id="favicon" rel="icon" href="https://iftc-xlkj.github.io/file/favicon.jpg" type="image/jpeg">
     <link rel="stylesheet" href="./404.css">>
     <title>404 - Not Found</title>
+    <script>
+        window.onload = function () {
+            console.log("404 - Not Found");
+            body.style.fontFamily = "ZhanKuKuaiLeTi";
+            console.log(body.style.fontFamily)
+        }
+    </script>
+    <style>
+        @font-face {
+            font-family: Bondi Regular;
+            src: url('https://resource.hellofont.cn/fonts/poem/7457.ttf') format('TrueType'), url('https://resource.hellofont.cn/fonts/poem/7457.woff') format('woff'), url('https://www.hellofont.cn/resource/fonts/poem/7457.ttf') format('TrueType'), url('https://www.hellofont.cn/resource/fonts/poem/7457.woff') format('woff');
+            font-display: swap;
+        }
+
+        /* 字体：https://IFTC-XLKJ.github.io/fonts/Bondi%20Regular.ttf */
+    </style>
+    <style>
+        @font-face {
+            font-family: ZhanKuKuaiLeTi;
+            src: url('https://resource.hellofont.cn/fonts/poem/2523.ttf') format('TrueType'), url('https://resource.hellofont.cn/fonts/poem/2523.woff') format('woff'), url('https://www.hellofont.cn/resource/fonts/poem/2523.ttf') format('TrueType'), url('https://www.hellofont.cn/resource/fonts/poem/2523.woff') format('woff');
+            font-display: swap;
+        }
+    </style>
 </head>
 
 <body>
@@ -15,7 +38,9 @@
         <ul id="main">
             <li id="headtitle">404</li>
             <li id="headmsg">Not Found</li>
-            <li id="body"><div id="bodymsg">没有找到任何内容<br>请检查URL输入是否有误</div></li>
+            <li id="body">
+                <div id="bodymsg">没有找到任何内容<br>请检查URL输入是否有误</div>
+            </li>
         </ul>
 
     </div>
