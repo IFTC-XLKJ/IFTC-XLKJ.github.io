@@ -23,5 +23,5 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             window.location.href = `./Home`;
         }
-    }, 1000);
+    }, 2000);
 });
