@@ -296,21 +296,22 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     docuemnt.body.addEventListener('click', (e) => {
         console.log(e.target, isSIFocus);
-        if (!isPC()) return;
-        var pageInput = document.getElementById('page-input');
-        if (isSIFocus) {
-            searchinput.focus();
-            check.blur();
-            pageInput.blur();
-        } else if (isPIFocus) {
-            searchinput.blur();
-            check.blur();
-            pageInput.focus();
-        } else {
-            searchinput.blur();
-            check.focus();
-            pageInput.blur();
-        }
+        if (isPC()) {
+            var pageInput = document.getElementById('page-input');
+            if (isSIFocus) {
+                searchinput.focus();
+                check.blur();
+                pageInput.blur();
+            } else if (isPIFocus) {
+                searchinput.blur();
+                check.blur();
+                pageInput.focus();
+            } else {
+                searchinput.blur();
+                check.focus();
+                pageInput.blur();
+            }
+        };
     })
     progress.addEventListener('change', (e) => {
         audio.currentTime = e.target.value;
