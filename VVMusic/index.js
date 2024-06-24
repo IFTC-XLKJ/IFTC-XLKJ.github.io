@@ -276,6 +276,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 audio.play();
                 isPlay = true;
             }
+        } else if (e.key == 'ArrowLeft') {
+            if (audio.currentTime > 0) {
+                audio.currentTime -= 1;
+            }
+        } else if (e.key == 'ArrowRight') {
+            if (audio.currentTime < audio.duration) {
+                audio.currentTime += 1;
+            }
+        } else if (e.key == 'ArrowUp') {
+            if (audio.volume < 1) {
+                audio.volume += 0.05;
+            }
+        } else if (e.key == 'ArrowDown') {
+            if (audio.volume > 0) {
+                audio.volume -= 0.05;
+            }
         }
     })
     docuemnt.body.addEventListener('click', (e) => {
