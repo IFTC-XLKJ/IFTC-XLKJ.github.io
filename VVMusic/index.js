@@ -8,6 +8,18 @@ var audio = new Audio();
 var isPlay = false;
 var isSIFocus = false;
 var isPIFocus = false;
+function formatSecondsToTime(seconds) {
+    var minutes = Math.floor(seconds / 60);
+    var remainingSeconds = seconds % 60;
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+    if (remainingSeconds < 10) {
+        remainingSeconds = "0" + remainingSeconds;
+    }
+    return minutes + ":" + remainingSeconds;
+}
+
 function isPC() {
     var userAgent = navigator.userAgent;
     var mobileRegex = /(Android|webOS|iPhone|iPad|iPod|SymbianOS|BlackBerry|Windows Phone)/;
@@ -24,8 +36,12 @@ function getURLAPI(ID) {
 function updatetime() {
     var time = document.getElementById('player-progress-time');
     audio.ontimeupdate = function () {
+        if (!isPlay) {
+            return;
+        }
         var currentTime = Math.ceil(audio.currentTime);
-        time.innerHTML = currentTime;
+        time.innerHTML = formatSecondsToTime(currentTime);
+        progress.value = currentTime;
     };
 }
 
@@ -33,7 +49,8 @@ function totaltime() {
     var totaltime = document.getElementById('player-progress-time-total');
     audio.onloadedmetadata = function () {
         var duration = Math.ceil(audio.duration);
-        totaltime.innerHTML = duration;
+        totaltime.innerHTML = formatSecondsToTime(duration);
+        progress.max = duration;
     };
 }
 document.addEventListener('DOMContentLoaded', () => {
@@ -55,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var searchinput = document.querySelector('#s > input');
     var check = document.getElementById('check');
     check.focus();
+    var progress = document.getElementById('progress');
 
     function getMusic() {
         dialog.style.display = 'flex';
@@ -277,6 +295,13 @@ document.addEventListener('DOMContentLoaded', () => {
             check.focus();
             pageInput.blur();
         }
+    })
+    progress.addEventListener('change', (e) => {
+        isPlay = false;
+        audio.pause();
+        audio.currentTime = e.target.value;
+        audio.play();
+        isPlay = true;
     })
 })
 
