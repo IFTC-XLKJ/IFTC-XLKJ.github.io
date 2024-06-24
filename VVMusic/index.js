@@ -297,11 +297,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
     progress.addEventListener('change', (e) => {
-        isPlay = false;
-        audio.pause();
         audio.currentTime = e.target.value;
         audio.play();
         isPlay = true;
+    })
+    progress.addEventListener('input', (e) => {
+        isPlay = false;
+        audio.pause();
     })
 })
 
