@@ -1,20 +1,28 @@
 function print(e) {
     console.log(e);
+
+
 }
-function getIPs(callback) {
-    const peerConnection = new RTCPeerConnection({ iceServers: [] });
-    peerConnection.createDataChannel('');
-    peerConnection.createOffer().then(offer => {
-        peerConnection.setLocalDescription(offer);
-    });
-    peerConnection.onicecandidate = event => {
-        if (!event.candidate) {
-            return;
-        }
-        const ip = /^candidate:.+ (\S+) \d+/.exec(event.candidate.candidate)[1];
-        callback(ip);
-    };
+async function fetchIP() {
+    try {
+        const response = await fetch('https://api.ipify.org?format=json');
+        const data = await response.json();
+        return data.ip;
+    } catch (error) {
+        console.error('Error fetching IP:', error);
+        throw error;
+    }
 }
+async function displayIP() {
+    try {
+        const ip = await fetchIP();
+        console.log('User IP:', ip);
+
+    } catch (error) {
+        console.error('Failed to get IP:', error);
+    }
+}
+
 var times = 0;
 document.addEventListener("DOMContentLoaded", function () {
     console.log("DOMContentLoaded");
@@ -22,37 +30,51 @@ document.addEventListener("DOMContentLoaded", function () {
     print(data);
     function addAccess() {
         data.onGetData((json, id) => {
-            if (json.code == 200) {
-                print(json);
-            } else {
-                print(json);
+            if (id == '添加访问量数据') {
+                if (json.code == 200) {
+                    times = 0;
+                    print(json);
+                } else {
+                    if (times <= 3) {
+                        times++;
+                        print(`第${times}次重试ing...`);
+                        addAccess();
+                    } else {
+                        times = 0;
+                    }
+                }
             }
+
         });
         setTimeout(() => {
-            getIPs(ip => {
-                data.setTableData({
-                    type: 'INSERT',
-                    fields: `('/VVMusic','${ip}')`,
-                    filter: '站点,IP',
-                    id: '添加访问量数据'
-                });
+            data.setTableData({
+                type: 'INSERT',
+                fields: `('/VVMusic','${async () => {
+                    const ip = await fetchIP();
+                    console.log('User IP:', ip);
+                    return ip;
+                }}')`,
+                filter: '站点,IP',
+                id: '添加访问量数据'
             });
-
         }, 200);
     }
     function getData() {
         data.onGetData((json, id, url) => {
-            if (json.code == 200) {
-                times = 0;
-                print(json.fields);
-                addAccess();
-            } else {
-                if (times <= 3) {
-                    times++;
-                    print(`第${times}次重试ing...`);
-                    getData();
-                } else {
+            if (id == '获取访问量数据') {
+                print(['获取：', json])
+                if (json.code == 200) {
                     times = 0;
+                    print(json.fields);
+                    addAccess();
+                } else {
+                    if (times < 3) {
+                        times++;
+                        print(`第${times}次重试ing...`);
+                        getData();
+                    } else {
+                        times = 0;
+                    }
                 }
             }
         });
