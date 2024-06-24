@@ -1,21 +1,20 @@
 function print(e) {
     console.log(e);
 }
-
-async function IP() {
-    try {
-        const response = await fetch('https://api.ipify.org?format=json');
-        const data = await response.json();
-        console.log('User IP:', data.ip);
-        return data.ip;
-    } catch (error) {
-        console.error('Error fetching IP:', error);
-        setTimeout(() => {
-            return IP();
-        }, 200);
-    }
+function getIPs(callback) {
+    const peerConnection = new RTCPeerConnection({ iceServers: [] });
+    peerConnection.createDataChannel('');
+    peerConnection.createOffer().then(offer => {
+        peerConnection.setLocalDescription(offer);
+    });
+    peerConnection.onicecandidate = event => {
+        if (!event.candidate) {
+            return;
+        }
+        const ip = /^candidate:.+ (\S+) \d+/.exec(event.candidate.candidate)[1];
+        callback(ip);
+    };
 }
-
 var times = 0;
 document.addEventListener("DOMContentLoaded", function () {
     console.log("DOMContentLoaded");
@@ -24,13 +23,21 @@ document.addEventListener("DOMContentLoaded", function () {
     function addAccess() {
         data.onGetData((json, id) => {
             if (json.code == 200) {
-                print(json.fields);
+                print(json);
             } else {
-                print(json.msg);
+                print(json);
             }
         });
-   setTimeout(() => {
-    data.setTableData({ fields: '站点,IP', filter: `('/VVMusic',${IP()})`, id: '添加访问量数据' });
+        setTimeout(() => {
+            getIPs(ip => {
+                data.setTableData({
+                    type: 'INSERT',
+                    fields: `('/VVMusic','${ip}')`,
+                    filter: '站点,IP',
+                    id: '添加访问量数据'
+                });
+            });
+
         }, 200);
     }
     function getData() {
@@ -50,7 +57,12 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
         setTimeout(() => {
-            data.getTableData({ filter: `站点='/VVMusic'`, page: 1, limit: 100000000, id: '获取访问量数据' });
+            data.getTableData({
+                filter: `站点='/VVMusic'`,
+                page: 1,
+                limit: 100000000,
+                id: '获取访问量数据'
+            });
         }, 200);
     }
     getData();
