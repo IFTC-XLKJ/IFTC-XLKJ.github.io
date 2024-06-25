@@ -29,6 +29,53 @@
             font-display: swap;
         }
     </style>
+    <style>
+        body {
+            user-select: none;
+            -webkit-user-drag: none;
+            user-zoom: none;
+        }
+
+        #page {
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #main {
+            text-align: center;
+            padding: 0;
+        }
+
+        #headtitle {
+            font-size: 100px;
+            color: #333;
+            font-family: Bondi Regular;
+            display: block;
+        }
+
+        #headmsg {
+            font-size: 40px;
+            color: #333;
+            font-family: Bondi Regular;
+            display: block;
+        }
+
+        #body {
+            list-style-type: none;
+        }
+
+        #bodymsg {
+            font-size: 24px;
+            color: #333;
+            font-family: ZhanKuKuaiLeTi;
+        }
+    </style>
 </head>
 
 <body>
