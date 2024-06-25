@@ -2,6 +2,7 @@ var document = this.document;
 var window = this.window;
 document.addEventListener("DOMContentLoaded", function () {
     var editorTextarea = document.getElementById("editor-textarea");
+    editorTextarea.value = localStorage.getItem("vchccode");
     var outputTextarea = document.getElementById("output-textarea");
     var controls = document.getElementById("controls");
     var run = document.getElementById("run");
@@ -13,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var cd = [];
     editorTextarea.addEventListener("input", function (e) {
         console.log('变化');
+        localStorage.setItem("vchccode", editorTextarea.value);
     });
     run.addEventListener("click", function () {
         var code = editorTextarea.value;
