@@ -10,9 +10,15 @@
                 margin: 0;
                 padding: 0;
             }
-            #editor-textarea {
+            #editor{
                 width: 100vw;
-                height: 50vh;
+                height: calc(50vh - 1.5px);
+                border-bottom: 1.5px solid white;
+            }
+            #editor-textarea {
+                padding: 0;
+                width: 100vw;
+                height: calc(50vh - 1.5px);
                 border: none;
                 resize: none;
                 outline: none;
@@ -20,6 +26,42 @@
                 color: white;
                 font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
                 border-radius: 5px 5px 0 0;
+            }
+            #output{
+                width: 100vw;
+                height: calc(50vh - 1.5px);
+                border-top: 1.5px solid white;
+            }
+            #output-textarea {
+                width: 100vw;
+                height: calc(50vh - 1.5px);
+                border: none;
+                resize: none;
+                outline: none;
+                background-color: #333;
+                color: white;
+                font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+                border-radius: 0 0 5px 5px;
+            }
+            #controls{
+                width: 100vw;
+                height: calc(50vh - 1.5px);
+                background-color: rgba(255, 255, 255, 0.5);
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                top: calc(-50vh + 1.5px);
+                left: 0;
+            }
+            #run{
+                width: 100px;
+                height: 50px;
+                font-size: large;
+                font-family: 'Courier New', Courier, monospace;
+                border: none;
+                border-radius: 5px;
+                outline: none;
             }
         </style>
     </head>
@@ -30,6 +72,9 @@
             </div>
             <div id="output">
                 <div id="output-textarea"></div>
+                <div id="controls">
+                    <button id="run">运行</button>
+                </div>
             </div>
         </div>
     </body>
