@@ -2,9 +2,35 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <script src="./index.js"></script>
         <title>WebVCHC</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            #editor-textarea {
+                width: 100vw;
+                height: 50vh;
+                border: none;
+                resize: none;
+                outline: none;
+                background-color: #333;
+                color: white;
+                font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+                border-radius: 5px 5px 0 0;
+            }
+        </style>
     </head>
     <body>
-        <div id="app"></div>
+        <div id="app">
+            <div id="editor">
+                <textarea id="editor-textarea"></textarea>
+            </div>
+            <div id="output">
+                <div id="output-textarea"></div>
+            </div>
+        </div>
     </body>
 </html>
