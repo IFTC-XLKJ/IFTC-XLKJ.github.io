@@ -49,12 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log(doctable);
     function getDoc() {
         doctable.onGetData((json, id, url) => {
-            if (json.code == 200) {
-                var docobj = json.fields;
-                console.log(docobj);
-            }else{
-                alert(json.msg);
-            }
+            console.log(json, id, url);
         })
         doctable.getTableData(
             {
