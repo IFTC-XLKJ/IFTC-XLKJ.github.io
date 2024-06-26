@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     console.log('User IP:', ip);
                     data.setTableData({
                         type: 'INSERT',
-                        fields: `('/Docs/doc-0','${ip}')`,
+                        fields: `('/Docs/0','${ip}')`,
                         filter: '站点,IP',
                         id: '添加访问量数据'
                     });
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         setTimeout(() => {
             data.getTableData({
-                filter: `站点='/Docs/doc-0'`,
+                filter: `站点='/Docs/0'`,
                 page: 1,
                 limit: 100000000,
                 id: '获取访问量数据'
