@@ -8,6 +8,19 @@ function isPC() {
     return !mobileRegex.test(userAgent);
 }
 document.addEventListener('DOMContentLoaded', function () {
+    function getURLParameters() {
+        const queryString = window.location.search.substring(1);
+        const params = {};
+        if (queryString) {
+            queryString.split('&').forEach(param => {
+                const [key, value] = param.split('=');
+                params[key] = decodeURIComponent(value);
+            });
+        }
+        return params;
+    }
+    const urlParams = getURLParameters();
+    console.log(urlParams);
     var dir = document.getElementById('dir');
     var dirButton = document.getElementById('dir-button');
     var dirList = document.getElementById('dir-list');
@@ -34,4 +47,23 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     var doctable = new pgdbs(dbs_cd48c6ccdf6ef2fe2d5fbeabeb3e33104e0e7f6d08cfa756191e3fc83ecb9651);
     console.log(doctable);
+    function getDoc() {
+        doctable.onGetData((json, id, url) => {
+            if (json.code == 200) {
+                var docobj = json.fields;
+                console.log(docobj);
+            }else{
+                alert(json.msg);
+            }
+        })
+        doctable.getTableData(
+            {
+                id: '获取文档',
+                filter: `归属='demo' AND 路径='${urlParams.doc}'`,
+                page: 1,
+                limit: 100000000,
+            }
+        )
+    }
+    getDoc();
 })
