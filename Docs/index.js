@@ -50,6 +50,12 @@ document.addEventListener('DOMContentLoaded', function () {
     function getDoc() {
         doctable.onGetData((json, id, url) => {
             console.log(json, id, url);
+            if (json.code == 200) {
+                var docobj = json.fields[0];
+                console.log(docobj);
+            } else {
+                alert("获取数据失败，请页面刷新重新");
+            }
         })
         doctable.getTableData(
             {
