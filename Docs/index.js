@@ -6,13 +6,20 @@ document.addEventListener('DOMContentLoaded', function () {
     var dir = document.getElementById('dir');
     var dirButton = document.getElementById('dir-button');
     var dirList = document.getElementById('dir-list');
+    var doc = document.getElementById('doc');
     dirButton.addEventListener('click', function () {
         if (isDirOpen) {
             dirList.style.left = '-360px';
-            dirButton.innerHTML = dirclosebutton;
-        } else {
-            dir.style.left = '0px';
+            doc.style.width = 'calc(100vw - 30px)';
+            doc.style.left = '30px';
             dirButton.innerHTML = diropenbutton;
+            isDirOpen = false;
+        } else {
+            dirList.style.left = '0px';
+            doc.style.width = 'calc(100vw - 360px)';
+            doc.style.left = '360px';
+            dirButton.innerHTML = dirclosebutton;
+            isDirOpen = true;
         }
     })
 })
