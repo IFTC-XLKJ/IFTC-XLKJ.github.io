@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var doc = document.getElementById('doc');
     dirButton.addEventListener('click', function () {
         if (isDirOpen) {
-            dirList.style.left = '-360px';
+            dirList.style.left = '-366px';
             doc.style.width = 'calc(100vw - 30px)';
             doc.style.left = '30px';
             dirButton.innerHTML = diropenbutton;
