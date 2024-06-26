@@ -17,12 +17,14 @@ document.addEventListener('DOMContentLoaded', function () {
             dirList.style.left = '-366px';
             doc.style.width = 'calc(100vw - 30px)';
             doc.style.left = '30px';
+            dir.style.width = '30px';
             dirButton.innerHTML = diropenbutton;
             isDirOpen = false;
         } else {
             dirList.style.left = '0px';
             doc.style.width = 'calc(100vw - 360px)';
             doc.style.left = '360px';
+            dir.style.width = '360px';
             dirButton.innerHTML = dirclosebutton;
             isDirOpen = true;
         }
@@ -30,4 +32,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (isPC()) {
         dirButton.click();
     }
+    var doctable = new pgdbs(dbs_cd48c6ccdf6ef2fe2d5fbeabeb3e33104e0e7f6d08cfa756191e3fc83ecb9651);
+    console.log(doctable);
 })
