@@ -17,6 +17,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 params[key] = decodeURIComponent(value);
             });
         }
+        if (params.doc) {
+            console.log(params.doc);
+        } else {
+            params.doc = '/';
+        }
         return params;
     }
     const urlParams = getURLParameters();
@@ -49,10 +54,16 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log(doctable);
     function getDoc() {
         doctable.onGetData((json, id, url) => {
-            console.log(json, id, url);
+            console.log(json);
             if (json.code == 200) {
-                var docobj = json.fields[0];
+                var docobj = JSON.parse(json.fields[0].文档);
                 console.log(docobj);
+                var docTitle = document.querySelector("#doc-title > h1");
+                docTitle.innerHTML = docobj.title;
+                var docPosition = document.querySelector("#doc-position > p");
+                docPosition.innerHTML = `位置：${docobj.path}`;
+                var docAuthor = document.querySelector("#doc-author > p");
+                docAuthor.innerHTML = `作者：${docobj.author}`;
             } else {
                 alert("获取数据失败，请页面刷新重新");
             }
@@ -62,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 id: '获取文档',
                 filter: `归属='demo' AND 路径='${urlParams.doc}'`,
                 page: 1,
-                limit: 100000000,
+                limit: 1,
             }
         )
     }
