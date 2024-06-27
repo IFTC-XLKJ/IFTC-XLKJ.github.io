@@ -98,6 +98,16 @@ document.addEventListener('DOMContentLoaded', function () {
                             });
                         })
                     })
+                    if (urlParams.to) {
+                        var docto = document.getElementById(urlParams.to);
+                        if (docto) {
+                            docto.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start',
+                                inline: 'nearest'
+                            });
+                        }
+                    }
                 } else {
                     alert("获取数据失败，请页面刷新重新");
                 }
