@@ -54,19 +54,22 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log(doctable);
     function getDoc() {
         doctable.onGetData((json, id, url) => {
-            console.log(json);
-            if (json.code == 200) {
-                var docobj = JSON.parse(json.fields[0].文档);
-                console.log(docobj);
-                var docTitle = document.querySelector("#doc-title > h1");
-                docTitle.innerHTML = docobj.title;
-                var docPosition = document.querySelector("#doc-position > p");
-                docPosition.innerHTML = `位置：${docobj.path}`;
-                var docAuthor = document.querySelector("#doc-author > p");
-                docAuthor.innerHTML = `作者：${docobj.author}`;
-            } else {
-                alert("获取数据失败，请页面刷新重新");
+            if (id == '获取文档') {
+                if (json.code == 200) {
+                    var docobj = JSON.parse(json.fields[0].文档);
+                    console.log(docobj);
+                    var docTitle = document.querySelector("#doc-title > h1");
+                    docTitle.innerHTML = docobj.title;
+                    var docPosition = document.querySelector("#doc-position > p");
+                    docPosition.innerHTML = `位置：${docobj.path}`;
+                    var docAuthor = document.querySelector("#doc-author > p");
+                    docAuthor.innerHTML = `作者：${docobj.author}`;
+                } else {
+                    alert("获取数据失败，请页面刷新重新");
+                }
             }
+            console.log(json);
+
         })
         doctable.getTableData(
             {
@@ -74,6 +77,30 @@ document.addEventListener('DOMContentLoaded', function () {
                 filter: `归属='demo' AND 路径='${urlParams.doc}'`,
                 page: 1,
                 limit: 1,
+            }
+        )
+    }
+    function getDocs() {
+        doctable.onGetData((json, id, url) => {
+            if (id == '获取文档列表') {
+                if (json.code == 200) {
+                    var docs = json.fields;
+                    //                    var docsList = document.getElementById('docs-list');
+                    //                    docsList.innerHTML = '';
+                    //                    for (var i = 0; i < docs.length; i++) {
+                    //                        var doc = docs[i];
+                    //                        var docobj = JSON.parse(doc.文档);
+                    //                        var docItem = document.createElement('div');
+                    //                    }
+                }
+            }
+        })
+        doctable.getTableData(
+            {
+                id: '获取文档列表',
+                filter: `归属='demo'`,
+                page: 1,
+                limit: 10000,
             }
         )
     }
