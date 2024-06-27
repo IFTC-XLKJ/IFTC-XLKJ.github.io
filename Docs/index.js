@@ -2,6 +2,15 @@ var document = this.document;
 const diropenbutton = `<svg t="1719391421508" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5806" width="30" height="30"><path d="M915 556H334.782c-60 0-60-90 0-90H915c60 0 60 90 0 90z m-0.377 371H334.405c-60 0-60-90 0-90h580.218c60 0 60 90 0 90z m0-741H334.405c-60 0-60-90 0-90h580.218c60 0 60 90 0 90zM128 206c-35.346 0-64-28.654-64-64 0-35.346 28.654-64 64-64 35.346 0 64 28.654 64 64 0 35.346-28.654 64-64 64z m0 741c-35.346 0-64-28.654-64-64 0-35.346 28.654-64 64-64 35.346 0 64 28.654 64 64 0 35.346-28.654 64-64 64z m0-371c-35.346 0-64-28.654-64-64 0-35.346 28.654-64 64-64 35.346 0 64 28.654 64 64 0 35.346-28.654 64-64 64z" fill="#2C2C2C" p-id="5807"></path></svg>`;
 const dirclosebutton = `<svg t="1719391938262" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10462" width="30" height="30"><path d="M756.736 812.032L512 567.296 267.776 811.52c-12.8 12.8-28.672 7.168-45.568-9.728-16.896-16.896-23.04-32.768-9.728-45.568L456.704 512 211.968 267.264c-14.848-15.36-6.144-30.208 8.704-45.568 16.896-16.896 30.72-25.6 46.592-10.24L512 456.704 756.736 212.48c14.336-14.336 28.672-7.168 47.104 11.264 15.36 15.36 23.552 28.672 8.192 44.032L567.296 512 811.52 756.224c15.36 15.36 8.704 28.672-8.192 46.08-16.896 17.408-33.792 22.528-46.592 9.728z" fill="#2C2C2C" p-id="10463"></path></svg>`;
 var isDirOpen = false;
+var codeids = [];
+function mathRandomInt(a, b) {
+    if (a > b) {
+        var c = a;
+        a = b;
+        b = c;
+    }
+    return Math.floor(Math.random() * (b - a + 1) + a);
+}
 function isPC() {
     var userAgent = navigator.userAgent;
     var mobileRegex = /(Android|webOS|iPhone|iPad|iPod|SymbianOS|BlackBerry|Windows Phone)/;
@@ -67,6 +76,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     docAuthor.innerHTML = `作者：${docobj.author}`;
                     var docContent = document.querySelector("#doc-content > div");
                     docContent.innerHTML = compile(docobj.document);
+                    codeids.forEach(id => {
+                        document.getElementById(id).addEventListener('click', () => {
+                            navigator.clipboard.writeText(document.getElementById(id).getAttribute('data-code')).then(() => {
+                                alert('复制成功');
+                            }, () => {
+                                alert('复制失败');
+                            });
+                        })
+                    })
                 } else {
                     alert("获取数据失败，请页面刷新重新");
                 }
@@ -130,8 +148,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 for (var i = 1; i <= docobj.line; i++) {
                     lineul += `<li>${i}</li>`;
                 }
-                console.log(lineul);
-                doccontent += `<br><div style="text-align: right;height: 20px;width: 100%;background-color: #333;color: white;width: 100%;border-radius: 5px 5px 0 0;margin: 0 5px 0 5px;"><div>复制</div><p style="margin-right: 10px;marin-top: 0;margin-bottom: 0;padding-top: 10px;">${docobj.lang}</p></div><div style="display: grid;grid-template-columns: auto 1fr;grid-template-rows: auto;grid-gap: 10px;background-color: #333;color: white;width: 100%;height: auto;border-radius: 0 0 5px 5px;margin: 0 5px 0 5px;"><ul style="list-style-type: none;padding-left: 10px;">${lineul}</ul><pre style="margin-top: 16px;"><code class="language-${docobj.lang}" style="line-height: 1.6;" title="${docobj.lang}">${hljs.highlight((docobj.code).replaceAll('%Enter%', '\n'), {language: docobj.lang}).value}</code></pre></div>`;
+                var codeid = mathRandomInt(10000000000000, 99999999999999);
+                doccontent += `<br><div style="text-align: right;height: 20px;width: 100%;background-color: #333;color: white;width: 100%;border-radius: 5px 5px 0 0;margin: 0 5px 0 5px;"><div id="${codeid}" style="margin-right: 10px;display: inline;height: 20px;background-color: grey;border-radius: 2px;font-size: 12px;cursor: pointer;padding: 2px;user-select: none;" data-code="${(docobj.code).replaceAll('%Enter%', '\n')}">复制</div><p style="display: inline;margin-right: 10px;marin-top: 0;margin-bottom: 0;padding-top: 10px;">${docobj.lang}</p></div><div style="display: grid;grid-template-columns: auto 1fr;grid-template-rows: auto;grid-gap: 10px;background-color: #333;color: white;width: 100%;height: auto;border-radius: 0 0 5px 5px;margin: 0 5px 0 5px;"><ul style="list-style-type: none;padding-left: 10px;">${lineul}</ul><pre style="margin-top: 16px;"><code class="language-${docobj.lang}" style="line-height: 1.6;" title="${docobj.lang}">${hljs.highlight((docobj.code).replaceAll('%Enter%', '\n'), { language: docobj.lang }).value}</code></pre></div>`;
+                codeids.push(codeid);
             }
         });
         return doccontent;
