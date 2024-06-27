@@ -102,9 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         if (docto) {
                             console.log(docto);
                             docto.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start',
-                                inline: 'nearest'
+                                behavior: 'smooth'
                             });
                         }
                     }
