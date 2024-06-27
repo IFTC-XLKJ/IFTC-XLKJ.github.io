@@ -59,6 +59,10 @@
 
         .dialog {
             position: fixed;
+            max-width: 280px;
+            background-color: #3333337c;
+            color: white;
+            outline: none;
         }
     </style>
 </head>
@@ -93,6 +97,8 @@
                     {Content}</div>
             </div>
         </div>
+        <dialog id="copysuccess" class="dialog" style="display: flex;">复制成功</dialog>
+        <dialog id="copyerror" class="dialog" style="display: flex;">复制失败</dialog>
     </div>
 </body>
 

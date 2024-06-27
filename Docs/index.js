@@ -80,13 +80,21 @@ document.addEventListener('DOMContentLoaded', function () {
                     codeids.forEach(id => {
                         document.getElementById(id).addEventListener('click', (e) => {
                             navigator.clipboard.writeText(document.getElementById(id).getAttribute('data-code')).then(() => {
-                                var dialogid = mathRandomInt(10000000000000, 99999999999999);
-                                app.innerHTML += `<dialog id="dialog${dialogid}" class="dialog" style="display: flex;">复制成功</dialog>`;
-                                var dialog = document.getElementById(`dialog${dialogid}`);
-                                dialog.style.top = `${(window.offsetHeight / 2) - (e.offsetHeight / 2)}px`;
+                                var dialog = document.getElementById('copysuccess');
+                                dialog.style.display = 'flex';
+                                dialog.style.top = `${(window.innerHeight / 2) - (dialog.offsetHeight / 2)}px`;
                                 dialog.show();
+                                setTimeout(() => {
+                                    dialog.style.display = 'none';
+                                }, 2000);
                             }, () => {
-                                alert('复制失败');
+                                var dialog = document.getElementById('copyerror');
+                                dialog.style.display = 'flex';
+                                dialog.style.top = `${(window.innerHeight / 2) - (dialog.offsetHeight / 2)}px`;
+                                dialog.show();
+                                setTimeout(() => {
+                                    dialog.style.display = 'none';
+                                }, 2000);
                             });
                         })
                     })
