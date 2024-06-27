@@ -67,6 +67,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     docAuthor.innerHTML = `作者：${docobj.author}`;
                     var docContent = document.querySelector("#doc-content > div");
                     docContent.innerHTML = compile(docobj.document);
+                    document.querySelectorAll('pre code').forEach((el) => {
+                        hljs.highlightElement(el);
+                    });
                 } else {
                     alert("获取数据失败，请页面刷新重新");
                 }
@@ -126,7 +129,12 @@ document.addEventListener('DOMContentLoaded', function () {
             } else if (docobj.type == 'a') {
                 doccontent += `<br><a href="${docobj.url}" style="color: ${docobj.color};text-decoration: none;">${docobj.content}</a>`;
             } else if (docobj.type == 'code') {
-                doccontent += `<br><code title="${docobj.lang}" style="background-color: #333;color: white;width: ${docContent.offsetWidth - 60}px;height: auto;border-radius: 5px;margin: 5px;">${(docobj.code).replaceAll('<ENETR>', '<br>')}</code>`;
+                var lineul = '';
+                for (var i = 1; i <= docobj.line; i++) {
+                    lineul += `<li>${i}</li>`;
+                }
+                console.log(lineul);
+                doccontent += `<br><div style="display: grid;grid-template-columns: auto 1fr;grid-template-rows: auto;grid-gap: 10px;background-color: #333;color: white;width: 100%;height: auto;border-radius: 5px;margin: 5px;text-align: ${docobj.align}"><ul style="list-style-type: none;padding-left: 10px;">${lineul}</ul><pre style="margin-top: 16px;"><code class="language-${docobj.lang}" style="line-height: 1.6;" title="${docobj.lang}">${(docobj.code).replaceAll('%Enter%', '<br>')}</code></pre></div>`;
             }
         });
         return doccontent;
