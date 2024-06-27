@@ -76,10 +76,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     docAuthor.innerHTML = `作者：${docobj.author}`;
                     var docContent = document.querySelector("#doc-content > div");
                     docContent.innerHTML = compile(docobj.document);
+                    var app = document.getElementById('app');
                     codeids.forEach(id => {
-                        document.getElementById(id).addEventListener('click', () => {
+                        document.getElementById(id).addEventListener('click', (e) => {
                             navigator.clipboard.writeText(document.getElementById(id).getAttribute('data-code')).then(() => {
-                                alert('复制成功');
+                                var dialogid = mathRandomInt(10000000000000, 99999999999999);
+                                app.innerHTML += `<dialog id="dialog${dialogid}" class="dialog" style="display: flex;">复制成功</dialog>`;
+                                var dialog = document.getElementById(`dialog${dialogid}`);
+                                dialog.style.top = `${(window.offsetHeight / 2) - (e.offsetHeight / 2)}px`;
+                                dialog.show();
                             }, () => {
                                 alert('复制失败');
                             });
