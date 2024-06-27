@@ -100,6 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     })
                     if (urlParams.to) {
                         var docto = document.getElementById(urlParams.to);
+                        console.log(docto);
                         if (docto) {
                             docto.scrollIntoView({
                                 behavior: 'smooth',
