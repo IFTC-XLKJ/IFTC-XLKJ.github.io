@@ -104,6 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
     getDoc();
     function compile(docarr) {
         var doccontent = '';
+        var docContent = document.querySelector("#doc-content > div");
         docarr.forEach(docobj => {
             console.log('文档数据：', docobj);
             if (docobj.type == 'h1') {
@@ -125,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } else if (docobj.type == 'a') {
                 doccontent += `<br><a href="${docobj.url}" style="color: ${docobj.color};text-decoration: none;">${docobj.content}</a>`;
             } else if (docobj.type == 'code') {
-                doccontent += `<br><code title="${docobj.lang}" style="background-color: #333;color: white;">${(docobj.code).replaceAll('<ENETR>', '<br>')}</code>`;
+                doccontent += `<br><code title="${docobj.lang}" style="background-color: #333;color: white;width: ${docContent.offsetWidth - 60}px;height: auto;border-radius: 5px;margin: 5px;">${(docobj.code).replaceAll('<ENETR>', '<br>')}</code>`;
             }
         });
         return doccontent;
