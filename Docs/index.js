@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.log(docobj);
                     var docTitle = document.querySelector("#doc-title > h1");
                     docTitle.innerHTML = docobj.title;
+                    document.title = docobj.title;
                     var docPosition = document.querySelector("#doc-position > p");
                     docPosition.innerHTML = `位置：${docobj.path}`;
                     var docAuthor = document.querySelector("#doc-author > p");
@@ -120,9 +121,9 @@ document.addEventListener('DOMContentLoaded', function () {
             } else if (docobj.type == 'p') {
                 doccontent += `<p style="color: ${docobj.color}">${docobj.content}</p>`;
             } else if (docobj.type == 'img') {
-                doccontent += `<img src="${docobj.content}" alt="图片">`;
+                doccontent += `<img src="${docobj.url}" alt="${docobj.tiptext}">`;
             } else if (docobj.type == 'a') {
-                doccontent += `<a href="${docobj.content}" style="color: ${docobj.color}`;
+                doccontent += `<br><a href="${docobj.url}" style="color: ${docobj.color};text-decoration: none;">${docobj.content}</a>`;
             }
         });
         return doccontent;
