@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 doccontent += `<img src="${docobj.url}" alt="${docobj.tiptext}"style="width: 33.33333333%;border-radius: 10px;text-align: ${docobj.align};">`;
             } else if (docobj.type == 'a') {
                 doccontent += `<br><a href="${docobj.url}" style="color: ${docobj.color};text-decoration: none;">${docobj.content}</a>`;
-            } else if (docobj.type == 'code') {
+            } else if (docobj.type == 'codes') {
                 var lineul = '';
                 for (var i = 1; i <= docobj.line; i++) {
                     lineul += `<li>${i}</li>`;
