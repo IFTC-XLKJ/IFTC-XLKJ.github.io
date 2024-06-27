@@ -121,9 +121,11 @@ document.addEventListener('DOMContentLoaded', function () {
             } else if (docobj.type == 'p') {
                 doccontent += `<p style="color: ${docobj.color}">${docobj.content}</p>`;
             } else if (docobj.type == 'img') {
-                doccontent += `<img src="${docobj.url}" alt="${docobj.tiptext}">`;
+                doccontent += `<img src="${docobj.url}" alt="${docobj.tiptext}"style="width: 100%;border-radius: 10px;text-align: ${docobj.align};">`;
             } else if (docobj.type == 'a') {
                 doccontent += `<br><a href="${docobj.url}" style="color: ${docobj.color};text-decoration: none;">${docobj.content}</a>`;
+            } else if (docobj.type == 'code') {
+                doccontent += `<code title="${docobj.lsng}">${docobj.code}</code>`;
             }
         });
         return doccontent;
