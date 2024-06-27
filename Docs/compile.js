@@ -1,1 +1,0 @@
-var document = this.document;

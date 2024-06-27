@@ -64,6 +64,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     docPosition.innerHTML = `位置：${docobj.path}`;
                     var docAuthor = document.querySelector("#doc-author > p");
                     docAuthor.innerHTML = `作者：${docobj.author}`;
+                    var docContent = document.querySelector("#doc-content > div");
+                    docContent.innerHTML = compile(docobj.document);
                 } else {
                     alert("获取数据失败，请页面刷新重新");
                 }
@@ -85,13 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (id == '获取文档列表') {
                 if (json.code == 200) {
                     var docs = json.fields;
-                    //                    var docsList = document.getElementById('docs-list');
-                    //                    docsList.innerHTML = '';
-                    //                    for (var i = 0; i < docs.length; i++) {
-                    //                        var doc = docs[i];
-                    //                        var docobj = JSON.parse(doc.文档);
-                    //                        var docItem = document.createElement('div');
-                    //                    }
+
                 }
             }
         })
@@ -105,4 +101,30 @@ document.addEventListener('DOMContentLoaded', function () {
         )
     }
     getDoc();
+    function compile(docarr) {
+        var doccontent = '';
+        docarr.forEach(docobj => {
+            console.log('文档数据：', docobj);
+            if (docobj.type == 'h1') {
+                doccontent += `<h1 id="${docobj.content}" style="color: ${docobj.color}">${docobj.content}</h1>`;
+            } else if (docobj.type == 'h2') {
+                doccontent += `<h2 id="${docobj.content}" style="color: ${docobj.color}">${docobj.content}</h2>`;
+            } else if (docobj.type == 'h3') {
+                doccontent += `<h3 id="${docobj.content}" style="color: ${docobj.color}">${docobj.content}</h3>`;
+            } else if (docobj.type == 'h4') {
+                doccontent += `<h4 id="${docobj.content}" style="color: ${docobj.color}">${docobj.content}</h4>`;
+            } else if (docobj.type == 'h5') {
+                doccontent += `<h5 id="${docobj.content}" style="color: ${docobj.color}">${docobj.content}</h5>`;
+            } else if (docobj.type == 'h6') {
+                doccontent += `<h6 id="${docobj.content}" style="color: ${docobj.color}">${docobj.content}</h6>`;
+            } else if (docobj.type == 'p') {
+                doccontent += `<p style="color: ${docobj.color}">${docobj.content}</p>`;
+            } else if (docobj.type == 'img') {
+                doccontent += `<img src="${docobj.content}" alt="图片">`;
+            } else if (docobj.type == 'a') {
+                doccontent += `<a href="${docobj.content}" style="color: ${docobj.color}`;
+            }
+        });
+        return doccontent;
+    }
 })
