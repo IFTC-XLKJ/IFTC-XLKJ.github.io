@@ -76,7 +76,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     docAuthor.innerHTML = `作者：${docobj.author}`;
                     var docContent = document.querySelector("#doc-content > div");
                     docContent.innerHTML = compile(docobj.document);
-                    var app = document.getElementById('app');
                     codeids.forEach(id => {
                         document.getElementById(id).addEventListener('click', (e) => {
                             navigator.clipboard.writeText(document.getElementById(id).getAttribute('data-code')).then(() => {
@@ -100,8 +99,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     })
                     if (urlParams.to) {
                         var docto = document.getElementById(urlParams.to);
-                        console.log(docto);
                         if (docto) {
+                            console.log(docto);
                             docto.scrollIntoView({
                                 behavior: 'smooth',
                                 block: 'start',
