@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } else if (false/*docobj.type == 'code'*/) {
                 doccontent += ``;
             } else if (docobj.type == 'table') {
-                doccontent += `<table style="width: 100%;border-collapse: collapse;">`;
+                doccontent += `<table style="width: 100%;border-collapse: collapse;"></table>`;
             }
         });
         return doccontent;
