@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全屏示例</title>
+    <style>
+        #fullscreenElement {
+            width: 600px;
+            height: 400px;
+            background-color: #f0f0f0;
+            padding: 20px;
+            margin: 20px auto;
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="fullscreenElement">
+        点击这里进入全屏模式
+    </div>
+
+    <script>
+        document.getElementById('fullscreenElement').addEventListener('click', function () {
+            if (this.requestFullscreen) {
+                this.requestFullscreen().catch(err => {
+                    console.error("请求全屏模式失败:", err);
+                });
+            } else {
+                // 如果浏览器不支持requestFullscreen，则给出提示
+                console.log("您的浏览器不支持全屏模式。");
+            }
+        });
+
+        // 监听全屏状态改变事件（可选）
+        document.addEventListener('fullscreenchange', function (event) {
+            if (document.fullscreenElement) {
+                console.log("现在处于全屏模式。");
+            } else {
+                console.log("现在退出了全屏模式。");
+            }
+        });
+    </script>
+
+</body>
+
+</html>
