@@ -67,9 +67,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     docAuthor.innerHTML = `作者：${docobj.author}`;
                     var docContent = document.querySelector("#doc-content > div");
                     docContent.innerHTML = compile(docobj.document);
-                    document.querySelectorAll('pre code').forEach((el) => {
-                        hljs.highlightElement(el);
-                    });
                 } else {
                     alert("获取数据失败，请页面刷新重新");
                 }
@@ -125,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } else if (docobj.type == 'p') {
                 doccontent += `<p style="color: ${docobj.color}">${docobj.content}</p>`;
             } else if (docobj.type == 'img') {
-                doccontent += `<img src="${docobj.url}" alt="${docobj.tiptext}"style="width: 100%;border-radius: 10px;text-align: ${docobj.align};">`;
+                doccontent += `<img src="${docobj.url}" alt="${docobj.tiptext}"style="width: 33.33333333%;border-radius: 10px;text-align: ${docobj.align};">`;
             } else if (docobj.type == 'a') {
                 doccontent += `<br><a href="${docobj.url}" style="color: ${docobj.color};text-decoration: none;">${docobj.content}</a>`;
             } else if (docobj.type == 'code') {
@@ -134,7 +131,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     lineul += `<li>${i}</li>`;
                 }
                 console.log(lineul);
-                doccontent += `<br><div style="display: grid;grid-template-columns: auto 1fr;grid-template-rows: auto;grid-gap: 10px;background-color: #333;color: white;width: 100%;height: auto;border-radius: 5px;margin: 5px;text-align: ${docobj.align}"><ul style="list-style-type: none;padding-left: 10px;">${lineul}</ul><pre style="margin-top: 16px;"><code class="language-${docobj.lang}" style="line-height: 1.6;" title="${docobj.lang}">${(docobj.code).replaceAll('%Enter%', '<br>')}</code></pre></div>`;
+                doccontent += `<br><div style="display: grid;grid-template-columns: auto 1fr;grid-template-rows: auto;grid-gap: 10px;background-color: #333;color: white;width: 100%;height: auto;border-radius: 5px;margin: 5px;"><ul style="list-style-type: none;padding-left: 10px;">${lineul}</ul><pre style="margin-top: 16px;"><code class="language-${docobj.lang}" style="line-height: 1.6;" title="${docobj.lang}">${hljs.highlight((docobj.code).replaceAll('%Enter%', '\n'), {language: docobj.lang}).value}</code></pre></div>`;
+                console.log(hljs.highlight((docobj.code).replaceAll('%Enter%', '<br>'), {language: docobj.lang}));
             }
         });
         return doccontent;
