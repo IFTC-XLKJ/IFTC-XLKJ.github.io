@@ -170,12 +170,26 @@ document.addEventListener('DOMContentLoaded', function () {
                     lineul += `<li>${i}</li>`;
                 }
                 var codeid = mathRandomInt(10000000000000, 99999999999999);
-                doccontent += `<br><div style="text-align: right;height: 20px;width: 100%;background-color: #333;color: white;width: 100%;border-radius: 5px 5px 0 0;margin: 0 5px 0 5px;"><div id="${codeid}" style="margin-right: 10px;display: inline;height: 20px;background-color: grey;border-radius: 2px;font-size: 12px;cursor: pointer;padding: 2px;user-select: none;" data-code="${(docobj.code).replaceAll('%Enter%', '\n')}">复制</div><p style="display: inline;margin-right: 10px;marin-top: 0;margin-bottom: 0;padding-top: 10px;">${docobj.lang}</p></div><div style="display: grid;grid-template-columns: auto 1fr;grid-template-rows: auto;grid-gap: 10px;background-color: #333;color: white;width: 100%;height: auto;border-radius: 0 0 5px 5px;margin: 0 5px 0 5px;"><ul style="list-style-type: none;padding-left: 10px;">${lineul}</ul><pre style="margin-top: 16px;"><code class="language-${docobj.lang}" style="line-height: 1.6;" title="${docobj.lang}">${hljs.highlight((docobj.code).replaceAll('%Enter%', '\n'), { language: docobj.lang }).value}</code></pre></div>`;
+                doccontent += `<br><div style="text-align: right;height: 20px;width: 100%;background-color: #333;color: white;width: 100%;border-radius: 5px 5px 0 0;margin: 20px 5px 0 5px;"><div id="${codeid}" style="margin-right: 10px;display: inline;height: 20px;background-color: grey;border-radius: 2px;font-size: 12px;cursor: pointer;padding: 2px;user-select: none;" data-code="${(docobj.code).replaceAll('%Enter%', '\n')}">复制</div><p style="display: inline;margin-right: 10px;marin-top: 0;margin-bottom: 0;padding-top: 10px;">${docobj.lang}</p></div><div style="display: grid;grid-template-columns: auto 1fr;grid-template-rows: auto;grid-gap: 10px;background-color: #333;color: white;width: 100%;height: auto;border-radius: 0 0 5px 5px;margin: 0 5px 0 5px;"><ul style="list-style-type: none;padding-left: 10px;">${lineul}</ul><pre style="margin-top: 16px;"><code class="language-${docobj.lang}" style="line-height: 1.6;" title="${docobj.lang}">${hljs.highlight((docobj.code).replaceAll('%Enter%', '\n'), { language: docobj.lang }).value}</code></pre></div>`;
                 codeids.push(codeid);
             } else if (false/*docobj.type == 'code'*/) {
                 doccontent += ``;
             } else if (docobj.type == 'table') {
-                doccontent += `<table style="width: 100%;border-collapse: collapse;"></table>`;
+                var headers = docobj.table.header;
+                var head = '';
+                var bodys = docobj.table.body;
+                headers.forEach(header => {
+                    head += `<th style="border: 1px solid #333;padding: 5px;">${header}</th>`;
+                });
+                var bodytd = '';
+                bodys.forEach(body => {
+                    var bodytr = '';
+                    body.forEach(item => {
+                        bodytr += `<td style="border: 1px solid #333;padding: 5px;text-align: ${docobj.align};">${item}</td>`;
+                    });
+                    bodytd += `<tr>${bodytr}</tr>`;
+                });
+                doccontent += `<table style="width: 100%;border-collapse: collapse;margin-top: 20px;">${head}${bodytd}</table>`;
             }
         });
         return doccontent;
