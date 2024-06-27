@@ -1,0 +1,27 @@
+<div class="kalaok1">111111</div>
+<div class="kalaok2">111111</div>
+<style>
+    .kalaok1 {
+        font-size: 100px;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+    .kalaok2 {
+        font-size: 100px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        color: aqua;
+        clip-path: inset(0 100% 0 0);
+        animation: alternate kalaok 1s linear;
+    }
+    @keyframes kalaok {
+        0% {
+            clip-path: inset(0 100% 0 0);
+        }
+        100% {
+            clip-path: inset(0 0% 0 0);
+        }
+    }
+</style>
