@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } else if (docobj.type == 'a') {
                 doccontent += `<br><a href="${docobj.url}" style="color: ${docobj.color};text-decoration: none;">${docobj.content}</a>`;
             } else if (docobj.type == 'code') {
-                doccontent += `<code title="${docobj.lang}" style="background-color: #333;color: white;">${docobj.code}</code>`;
+                doccontent += `<code title="${docobj.lang}" style="background-color: #333;color: white;">${docobj.code.replaceAll('<ENETR>', '<br>')}</code>`;
             }
         });
         return doccontent;
