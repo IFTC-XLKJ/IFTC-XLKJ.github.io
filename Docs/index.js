@@ -116,21 +116,64 @@ document.addEventListener('DOMContentLoaded', function () {
                             dialog.show();
                             var image = document.querySelector('#imgviewer img');
                             image.src = img.src;
-                            image.style.margin = 'auto';
-                            image.addEventListener('click', function (e) {
-                                if (e.target.id == 'imgdialog-img') {
+                            image.style.top = `${(window.innerHeight / 2) - (image.offsetHeight / 2)}px`;
+                            image.style.left = `${(window.innerWidth / 2) - (image.offsetWidth / 2)}px`;
+                            var size = 1;
+                            image.style.trasform = `scale(${size})`;
+                            document.addEventListener('wheel', function (e) {
+                                if (e.deltaY > 0) {
+                                    if (size > 0.4) {
+                                        console.log('缩小')
+                                        size -= 0.3;
+                                        image.style.transform = `scale(${size})`;
+                                    }
+                                } else {
+                                    if (size < 25) {
+                                        console.log('放大')
+                                        size += 0.3;
+                                        image.style.transform = `scale(${size})`;
+                                    }
+                                }
+                            })
+                            var isDragging = false;
+                            var initialOffset = { x: 0, y: 0 };
+                            var dragStartPos = { x: 0, y: 0 };
+                            var newX = 0;
+                            var newY = 0;
+                            image.addEventListener('mousedown', function (e) {
+                                console.log(isDragging)
+                                e.preventDefault();
+                                dragStartPos.x = e.clientX;
+                                dragStartPos.y = e.clientY;
+                                initialOffset.x = image.offsetLeft;
+                                initialOffset.y = image.offsetTop;
+                                document.addEventListener('mousemove', onMouseMove);
+                                document.addEventListener('mouseup', onMouseUp);
+                            });
+                            function onMouseMove(e) {
+                                console.log(isDragging);
+                                isDragging = true;
+                                console.log(e.clientX - dragStartPos.x);
+                                newX = initialOffset.x + e.clientX - dragStartPos.x;
+                                newY = initialOffset.y + e.clientY - dragStartPos.y;
+                                image.style.left = newX + 'px';
+                                image.style.top = newY + 'px';
+                            }
+
+                            function onMouseUp() {
+                                isDragging = false;
+                                console.log(isDragging)
+                                document.removeEventListener('mousemove', onMouseMove);
+                                document.removeEventListener('mouseup', onMouseUp);
+                                console.log(newX, newY)
+                                if (newX == 0 && newY == 0) {
+                                    size = 1;
+                                    image.style.top = `${(window.innerHeight / 2) - (image.offsetHeight / 2)}px`;
+                                    image.style.left = `${(window.innerWidth / 2) - (image.offsetWidth / 2)}px`;
+                                    image.style.transform = `scale(${size})`;
                                     dialog.style.display = 'none';
                                 }
-                            })
-                            var size = 1;
-                            document.addEventListener('wheel' , function (e) {
-                                console.log(e.deltaY)
-                                if (e.deltaY > 0) {
-                                    image.style.trasform = `scale(${size += 0.1})`;
-                                } else {
-                                    image.style.trasform = `scale(${size -= 0.1})`;
-                                }
-                            })
+                            }
                         }
                     })
                 } else {

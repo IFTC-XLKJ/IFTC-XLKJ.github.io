@@ -74,6 +74,14 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
         }
+
+        #imgviewer img:hover {
+            cursor: grab;
+        }
+
+        #imgviewer img:active {
+            cursor: grabbing;
+        }
     </style>
 </head>
 
@@ -110,7 +118,7 @@
         <dialog id="copysuccess" class="dialog" style="display: flex;">复制成功</dialog>
         <dialog id="copyerror" class="dialog" style="display: flex;">复制失败</dialog>
         <dialog id="imgviewer" style="display: none;">
-            <img id="imgviewerimg" src="" alt="" style="width: auto;height: auto;">
+            <img id="imgviewerimg" src="" alt="" style="position: fixed;width: auto;height: auto;" draggable="true">
         </dialog>
     </div>
 </body>
