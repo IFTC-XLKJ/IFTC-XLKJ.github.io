@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     });
                     bodytd += `<tr>${bodytr}</tr>`;
                 });
-                doccontent += `<table style="width: 100%;border-collapse: collapse;margin-top: 20px;">${head}${bodytd}</table>`;
+                doccontent += `<table style="width: 100%;border-collapse: collapse;margin-top: 20px;color: ${docobj.color};">${head}${bodytd}</table>`;
             }
         });
         return doccontent;
