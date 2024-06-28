@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     })
                 } else {
                     setTimeout(() => {
-                        window.location.reload();
+                        
                     }, 200)
                 }
             }
