@@ -106,8 +106,37 @@ document.addEventListener('DOMContentLoaded', function () {
                             });
                         }
                     }
+                    var imgs = docContent.querySelectorAll('#doc img');
+                    console.log(imgs);
+                    imgs.forEach(img => {
+                        img.onclick = () => {
+                            var dialog = document.getElementById('imgviewer');
+                            dialog.style.display = 'flex';
+                            dialog.style.top = `${(window.innerHeight / 2) - (dialog.offsetHeight / 2)}px`;
+                            dialog.show();
+                            var image = document.querySelector('#imgviewer img');
+                            image.src = img.src;
+                            image.style.margin = 'auto';
+                            image.addEventListener('click', function (e) {
+                                if (e.target.id == 'imgdialog-img') {
+                                    dialog.style.display = 'none';
+                                }
+                            })
+                            var size = 1;
+                            document.addEventListener('wheel' , function (e) {
+                                console.log(e.deltaY)
+                                if (e.deltaY > 0) {
+                                    image.style.trasform = `scale(${size += 0.1})`;
+                                } else {
+                                    image.style.trasform = `scale(${size -= 0.1})`;
+                                }
+                            })
+                        }
+                    })
                 } else {
-                    alert("获取数据失败，请页面刷新重新");
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 200)
                 }
             }
             console.log(json);
