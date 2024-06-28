@@ -191,7 +191,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
                 doccontent += `<table style="width: 100%;border-collapse: collapse;margin-top: 20px;color: ${docobj.color};">${head}${bodytd}</table>`;
             } else if (docobj.type == 'hr') {
-                doccontent += `<hr style="border: none;width: auto;height: ${docobj.size}px;background-color: ${docobj.color};">`;
+                doccontent += `<hr style="border: none;width: auto;height: ${docobj.size}px;background-color: ${docobj.color};margin: 20px 0 20px 0;">`;
+            } else if (docobj.type == 'ps') {
+                var items = "";
+                (docobj.contents).forEach(content => {
+                    if (content.type == 'p') {
+                        items += `<p style="display: inline;color: ${content.color};">${content.content}</p>`;
+                    } else if (content.type == 'block') {
+                        items += `<div style="display: inline;background-color: #ECECEFFF;border-radius: 3px;color: ${content.color};font-size: 14px;padding: 2px;margin-left: 2px;margin-right: 2px;">${content.contents}</div>`
+                    }
+                })
+                doccontent += `<p style="margin: 20px;color: ${docobj.color};">${items}</p>`;
             }
         });
         return doccontent;
