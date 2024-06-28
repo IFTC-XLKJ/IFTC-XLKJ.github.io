@@ -179,13 +179,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 var head = '';
                 var bodys = docobj.table.body;
                 headers.forEach(header => {
-                    head += `<th style="border: 1px solid #333;padding: 5px;">${header}</th>`;
+                    head += `<th style="border: ${docobj.border.width}px ${docobj.border.type} ${docobj.border.color};padding: 5px;">${header}</th>`;
                 });
                 var bodytd = '';
                 bodys.forEach(body => {
                     var bodytr = '';
                     body.forEach(item => {
-                        bodytr += `<td style="border: 1px solid #333;padding: 5px;text-align: ${docobj.align};">${item}</td>`;
+                        bodytr += `<td style="border: ${docobj.border.width}px ${docobj.border.type} ${docobj.border.color};padding: 5px;text-align: ${docobj.align};">${item}</td>`;
                     });
                     bodytd += `<tr>${bodytr}</tr>`;
                 });
