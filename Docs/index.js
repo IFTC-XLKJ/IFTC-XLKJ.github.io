@@ -190,6 +190,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     bodytd += `<tr>${bodytr}</tr>`;
                 });
                 doccontent += `<table style="width: 100%;border-collapse: collapse;margin-top: 20px;color: ${docobj.color};">${head}${bodytd}</table>`;
+            } else if (docobj.type == 'hr') {
+                doccontent += `<hr style="border: none;width: auto;height: ${docobj.size}px;background-color: ${docobj.color};">`;
             }
         });
         return doccontent;
