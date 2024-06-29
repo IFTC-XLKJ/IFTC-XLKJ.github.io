@@ -119,7 +119,11 @@ document.addEventListener('DOMContentLoaded', function () {
                             image.style.top = `${(window.innerHeight / 2) - (image.offsetHeight / 2)}px`;
                             image.style.left = `${(window.innerWidth / 2) - (image.offsetWidth / 2)}px`;
                             if (!isPC()) {
-                                image.style.width = '100%';
+                                if (image.offsetWidth >= image.offsetHeight) {
+                                    image.style.width = '100%';
+                                } else {
+                                    image.style.height = '100%';
+                                }
                             }
                             var size = 1;
                             image.style.trasform = `scale(${size})`;
