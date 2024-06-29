@@ -118,6 +118,9 @@ document.addEventListener('DOMContentLoaded', function () {
                             image.src = img.src;
                             image.style.top = `${(window.innerHeight / 2) - (image.offsetHeight / 2)}px`;
                             image.style.left = `${(window.innerWidth / 2) - (image.offsetWidth / 2)}px`;
+                            if (!isPC()) {
+                                image.style.width = '100%';
+                            }
                             var size = 1;
                             image.style.trasform = `scale(${size})`;
                             document.addEventListener('wheel', function (e) {
