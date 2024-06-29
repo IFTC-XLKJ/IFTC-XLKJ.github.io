@@ -140,6 +140,8 @@ document.addEventListener('DOMContentLoaded', function () {
                             var dragStartPos = { x: 0, y: 0 };
                             var newX = 0;
                             var newY = 0;
+                            var CX = 0;
+                            var CY = 0;
                             image.addEventListener('mousedown', function (e) {
                                 console.log(isDragging)
                                 e.preventDefault();
@@ -153,7 +155,8 @@ document.addEventListener('DOMContentLoaded', function () {
                             function onMouseMove(e) {
                                 console.log(isDragging);
                                 isDragging = true;
-                                console.log(e.clientX - dragStartPos.x);
+                                CX = e.clientX - dragStartPos.x;
+                                CY = e.clientY - dragStartPos.y;
                                 newX = initialOffset.x + e.clientX - dragStartPos.x;
                                 newY = initialOffset.y + e.clientY - dragStartPos.y;
                                 image.style.left = newX + 'px';
@@ -161,18 +164,18 @@ document.addEventListener('DOMContentLoaded', function () {
                             }
 
                             function onMouseUp() {
-                                isDragging = false;
                                 console.log(isDragging)
                                 document.removeEventListener('mousemove', onMouseMove);
                                 document.removeEventListener('mouseup', onMouseUp);
-                                console.log(newX, newY)
-                                if (newX == 0 && newY == 0) {
+                                console.log(CX, CY)
+                                if (!isDragging) {
                                     size = 1;
                                     image.style.top = `${(window.innerHeight / 2) - (image.offsetHeight / 2)}px`;
                                     image.style.left = `${(window.innerWidth / 2) - (image.offsetWidth / 2)}px`;
                                     image.style.transform = `scale(${size})`;
                                     dialog.style.display = 'none';
                                 }
+                                isDragging = false;
                             }
                         }
                     })
