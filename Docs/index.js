@@ -116,8 +116,6 @@ document.addEventListener('DOMContentLoaded', function () {
                             dialog.show();
                             var image = document.querySelector('#imgviewer img');
                             image.src = img.src;
-                            image.style.top = `${(window.innerHeight / 2) - (image.offsetHeight / 2)}px`;
-                            image.style.left = `${(window.innerWidth / 2) - (image.offsetWidth / 2)}px`;
                             if (!isPC()) {
                                 if (image.offsetWidth > window.innerWidth) {
                                     image.style.width = `${window.innerWidth}px`;
@@ -128,6 +126,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                     image.style.height = `${image.offsetHeight}px`;
                                 }
                             }
+                            image.style.top = `${(window.innerHeight / 2) - (image.offsetHeight / 2)}px`;
+                            image.style.left = `${(window.innerWidth / 2) - (image.offsetWidth / 2)}px`;
                             var size = 1;
                             image.style.trasform = `scale(${size})`;
                             document.addEventListener('wheel', function (e) {
