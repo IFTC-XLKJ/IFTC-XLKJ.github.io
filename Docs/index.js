@@ -119,10 +119,13 @@ document.addEventListener('DOMContentLoaded', function () {
                             image.style.top = `${(window.innerHeight / 2) - (image.offsetHeight / 2)}px`;
                             image.style.left = `${(window.innerWidth / 2) - (image.offsetWidth / 2)}px`;
                             if (!isPC()) {
-                                if (image.offsetWidth >= image.offsetHeight) {
-                                    image.style.width = '100%';
+                                if (image.offsetWidth > window.innerWidth) {
+                                    image.style.width = `${window.innerWidth}px`;
+                                } else if (image.offsetHeight > window.innerHeight) {
+                                    image.style.height = `${window.innerHeight}px`;
                                 } else {
-                                    image.style.height = '100%';
+                                    image.style.width = `${image.offsetWidth}px`;
+                                    image.style.height = `${image.offsetHeight}px`;
                                 }
                             }
                             var size = 1;
