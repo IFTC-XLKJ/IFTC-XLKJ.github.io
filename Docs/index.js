@@ -304,13 +304,17 @@ document.addEventListener('DOMContentLoaded', function () {
         return doccontent;
     }
 
-    function compilePath(path) {
-        var patharr = subsequenceFromStartLast(path, 1).split('/');
+    function compilePath(path, name) {
         patharr.forEach(path => {
-            if (pathArr.includes(path)) {
-                pathArr.push(path);
-            }
-        });
+            pathArr.push(path + name);
+        })
         console.log('路径列表', pathArr);
-    }
+    }/*
+    function PathToDir() {
+        pathArr.forEach(path => {
+            if (path.slice(0, 0) == '/' && ) {
+                dircontent = `${path.slice(0, 0)}${path.slice(1, )}`;
+            }
+        })
+    }*/
 })
