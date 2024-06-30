@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>To New Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        function getURLParameters() {
+            const queryString = window.location.search.substring(1);
+            const params = {};
+
+            if (queryString) {
+                queryString.split('&').forEach(param => {
+                    const [key, value] = param.split('=');
+                    params[key] = decodeURIComponent(value);
+                });
+            }
+
+            return params;
+        }
+        function toNewPage(url) {
+            window.location.href = url;
+        }
+        toNewPage(getURLParameters()['url']);
+    </script>
+</head>
+
+</html>
