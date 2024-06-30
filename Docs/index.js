@@ -3,6 +3,7 @@ const diropenbutton = `<svg t="1719391421508" class="icon" viewBox="0 0 1024 102
 const dirclosebutton = `<svg t="1719391938262" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10462" width="30" height="30"><path d="M756.736 812.032L512 567.296 267.776 811.52c-12.8 12.8-28.672 7.168-45.568-9.728-16.896-16.896-23.04-32.768-9.728-45.568L456.704 512 211.968 267.264c-14.848-15.36-6.144-30.208 8.704-45.568 16.896-16.896 30.72-25.6 46.592-10.24L512 456.704 756.736 212.48c14.336-14.336 28.672-7.168 47.104 11.264 15.36 15.36 23.552 28.672 8.192 44.032L567.296 512 811.52 756.224c15.36 15.36 8.704 28.672-8.192 46.08-16.896 17.408-33.792 22.528-46.592 9.728z" fill="#2C2C2C" p-id="10463"></path></svg>`;
 var isDirOpen = false;
 var codeids = [];
+var pathArr = [];
 function mathRandomInt(a, b) {
     if (a > b) {
         var c = a;
@@ -11,6 +12,13 @@ function mathRandomInt(a, b) {
     }
     return Math.floor(Math.random() * (b - a + 1) + a);
 }
+
+function subsequenceFromStartLast(sequence, at1) {
+    var start = at1;
+    var end = sequence.length - 1 + 1;
+    return sequence.slice(start, end);
+}
+
 function isPC() {
     var userAgent = navigator.userAgent;
     var mobileRegex = /(Android|webOS|iPhone|iPad|iPod|SymbianOS|BlackBerry|Windows Phone)/;
@@ -191,10 +199,9 @@ document.addEventListener('DOMContentLoaded', function () {
                             }
                         }
                     })
+                    getDocs();
                 } else {
-                    setTimeout(() => {
-
-                    }, 200)
+                    null;
                 }
             }
             console.log(json);
@@ -214,7 +221,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (id == '获取文档列表') {
                 if (json.code == 200) {
                     var docs = json.fields;
-                    console.log(docs);
+                    docs.forEach(doc => {
+                        console.log('文档', doc);
+                        compilePath(doc.路径);
+                    });
                 }
             }
         })
@@ -292,5 +302,15 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
         return doccontent;
+    }
+
+    function compilePath(path) {
+        var patharr = subsequenceFromStartLast(path, 1).split('/');
+        patharr.forEach(path => {
+            if (pathArr.includes(path)) {
+                pathArr.push(path);
+            }
+        });
+        console.log('路径列表', pathArr);
     }
 })
