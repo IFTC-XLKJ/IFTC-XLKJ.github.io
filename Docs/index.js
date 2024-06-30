@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (id == '获取文档列表') {
                 if (json.code == 200) {
                     var docs = json.fields;
-
+                    console.log(docs);
                 }
             }
         })
