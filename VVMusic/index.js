@@ -8,6 +8,7 @@ var audio = new Audio();
 var isPlay = false;
 var isSIFocus = false;
 var isPIFocus = false;
+var musicInfo = {};
 function formatSecondsToTime(seconds) {
     var minutes = Math.floor(seconds / 60);
     var remainingSeconds = seconds % 60;
@@ -73,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var check = document.getElementById('check');
     check.focus();
     var progress = document.getElementById('progress');
+    var download = document.getElementById('download');
 
     function getMusic() {
         dialog.style.display = 'flex';
@@ -176,6 +178,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                         cover.alt = `${data.songname} - ${data.name}`;
                                         cover.title = `${data.songname} - ${data.name}`;
                                         docuemnt.title = `${data.songname} - ${data.name}`;
+                                        musicInfo.name = data.songname;
+                                        musicInfo.author = data.name;
                                         var name = document.querySelector('#player-name');
                                         var author = document.querySelector('#player-author');
                                         name.innerHTML = data.songname;
@@ -321,6 +325,24 @@ document.addEventListener('DOMContentLoaded', () => {
     progress.addEventListener('input', (e) => {
         isPlay = false;
         audio.pause();
+    })
+    download.addEventListener('click', () => {
+        fetch(audio.src)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(dataURL => {
+                let a = document.createElement('a');
+                a.href = dataURL;
+                a.download = `${musicInfo.name} - ${musicInfo.author}.mp3`;
+                a.click();
+            })
+            .catch(error => {
+                console.error('Fetch GET request failed:', error);
+            });
     })
 })
 
