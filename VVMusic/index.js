@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                         musicInfo.author = data.name;
                                         musicInfo.src = data.src;
                                         $.ajax({
-                                            url: musicInfo.src,
+                                            url: musicInfo.src.replace("http://","https://"),
                                             type: 'GET',
                                             xhrFields: {
                                                 responseType: 'blob'
