@@ -6,9 +6,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=360px, initial-scale=1.0">
     <script src="https://iftc-xlkj.github.io/jquery-2.2.4.min.js"></script>
-    <script src="https://iftc-xlkj.github.io/sipg_jcokxlcsd9.js"></script>
-    <script src="https://iftc-xlkj.github.io/pgdbs.class.js"></script>
-    <script src="https://iftc-xlkj.github.io/pickduckDBJQ.a6b2a4d6c02022e831626d31ab805a468a151b90d5161660485a73cc6e1ea902.js"></script>
+    <script src="https://static.pgaot.com/Assets/js/sipg_jcokxlcsd9.js"></script>
+    <script src="https://static.pgaot.com/Assets/js.class/pgdbs.class.js"></script>
+    <script
+        src="https://shequ.pgaot.com/AdminPages/pages/Mysqldb/vip/pickduckDBJQ.a6b2a4d6c02022e831626d31ab805a468a151b90d5161660485a73cc6e1ea902.js"></script>
     <style>
         #root {
             position: fixed;
@@ -21,7 +22,7 @@
             height: 640px;
             user-select: none;
         }
-        
+
         .loader {
             width: 60px;
             aspect-ratio: 4;
@@ -31,14 +32,14 @@
             background-repeat: no-repeat;
             animation: l4 1s infinite alternate;
         }
-        
+
         @keyframes l4 {
             to {
                 width: 25px;
                 aspect-ratio: 1
             }
         }
-        
+
         #mask {
             position: relative;
             top: 0px;
@@ -47,16 +48,16 @@
             height: 640px;
             display: flex;
         }
-        
+
         #loading {
             width: 120px;
         }
-        
+
         #tip_signed,
         #tip_success {
             width: 180px;
         }
-        
+
         #loading,
         #tip_signed,
         #tip_success {
@@ -66,7 +67,7 @@
         }
     </style>
     <script>
-        window.onload = function() {
+        window.onload = function () {
             function dialogcenter(e) {
                 e.style.top = `${320 - (loading.offsetHeight / 2)}px`;
             }
@@ -159,10 +160,10 @@
                 });
                 setTimeout(() => {
                     vvzh.getTableData({
-                        page:1,
-                        limit:1,
-                        filter:`ID='${jsonData.ID}'`,
-                        id:'getUserData'
+                        page: 1,
+                        limit: 1,
+                        filter: `ID='${jsonData.ID}'`,
+                        id: 'getUserData'
                     });
                 }, 200)
             }
@@ -187,10 +188,10 @@
                     //var date = new Date();
                     console.log(Date.now())
                     vvzh.setTableData({
-                        type:"UPDATE",
-                        filter:`ID='${jsonData.ID}'`,
-                        fields:`签到='${Date.now()}',V币='${parseInt(localStorage.getItem('V币')) + 5}'`,
-                        id:"sign"
+                        type: "UPDATE",
+                        filter: `ID='${jsonData.ID}'`,
+                        fields: `签到='${Date.now()}',V币='${parseInt(localStorage.getItem('V币')) + 5}'`,
+                        id: "sign"
                     });
                 }, 200)
             }
