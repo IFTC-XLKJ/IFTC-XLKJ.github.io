@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var keyword = document.querySelector('#s > input');
     var dialog = document.getElementById('dialog');
     var loading = document.getElementById('loading');
-    var tips = document.getElementById('tip');
+    var tips = document.getElementById('tips');
     var tiptext = document.getElementById('tiptext');
     var searchinput = document.querySelector('#s > input');
     var check = document.getElementById('check');
@@ -180,39 +180,72 @@ document.addEventListener('DOMContentLoaded', () => {
                                         docuemnt.title = `${data.songname} - ${data.name}`;
                                         musicInfo.name = data.songname;
                                         musicInfo.author = data.name;
-                                        var name = document.querySelector('#player-name');
-                                        var author = document.querySelector('#player-author');
-                                        name.innerHTML = data.songname;
-                                        author.innerHTML = data.name;
-                                        audio.src = data.src;
-                                        audio.loop = true;
-                                        audio.play();
-                                        totaltime();
-                                        updatetime();
-                                        console.log(audio);
-                                        var play = document.getElementById("player-play");
-                                        play.addEventListener('click', () => {
-                                            if (isPlay) {
-                                                audio.pause();
-                                                isPlay = false;
-                                            } else {
-                                                audio.play();
-                                                isPlay = true;
+                                        musicInfo.src = data.src;
+                                        $.ajax({
+                                            url: musicInfo.src,
+                                            type: 'GET',
+                                            xhrFields: {
+                                                responseType: 'blob'
+                                            },
+                                            success: function (blob) {
+                                                var reader = new FileReader();
+                                                reader.onload = function (e) {
+                                                    var dataURL = e.target.result;
+                                                    console.log('Data URL:', dataURL);
+                                                    var url = dataURL;
+                                                    tiptext.innerHTML = `资源下载成功`;
+                                                    tips.showModal();
+                                                    dialog.style.display = 'flex';
+                                                    setTimeout(() => {
+                                                        tips.close();
+                                                        dialog.style.display = 'none';
+                                                    }, 2000);
+                                                    var name = document.querySelector('#player-name');
+                                                    var author = document.querySelector('#player-author');
+                                                    name.innerHTML = data.songname;
+                                                    author.innerHTML = data.name;
+                                                    audio.src = url;
+                                                    musicInfo.src = url;
+                                                    audio.loop = true;
+                                                    audio.play();
+                                                    totaltime();
+                                                    updatetime();
+                                                    console.log(audio);
+                                                    var play = document.getElementById("player-play");
+                                                    play.addEventListener('click', () => {
+                                                        if (isPlay) {
+                                                            audio.pause();
+                                                            isPlay = false;
+                                                        } else {
+                                                            audio.play();
+                                                            isPlay = true;
+                                                        }
+                                                        console.log('状态：', isPlay);
+                                                    })
+                                                    play.innerHTML = pauseicon;
+                                                    audio.onplay = function () {
+                                                        isPlay = true;
+                                                        play.innerHTML = pauseicon;
+                                                    }
+                                                    audio.onpause = function () {
+                                                        isPlay = false;
+                                                        play.innerHTML = playicon;
+                                                    }
+                                                };
+                                                reader.readAsDataURL(blob);
+                                            },
+                                            error: function (error) {
+                                                tiptext.innerHTML = `Error:${error}`;
+                                                tips.showModal();
+                                                setTimeout(() => {
+                                                    tips.close();
+                                                }, 2000);
                                             }
-                                            console.log('状态：', isPlay);
                                         })
-                                        play.innerHTML = pauseicon;
-                                        audio.onplay = function () {
-                                            isPlay = true;
-                                            play.innerHTML = pauseicon;
-                                        }
-                                        audio.onpause = function () {
-                                            isPlay = false;
-                                            play.innerHTML = playicon;
-                                        }
                                     } else {
                                         tiptext.innerHTML = `Error:${data.msg}`;
                                         tips.showModal();
+                                        dialog.style.display = 'flex';
                                         setTimeout(() => {
                                             tips.close();
                                             dialog.style.display = 'none';
@@ -224,6 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     loading.close();
                                     tiptext.innerHTML = `Error:${data}`;
                                     tips.showModal();
+                                    dialog.style.display = 'flex';
                                     setTimeout(() => {
                                         tips.close();
                                         dialog.style.display = 'none';
@@ -327,22 +361,10 @@ document.addEventListener('DOMContentLoaded', () => {
         audio.pause();
     })
     download.addEventListener('click', () => {
-        fetch(audio.src)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.text();
-            })
-            .then(dataURL => {
-                let a = document.createElement('a');
-                a.href = dataURL;
-                a.download = `${musicInfo.name} - ${musicInfo.author}.mp3`;
-                a.click();
-            })
-            .catch(error => {
-                console.error('Fetch GET request failed:', error);
-            });
+        var a = document.createElement('a');
+        a.href = musicInfo.src;
+        a.download = `${musicInfo.name} - ${musicInfo.author}.mp3`;
+        a.click();
     })
 })
 
