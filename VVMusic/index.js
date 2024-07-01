@@ -165,8 +165,6 @@ document.addEventListener('DOMContentLoaded', () => {
                                 url: getURLAPI(ID),
                                 type: 'GET',
                                 success: function (data) {
-                                    dialog.style.display = 'none';
-                                    loading.close();
                                     console.log(data);
                                     if (data.code == 0) {
                                         var data = data.data;
@@ -193,6 +191,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                                     var dataURL = e.target.result;
                                                     console.log('Data URL:', dataURL);
                                                     var url = dataURL;
+                                                    dialog.style.display = 'none';
+                                                    loading.close();
                                                     tiptext.innerHTML = `资源下载成功`;
                                                     tips.showModal();
                                                     dialog.style.display = 'flex';
