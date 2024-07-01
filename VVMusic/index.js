@@ -243,9 +243,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                             }
                                         })
                                     } else {
+                                        dialog.style.display = 'flex';
                                         tiptext.innerHTML = `Error:${data.msg}`;
                                         tips.showModal();
-                                        dialog.style.display = 'flex';
                                         setTimeout(() => {
                                             tips.close();
                                             dialog.style.display = 'none';
@@ -255,6 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 error: function (data) {
                                     console.log(data);
                                     loading.close();
+                                    loading.style.display = 'none';
                                     tiptext.innerHTML = `Error:${data}`;
                                     tips.showModal();
                                     dialog.style.display = 'flex';
