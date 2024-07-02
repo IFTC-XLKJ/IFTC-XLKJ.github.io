@@ -379,6 +379,25 @@ document.addEventListener('DOMContentLoaded', () => {
             type: 'GET',
             success: function (data) {
                 console.log(data);
+                var lrcs = data.lrc.lyric ? data.lrc.lyric : null;
+                var tlyrics = data.tlyric.lyric ? data.tlyric.lyric : null;
+                var lrcstimes = [];
+                var tlyricstimes = [];
+                lrcs.split(/\n/).forEach((item, index) => {
+                    console.log(item);
+                    //console.log(index);
+                    if (item.match(/^\[.+\]/)) {
+                        lrcstimes.push(lrcTimeToNum(item.match(/^\[(.+)\]/)[1]));
+                    }
+                })
+                tlyrics.split(/\n/).forEach((item, index) => {
+                    console.log(item);
+                    //console.log(index);
+                    if (item.match(/^\[.+\]/)) {
+                        tlyricstimes.push(lrcTimeToNum(item.match(/^\[(.+)\]/)[1]));
+                    }
+                })
+                console.log(lrcstimes, tlyricstimes);
             },
             error: function (err) {
                 console.error(err);
@@ -391,6 +410,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 2000);
             }
         })
+    }
+    function lrcTimeToNum(time) {
+        var times = time.split(':');
+        console.log(times);
+        if (Number(times[0]).typeof == 'number') {
+            return parseInt(times[0]) * 60 + parseFloat(times[1]);
+        } else {
+            return 0;
+        }
     }
 })
 
