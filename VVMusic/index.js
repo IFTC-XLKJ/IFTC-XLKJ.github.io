@@ -182,8 +182,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                         musicInfo.name = data.songname;
                                         musicInfo.author = data.name;
                                         musicInfo.src = data.src;
+                                        musicInfo.ID = data.id;
                                         $.ajax({
-                                            url: musicInfo.src.replace("http://","https://"),
+                                            url: musicInfo.src.replace("http://", "https://"),
                                             type: 'GET',
                                             xhrFields: {
                                                 responseType: 'blob'
@@ -194,6 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                     var dataURL = e.target.result;
                                                     console.log('Data URL:', dataURL);
                                                     var url = dataURL;
+                                                    getlrc(musicInfo.ID);
                                                     dialog.style.display = 'none';
                                                     loading.close();
                                                     tiptext.innerHTML = `资源下载成功`;
@@ -371,6 +373,25 @@ document.addEventListener('DOMContentLoaded', () => {
         a.download = `${musicInfo.name} - ${musicInfo.author}.mp3`;
         a.click();
     })
+    function getlrc(ID) {
+        $.ajax({
+            url: `https://api.xfyun.club/musicAll/?lyric=${ID}`,
+            type: 'GET',
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (err) {
+                console.error(err);
+                tiptext.innerHTML = `Error:${data}`;
+                tips.showModal();
+                dialog.style.display = 'flex';
+                setTimeout(() => {
+                    tips.close();
+                    dialog.style.display = 'none';
+                }, 2000);
+            }
+        })
+    }
 })
 
 window.addEventListener('resize', function () {
