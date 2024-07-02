@@ -59,10 +59,13 @@ document.addEventListener('DOMContentLoaded', () => {
     var winheight = window.innerHeight;
     var app = document.querySelector('#app');
     app.style.width = winwidth + 'px';
-    app.style.height = (winheight - 60) + 'px';
+    app.style.height = (winheight - 90) + 'px';
     var player = document.querySelector('#player');
     player.style.width = winwidth + 'px';
     player.style.height = 60 + 'px';
+    var lrc = document.getElementById('music-lrc');
+    lrc.style.width = winwidth + 'px';
+    lrc.style.height = 30 + 'px';
     var search = document.querySelector('#search');
     var clear = document.querySelector('#clear');
     var keyword = document.querySelector('#s > input');
@@ -239,6 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                 tips.showModal();
                                                 setTimeout(() => {
                                                     tips.close();
+                                                    dialog.style.display = 'none';
                                                 }, 2000);
                                             }
                                         })
@@ -374,9 +378,12 @@ window.addEventListener('resize', function () {
     var winheight = window.innerHeight;
     var app = document.querySelector('#app');
     app.style.width = winwidth + 'px';
-    app.style.height = (winheight - 60) + 'px';
+    app.style.height = (winheight - 90) + 'px';
     var player = document.querySelector('#player');
     player.style.width = winwidth + 'px';
     player.style.height = 60 + 'px';
+    var lrc = document.getElementById('music-lrc');
+    lrc.style.width = winwidth + 'px';
+    lrc.style.height = 30 + 'px';
     console.log(winwidth, winheight)
 });
