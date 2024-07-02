@@ -268,8 +268,11 @@
             height: 30px;
             overflow: hidden;
             background-color: rgba(20, 100, 200, 0.5);
-            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             color: white;
+            box-shadow: 0 0 10px 0 rgba(20, 100, 200, 0.5);
         }
 
         #music-lrc:hover {
@@ -288,7 +291,6 @@
         <div id="music"></div>
         <div id="page"></div>
     </div>
-    <div id="music-lrc">歌词</div>
     <div id="player">
         <div id="player-cover">
             <img src="./default-cover.png" alt="default">
@@ -326,6 +328,7 @@
             </div>
         </div>
     </div>
+    <div id="music-lrc">歌词</div>
     <div id="dialog">
         <dialog id="loading">
             <div class="loader">
