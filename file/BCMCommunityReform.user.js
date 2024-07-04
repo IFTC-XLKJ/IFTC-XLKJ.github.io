@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BCM社区魔改
 // @namespace    http://tampermonkey.net/
-// @version      1.5
+// @version      1.6
 // @description  try to take over the world!
 // @author       IFTC
 // @match        https://shequ.codemao.cn/*
@@ -53,13 +53,19 @@
             nav9.href = "https://iftc-xlkj.github.io/Home";
             var home = document.querySelector('.r-home-c-course--homepage_course');
             console.log(home)
-            home.innerHTML = "";
+            if (home) {
+                home.innerHTML = "";
+            }
             var home1 = document.querySelector('.r-home-c-novel_area--novel_area');
             console.log(home1)
-            home1.innerHTML = "";
+            if (home1) {
+                home1.innerHTML = "";
+            }
             var home2 = document.querySelector('.r-home-c-code_tv--novel_area');
             console.log(home2)
-            home2.innerHTML = "";
+            if (home2) {
+                home2.innerHTML = "";
+            }
             var head = document.head;
             head.innerHTML += `
 <link href="https://static.codemao.cn/IFTC-Studio/By9XjA7wR.css" rel="stylesheet">
@@ -88,7 +94,8 @@
             nav13.innerHTML = '下个damn';
             var home3 = document.querySelector('.r-home-c-banner--banner_sub_items');
             console.log(home3);
-            home3.innerHTML = `<div class="r-home-c-banner--banner_sub_items" style="display: none; background: rgb(245, 245, 245); width: 220px;">
+            if (home3) {
+                home3.innerHTML = `<div class="r-home-c-banner--banner_sub_items" style="display: none; background: rgb(245, 245, 245); width: 220px;">
 </div>
 <div style="visibility: unset;">
     <div class="event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort2 r-home-c-banner--hovered"
@@ -146,69 +153,72 @@
             class="r-home-c-banner--funny r-home-c-banner--funny5"></span>
     </div>
 </div>`;
+            }
             var home4 = document.querySelector(".r-home-c-banner--sort2");
             var home5 = document.querySelector(".r-home-c-banner--sort1");
             var home6 = document.querySelector(".r-home-c-banner--sort3");
             var home7 = document.querySelector(".r-home-c-banner--sort4");
             var home8 = document.querySelector(".r-home-c-banner--sort5");
             console.log(home4);
-            home3.addEventListener('mouseleave', function(event) {
-                home4.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort2 r-home-c-banner--hovered';
-                home5.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort1 r-home-c-banner--out';
-                home6.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort3 r-home-c-banner--out';
-                home7.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort4 r-home-c-banner--out';
-                home8.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort5 r-home-c-banner--out';
-            });
-            home4.addEventListener('mouseenter', function(event) {
-                home4.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort2 r-home-c-banner--hovered';
-                home5.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort1 r-home-c-banner--out';
-                home6.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort3 r-home-c-banner--out';
-                home7.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort4 r-home-c-banner--out';
-                home8.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort5 r-home-c-banner--out';
-            });
-            home5.addEventListener('mouseenter', function(event) {
-                home4.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort2 r-home-c-banner--out';
-                home5.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort1 r-home-c-banner--hovered';
-                home6.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort3 r-home-c-banner--out';
-                home7.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort4 r-home-c-banner--out';
-                home8.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort5 r-home-c-banner--out';
-            });
-            home6.addEventListener('mouseenter', function(event) {
-                home4.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort2 r-home-c-banner--out';
-                home5.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort1 r-home-c-banner--out';
-                home6.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort3 r-home-c-banner--hovered';
-                home7.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort4 r-home-c-banner--out';
-                home8.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort5 r-home-c-banner--out';
-            });
-            home7.addEventListener('mouseenter', function(event) {
-                home4.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort2 r-home-c-banner--out';
-                home5.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort1 r-home-c-banner--out';
-                home6.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort3 r-home-c-banner--out';
-                home7.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort4 r-home-c-banner--hovered';
-                home8.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort5 r-home-c-banner--out';
-            });
-            home8.addEventListener('mouseenter', function(event) {
-                home4.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort2 r-home-c-banner--out';
-                home5.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort1 r-home-c-banner--out';
-                home6.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort3 r-home-c-banner--out';
-                home7.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort4 r-home-c-banner--out';
-                home8.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort5 r-home-c-banner--hovered';
-            });
-            home4.addEventListener('click', function(event) {
-                window.open('https://kitten4.codemao.cn');
-            });
-            home5.addEventListener('click', function(event) {
-                window.open('https://coco.codemao.cn');
-            });
-            home6.addEventListener('click', function(event) {
-                window.open('https://dao3.fun');
-            });
-            home7.addEventListener('click', function(event) {
-                window.open('https://turtle.codemao.cn');
-            });
-            home8.addEventListener('click', function(event) {
-                window.open('https://kitten.codemao.cn');
-            });
+            if (home4) {
+                home3.addEventListener('mouseleave', function(event) {
+                    home4.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort2 r-home-c-banner--hovered';
+                    home5.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort1 r-home-c-banner--out';
+                    home6.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort3 r-home-c-banner--out';
+                    home7.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort4 r-home-c-banner--out';
+                    home8.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort5 r-home-c-banner--out';
+                });
+                home4.addEventListener('mouseenter', function(event) {
+                    home4.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort2 r-home-c-banner--hovered';
+                    home5.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort1 r-home-c-banner--out';
+                    home6.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort3 r-home-c-banner--out';
+                    home7.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort4 r-home-c-banner--out';
+                    home8.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort5 r-home-c-banner--out';
+                });
+                home5.addEventListener('mouseenter', function(event) {
+                    home4.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort2 r-home-c-banner--out';
+                    home5.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort1 r-home-c-banner--hovered';
+                    home6.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort3 r-home-c-banner--out';
+                    home7.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort4 r-home-c-banner--out';
+                    home8.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort5 r-home-c-banner--out';
+                });
+                home6.addEventListener('mouseenter', function(event) {
+                    home4.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort2 r-home-c-banner--out';
+                    home5.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort1 r-home-c-banner--out';
+                    home6.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort3 r-home-c-banner--hovered';
+                    home7.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort4 r-home-c-banner--out';
+                    home8.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort5 r-home-c-banner--out';
+                });
+                home7.addEventListener('mouseenter', function(event) {
+                    home4.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort2 r-home-c-banner--out';
+                    home5.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort1 r-home-c-banner--out';
+                    home6.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort3 r-home-c-banner--out';
+                    home7.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort4 r-home-c-banner--hovered';
+                    home8.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort5 r-home-c-banner--out';
+                });
+                home8.addEventListener('mouseenter', function(event) {
+                    home4.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort2 r-home-c-banner--out';
+                    home5.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort1 r-home-c-banner--out';
+                    home6.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort3 r-home-c-banner--out';
+                    home7.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort4 r-home-c-banner--out';
+                    home8.className = 'event_target data_report r-home-c-banner--banner_sub_item r-home-c-banner--sort5 r-home-c-banner--hovered';
+                });
+                home4.addEventListener('click', function(event) {
+                    window.open('https://kitten4.codemao.cn');
+                });
+                home5.addEventListener('click', function(event) {
+                    window.open('https://coco.codemao.cn');
+                });
+                home6.addEventListener('click', function(event) {
+                    window.open('https://dao3.fun');
+                });
+                home7.addEventListener('click', function(event) {
+                    window.open('https://turtle.codemao.cn');
+                });
+                home8.addEventListener('click', function(event) {
+                    window.open('https://kitten.codemao.cn');
+                });
+            }
             document.body.style.display = "block";
         }, 1000)
     };
