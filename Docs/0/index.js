@@ -17,3 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const urlParams = getURLParameters();
     console.log(urlParams);
 });
+
+
+nav2.forEach((item) => {
+})

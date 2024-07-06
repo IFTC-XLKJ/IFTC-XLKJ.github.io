@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var search = document.querySelector('#search');
     var clear = document.querySelector('#clear');
     var keyword = document.querySelector('#s > input');
-    var dialog = document.getElementById('dialog');
+    //var dialog = document.getElementById('dialog');
     var loading = document.getElementById('loading');
     var tips = document.getElementById('tips');
     var tiptext = document.getElementById('tiptext');
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var download = document.getElementById('download');
 
     function getMusic() {
-        dialog.style.display = 'flex';
+        //dialog.style.display = 'flex';
         loading.showModal();
         if (keyword.value) {
             console.log(keyword.value);
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     keyword: keyword.value
                 },
                 success: function (data) {
-                    dialog.style.display = 'none';
+                    //dialog.style.display = 'none';
                     loading.close();
                     var result = data.data;
                     console.log('结果：', result);
@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             var name = this.dataset.name;
                             var author = this.dataset.author;
                             console.log(item, ID, name, author);
-                            dialog.style.display = 'flex';
+                            //dialog.style.display = 'flex';
                             loading.showModal();
                             $.ajax({
                                 url: getURLAPI(ID),
@@ -196,14 +196,16 @@ document.addEventListener('DOMContentLoaded', () => {
                                                     console.log('Data URL:', dataURL);
                                                     var url = dataURL;
                                                     getlrc(musicInfo.ID);
-                                                    dialog.style.display = 'none';
+                                                    //dialog.style.display = 'none';
                                                     loading.close();
                                                     tiptext.innerHTML = `资源下载成功`;
                                                     tips.showModal();
-                                                    dialog.style.display = 'flex';
+                                                    //dialog.style.display = 'flex';
+                                                    //dialog.style.zIndex = 1000;
                                                     setTimeout(() => {
                                                         tips.close();
-                                                        dialog.style.display = 'none';
+                                                        //dialog.style.display = 'none';
+                                                        //dialog.style.zIndex = -1;
                                                     }, 2000);
                                                     var name = document.querySelector('#player-name');
                                                     var author = document.querySelector('#player-author');
@@ -241,20 +243,23 @@ document.addEventListener('DOMContentLoaded', () => {
                                             },
                                             error: function (error) {
                                                 tiptext.innerHTML = `Error:${error}`;
+                                                //dialog.style.zIndex = 1000;
                                                 tips.showModal();
                                                 setTimeout(() => {
                                                     tips.close();
-                                                    dialog.style.display = 'none';
+                                                    //dialog.style.display = 'none';
                                                 }, 2000);
                                             }
                                         })
                                     } else {
-                                        dialog.style.display = 'flex';
+                                        //dialog.style.display = 'flex';
+                                        //dialog.style.zIndex = 1000;
                                         tiptext.innerHTML = `Error:${data.msg}`;
                                         tips.showModal();
                                         setTimeout(() => {
                                             tips.close();
-                                            dialog.style.display = 'none';
+                                            //dialog.style.display = 'none';
+                                            //dialog.style.zIndex = -1;
                                         }, 2000);
                                     }
                                 },
@@ -264,10 +269,11 @@ document.addEventListener('DOMContentLoaded', () => {
                                     loading.style.display = 'none';
                                     tiptext.innerHTML = `Error:${data}`;
                                     tips.showModal();
-                                    dialog.style.display = 'flex';
+                                    //dialog.style.display = 'flex';
                                     setTimeout(() => {
                                         tips.close();
-                                        dialog.style.display = 'none';
+                                        //dialog.style.display = 'none';
+                                        //dialog.style.zIndex = -1;
                                     }, 2000);
                                 }
                             })
@@ -275,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     })
                 },
                 error: function (err) {
-                    dialog.style.display = 'none';
+                    //dialog.style.display = 'none';
                     loading.close();
                     var page = docuemnt.getElementById('page');
                     page.innerHTML = ``;
