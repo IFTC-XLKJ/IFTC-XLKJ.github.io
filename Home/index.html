@@ -140,6 +140,11 @@
             margin-left: 5px;
             margin-top: 5px;
         }
+
+        #loader {
+            width: 150px;
+            height: 150px;
+        }
     </style>
     <script src="./login.js"></script>
     <script src="./index.js"></script>
@@ -151,6 +156,7 @@
     <script src="https://static.pgaot.com/Assets/js/jquery-2.2.4.min.js"></script>
     <script src="https://static.pgaot.com/Assets/js/sipg_jcokxlcsd9.js"></script>
     <script src="https://static.pgaot.com/Assets/js.class/pgdbs.class.js"></script>
+    <link rel="stylesheet" href="./loader.css">
     <script>
         window.onload = function () {
             function isMobileDevice() {
@@ -215,7 +221,14 @@
             <button id="Slogin">登录</button>
         </dialog>
         <dialog id="loader">
-            
+            <div class="spinner">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
         </dialog>
     </div>
 </body>
