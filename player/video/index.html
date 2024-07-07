@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Vedio Player</title>
-    </head>
-    <body>
-        <video id="video" controls="controls" width="100%" height="100%">
-            <source src="./test.mp4" type="video/mp4">
+
+<head>
+    <meta charset="utf-8">
+    <title>Vedio Player</title>
+    <style>
+        body {
+            margin: 0;
+            user-select: none;
+            background-color: black;
+        }
+
+        #video {
+            width: 100vw;
+            height: 99vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <video id="video">
+            <source src="./诈骗の小曲.mp4" type="video/mp4">
         </video>
-    </body>
+    </div>
+</body>
+
 </html>
