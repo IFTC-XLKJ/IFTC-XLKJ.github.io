@@ -127,6 +127,9 @@
             height: 20px;
             float: right;
         }
+        .hide {
+            display: none;
+        }
     </style>
     <script src="./login.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -181,6 +184,12 @@
             </div>
             <div id="login" class="inline">
                 <div id="Blogin" @click="login.showModal()">登录</div>
+                <div id="user" class="inline" style="display: none;">
+                    <div id="user_name" class="inline">{{user_name}}</div>
+                    <div id="user_img" class="inline">
+                        <img id="user_img_img" class="inline" src="">
+                    </div>
+                </div>
             </div>
         </div>
     </header>

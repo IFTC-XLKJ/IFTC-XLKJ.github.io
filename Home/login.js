@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	var Slogin = document.getElementById('Slogin');
 	var Blogin = document.getElementById('Blogin');
 	var qrlogin = document.getElementById('qrlogin');
-	var Dclose = document.getElementById("Dclose");
+	var Dlogin = document.getElementById("Dlogin");
 	console.log(Slogin);
 	var ms = 0;
 	var interval;
@@ -48,7 +48,8 @@ document.addEventListener('DOMContentLoaded', function () {
 						localStorage.setItem('头像', json.fields[0].头像);
 						localStorage.setItem('昵称', json.fields[0].昵称);
 						alert('登录成功');
-						Dclose.click();
+						Dlogin.close();
+						
 					}
 				} else {
 					alert('登录失败');
