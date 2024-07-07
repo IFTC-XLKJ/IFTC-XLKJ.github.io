@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var userImg = document.getElementById('user_img');
     var user = document.getElementById('user');
     var login = document.getElementById('login');
+	var loader = document.getElementById('loader');
 	console.log(Slogin);
 	var ms = 0;
 	var interval;
@@ -47,6 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				if (json.code == 200) {
 					if (json.fields.length == 0) {
 						alert('登录失败');
+						loader.close();
 					} else {
 						localStorage.setItem('头像', json.fields[0].头像);
 						localStorage.setItem('昵称', json.fields[0].昵称);
@@ -58,15 +60,18 @@ document.addEventListener('DOMContentLoaded', function () {
 						login.style.margin = '0px';
 						Blogin.style.display = 'none';
 						userImg.src = localStorage.getItem('头像');
+						loader.close();
 					}
 				} else {
 					alert('登录失败');
+					loader.close();
 				}
 			}
 		});
 		vvzh.getTableData({ page: 1, limit: 100, id: '获取用户数据', filter: `ID='${localStorage.getItem('ID')}'` })
 	}
 	Slogin.addEventListener('click', function () {
+		loader.showModal();
 		console.log("click");
 		weblogin.onGetData((json, id, url) => {
 			if (id == 'login') {
@@ -74,6 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				if (json.code == 200) {
 					if (json.fields.length == 0) {
 						alert('登录失败');
+						loader.close();
 					} else {
 						localStorage.setItem('ID', json.fields[0].ID);
 						setTimeout(() => {
@@ -82,18 +88,21 @@ document.addEventListener('DOMContentLoaded', function () {
 					}
 				} else {
 					alert('登录失败');
+					loader.close();
 				}
 			}
 		});
 		weblogin.getTableData({ page: 1, limit: 100, id: 'login', filter: `passid='${localStorage.getItem('passid')}'` })
 	})
 	Blogin.addEventListener('click', function () {
+		loader.showModal();
 		console.log("click", ms);
 		const passid = getpassid();
 		localStorage.setItem('passid', passid);
 		const text = `{"passid":"${localStorage.getItem('passid')}","type":"login"}`;
 		weblogin.onGetData((json, id, url) => {
 			if (id == 'add') {
+				loader.close();
 				console.log(json);
 				if (json.code == 200) {
 					const qrcodeDiv = document.getElementById('qrlogin');
@@ -116,12 +125,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	})
 	qrlogin.addEventListener('click', function () {
+		loader.showModal();
 		console.log("click", ms);
 		const passid = getpassid();
 		localStorage.setItem('passid', passid);
 		const text = `{"passid":"${localStorage.getItem('passid')}","type":"login"}`;
 		weblogin.onGetData((json, id, url) => {
 			if (id == 'add') {
+				loader.close();
 				console.log(json);
 				if (json.code == 200) {
 					qrlogin.innerHTML = "";

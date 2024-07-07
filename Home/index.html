@@ -144,6 +144,11 @@
         #loader {
             width: 150px;
             height: 150px;
+            background-color: #33333385;
+        }
+
+        .spinner {
+            margin: 35px 10px 10px 40px;
         }
     </style>
     <script src="./login.js"></script>
@@ -167,6 +172,7 @@
                 var login = document.getElementById('Dlogin');
                 console.log(login);
                 login.showModal();
+                loader.showModal();
                 var p = document.querySelector("#Dlogin>p");
                 if (isMobileDevice()) {
                     console.log('访问设备是手机');
@@ -220,7 +226,7 @@
             <p>打开VV账号中心扫码功能，扫码登录</p>
             <button id="Slogin">登录</button>
         </dialog>
-        <dialog id="loader">
+        <dialog id="loader" style="z-index: 1000;">
             <div class="spinner">
                 <div></div>
                 <div></div>
