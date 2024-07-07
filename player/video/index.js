@@ -16,4 +16,7 @@ console.log(urlParams);
 document.addEventListener('DOMContentLoaded', function () {
     var video = document.getElementById('video');
     var app = document.getElementById('app');
+    if (urlParams) {
+        video.play();
+    }
 });
