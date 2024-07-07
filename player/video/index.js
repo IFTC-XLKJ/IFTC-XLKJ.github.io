@@ -23,19 +23,20 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log(urlParams);
     var video = document.getElementById('video');
     var app = document.getElementById('app');
-    video.addEventListener('click', function () {
         if (!first.load) {
             if (getKeysNum(urlParams) == 0) {
-                video.play();
+                video.autoplay = true;
+                video.loop = true;
                 isPlaying = true;
             } else if (urlParams.url) {
+                video.autoplay = true;
+                video.loop = true;
                 video.src = urlParams.url;
                 video.play();
                 isPlaying = true;
             }
             first.load = true;
         }
-    });
     video.addEventListener('dblclick', function () {
         if (isPlaying) {
             video.pause();
@@ -45,5 +46,4 @@ document.addEventListener('DOMContentLoaded', function () {
             isPlaying = true;
         }
     })
-    video.click();
 });
