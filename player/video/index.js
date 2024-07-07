@@ -18,25 +18,42 @@ function getURLParameters() {
 function getKeysNum(obj) {
     return Object.keys(obj).length;
 }
+
+function searchMVAPI (){
+    return ``;
+}
 document.addEventListener('DOMContentLoaded', function () {
     const urlParams = getURLParameters();
     console.log(urlParams);
     var video = document.getElementById('video');
     var app = document.getElementById('app');
-        if (!first.load) {
-            if (getKeysNum(urlParams) == 0) {
+    function getMV() {
+        $.ajax({
+            type: 'GET',
+            url: '',
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                video.src = data.data.list[0].cover;
                 video.autoplay = true;
                 video.loop = true;
-                isPlaying = true;
-            } else if (urlParams.url) {
-                video.autoplay = true;
-                video.loop = true;
-                video.src = urlParams.url;
-                video.play();
-                isPlaying = true;
+               isPlaying = true;
             }
-            first.load = true;
+        })
+    }
+    if (!first.load) {
+        if (getKeysNum(urlParams) == 0) {
+            video.autoplay = true;
+            video.loop = true;
+            isPlaying = true;
+        } else if (urlParams.url) {
+            video.autoplay = true;
+            video.loop = true;
+            video.src = urlParams.url;
+            isPlaying = true;
         }
+        first.load = true;
+    }
     video.addEventListener('dblclick', function () {
         if (isPlaying) {
             video.pause();

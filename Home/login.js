@@ -2,6 +2,17 @@ var document = this.document;
 var window = this.window;
 console.log(window);
 console.log(document);
+function getpassid() {
+	return new Promise((resolve, reject) => {
+		const strlist = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+		var str = '';
+		for (var i = 0; i < 10; i++) {
+			str += strlist[Math.floor(Math.random() * strlist.length)];
+		}
+		resolve(str);
+	});
+}
+console.log(passid())
 document.addEventListener('DOMContentLoaded', function () {
 	console.log("onload");
 	var Slogin = document.getElementById('Slogin');
@@ -52,8 +63,15 @@ document.addEventListener('DOMContentLoaded', function () {
 				console.log(json);
 				if (json.code == 200) {
 					const qrcodeDiv = document.getElementById('qrlogin');
-					localStorage.setItem('qrtime', Date.now());
-					const text = `{"time":${localStorage.getItem('qrtime')},"type":"login"}`;
+					getpassid()
+						.then(passid => {
+							const passid = passid
+							console.log(password);
+						}).catch(error => {
+							console.error('生成密码时出错:', error);
+						});
+					localStorage.setItem('passid', passid);
+					const text = `{"time":${localStorage.getItem('passid')},"type":"login"}`;
 					console.log(JSON.parse(text));
 					new QRCode(qrcodeDiv, {
 						text: text,
@@ -68,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 		});
 		if (ms >= 200) {
-			weblogin.setTableData({ type: 'INSERT', filter: 'time', fields: `('${localStorage.getItem('qrtime')}')`, id: 'add' });
+			weblogin.setTableData({ type: 'INSERT', filter: 'passid', fields: `('${localStorage.getItem('qrtime')}')`, id: 'add' });
 		}
 
 	})
@@ -80,8 +98,15 @@ document.addEventListener('DOMContentLoaded', function () {
 				if (json.code == 200) {
 					qrlogin.innerHTML = "";
 					const qrcodeDiv = document.getElementById('qrlogin');
-					localStorage.setItem('qrtime', Date.now());
-					const text = `{"time":${localStorage.getItem('qrtime')},"type":"login"}`;
+					getpassid()
+						.then(passid => {
+							const passid = passid
+							console.log(password);
+						}).catch(error => {
+							console.error('生成密码时出错:', error);
+						});
+					localStorage.setItem('passid', passid);
+					const text = `{"time":${localStorage.getItem('passid')},"type":"login"}`;
 					console.log(JSON.parse(text));
 					new QRCode(qrcodeDiv, {
 						text: text,
@@ -96,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 		});
 		if (ms >= 200) {
-			weblogin.setTableData({ type: 'INSERT', filter: 'time', fields: `('${localStorage.getItem('qrtime')}')`, id: 'add' });
+			weblogin.setTableData({ type: 'INSERT', filter: 'passid', fields: `('${localStorage.getItem('passid')}')`, id: 'add' });
 		}
 	})
 });
