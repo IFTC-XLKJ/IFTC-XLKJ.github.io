@@ -396,7 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     function lrcTimeToNum(time) {
         var times = time.split(':');
-        console.log(times);
+        console.log(Number(times[0]).typeof);
         if (Number(times[0]).typeof == 'number') {
             return parseInt(times[0]) * 60 + parseFloat(times[1]);
         } else {
