@@ -388,10 +388,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error(err);
                 tiptext.innerHTML = `Error:${data}`;
                 tips.showModal();
-                dialog.style.display = 'flex';
                 setTimeout(() => {
                     tips.close();
-                    dialog.style.display = 'none';
                 }, 2000);
             }
         })
