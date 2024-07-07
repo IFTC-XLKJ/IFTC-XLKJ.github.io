@@ -16,6 +16,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	var Blogin = document.getElementById('Blogin');
 	var qrlogin = document.getElementById('qrlogin');
 	var Dlogin = document.getElementById("Dlogin");
+    var userImg = document.getElementById('user_img');
+    var user = document.getElementById('user');
+    var login = document.getElementById('login');
 	console.log(Slogin);
 	var ms = 0;
 	var interval;
@@ -49,7 +52,12 @@ document.addEventListener('DOMContentLoaded', function () {
 						localStorage.setItem('昵称', json.fields[0].昵称);
 						alert('登录成功');
 						Dlogin.close();
-						
+						user.style.display = 'inline';
+						user.style.height = '60px';
+						user.style.width = '60px';
+						login.style.margin = '0px';
+						Blogin.style.display = 'none';
+						userImg.src = localStorage.getItem('头像');
 					}
 				} else {
 					alert('登录失败');

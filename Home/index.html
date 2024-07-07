@@ -127,11 +127,22 @@
             height: 20px;
             float: right;
         }
+
         .hide {
             display: none;
         }
+
+        #user_img {
+            width: 50px;
+            height: 50px;
+            border: 1px solid white;
+            border-radius: 50%;
+            margin-left: 5px;
+            margin-top: 5px;
+        }
     </style>
     <script src="./login.js"></script>
+    <script src="./index.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script
         src="https://shequ.pgaot.com/AdminPages/pages/Mysqldb/vip/pickduckDBJQ.29956f7ff3449ed31f3e59bb3eb685d93ed73e96f6f9dfe01f2f65cbb08dcc14.js"></script>
@@ -185,10 +196,7 @@
             <div id="login" class="inline">
                 <div id="Blogin" @click="login.showModal()">登录</div>
                 <div id="user" class="inline" style="display: none;">
-                    <div id="user_name" class="inline">{{user_name}}</div>
-                    <div id="user_img" class="inline">
-                        <img id="user_img_img" class="inline" src="">
-                    </div>
+                    <img id="user_img" class="inline" src="">
                 </div>
             </div>
         </div>
@@ -205,6 +213,9 @@
             <div id="qrlogin" style="width: 280px;height: 280px;"></div>
             <p>打开VV账号中心扫码功能，扫码登录</p>
             <button id="Slogin">登录</button>
+        </dialog>
+        <dialog id="loader">
+            
         </dialog>
     </div>
 </body>
