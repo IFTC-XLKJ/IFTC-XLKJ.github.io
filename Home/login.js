@@ -16,9 +16,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	var Blogin = document.getElementById('Blogin');
 	var qrlogin = document.getElementById('qrlogin');
 	var Dlogin = document.getElementById("Dlogin");
-    var userImg = document.getElementById('user_img');
-    var user = document.getElementById('user');
-    var login = document.getElementById('login');
+	var userImg = document.getElementById('user_img');
+	var user = document.getElementById('user');
+	var login = document.getElementById('login');
 	var loader = document.getElementById('loader');
 	console.log(Slogin);
 	var ms = 0;
