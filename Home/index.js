@@ -1,5 +1,6 @@
 var document = this.document;
 var window = this.window;
+var appnum = 1;
 document.addEventListener('DOMContentLoaded', function () {
     var vvzh = new pgdbs(dbs_a6b2a4d6c02022e831626d31ab805a468a151b90d5161660485a73cc6e1ea902);
     var user = document.getElementById('user');
