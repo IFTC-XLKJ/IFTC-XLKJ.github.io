@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
 					} else {
 						localStorage.setItem('头像', json.fields[0].头像);
 						localStorage.setItem('昵称', json.fields[0].昵称);
+						localStorage.setItem('V币', json.fields[0].V币);
 						alert('登录成功');
 						Dlogin.close();
 						user.style.display = 'inline';
@@ -95,7 +96,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		weblogin.getTableData({ page: 1, limit: 100, id: 'login', filter: `passid='${localStorage.getItem('passid')}'` })
 	})
 	Blogin.addEventListener('click', function () {
-		loader.showModal();
 		console.log("click", ms);
 		const passid = getpassid();
 		localStorage.setItem('passid', passid);

@@ -172,7 +172,6 @@
                 var login = document.getElementById('Dlogin');
                 console.log(login);
                 login.showModal();
-                loader.showModal();
                 var p = document.querySelector("#Dlogin>p");
                 if (isMobileDevice()) {
                     console.log('访问设备是手机');
@@ -180,6 +179,7 @@
                 } else {
                     console.log('访问设备是电脑');
                 }
+                loader.showModal();
             });
             document.getElementById("Dclose").addEventListener('click', function () {
                 var login = document.getElementById('Dlogin');
