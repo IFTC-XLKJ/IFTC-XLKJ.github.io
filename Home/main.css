@@ -1,0 +1,54 @@
+#main {
+    width: calc(100vw - 16px);
+    height: calc(100vh - 76px);
+}
+
+#apps {
+    width: 99%;
+    height: auto;
+    margin: 0 auto;
+}
+
+#app_list {
+    width: 100%;
+}
+
+#app_list_title {
+    margin-left: calc(50% - 64px);
+    margin-right: calc(50% - 64px);
+    font-size: 32px;
+    position: relative;
+    font-weight: bold;
+    color: #333;
+    display: inline-block;
+}
+
+#app_list_title::after {
+    content: '应用列表';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #333;
+    transform: scaleY(-1);
+    transform-origin: bottom;
+    filter: blur(2px);
+    opacity: 0.6;
+}
+
+#titlebg {
+    position: absolute;
+    top: 42px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: linear-gradient(to bottom, #FFFFFF00, #FFFFFF8c, #FFFFFFef, white);
+}
+
+#app_list_content>table {
+    margin-top: 50px;
+    width: 100%;
+    font-size: large;
+}
