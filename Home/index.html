@@ -153,6 +153,7 @@
     </style>
     <script src="./login.js"></script>
     <script src="./index.js"></script>
+    <script src="/disabled.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script
         src="https://shequ.pgaot.com/AdminPages/pages/Mysqldb/vip/pickduckDBJQ.29956f7ff3449ed31f3e59bb3eb685d93ed73e96f6f9dfe01f2f65cbb08dcc14.js"></script>
@@ -187,6 +188,9 @@
                 qrlogin.innerHTML = "";
                 login.close();
             });
+            document.getElementById("user").addEventListener('click', function () {
+                localStorage.setItem("ID", "");
+            })
         }
     </script>
 </head>
