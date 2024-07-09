@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>APKToQRCode</title>
+    <script src="/qrcode.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            user-select: none;
+        }
+
+        #app {
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(30deg, #575757, #fff);
+        }
+
+        #apk {
+            position: fixed;
+            left: calc(50vw - 140px);
+            top: 50px;
+            width: 294px;
+        }
+
+        input[type=text],
+        input[type=number] {
+            outline: none;
+            border: none;
+            border-radius: 5px;
+            width: 280px;
+            height: 40px;
+            margin: 5px;
+        }
+
+        input[type=button] {
+            outline: none;
+            width: 120px;
+            height: 40px;
+            border-radius: 5px;
+            border: none;
+            position: relative;
+            left: calc(50% - 60px);
+            top: 120px;
+        }
+
+        #icon-view {
+            width: 100px;
+            height: 100px;
+            background: url("https://static.codemao.cn/appcraft/package/icon00.png");
+            background-size: 100px 100px;
+            border-radius: 5px;
+            position: absolute;
+            left: calc(50% - 50px);
+        }
+
+        #qrcode {
+            width: 320px;
+            height: 320px;
+            position: fixed;
+            left: calc(50vw - 160px);
+            top: 600px;
+            border: 1px solid #333;
+            border-radius: 5px;
+        }
+    </style>
+    <script>
+        var apkinfo = {
+            name: "我的应用",
+            id: 123456789,
+            version: 1,
+            url: "",
+            icon: "https://static.codemao.cn/appcraft/package/icon00.png"
+        };
+        window.onload = () => {
+            var name = document.getElementById('name');
+            name.focus();
+            var id = document.getElementById('id');
+            var version = document.getElementById('version');
+            var url = document.getElementById('url');
+            var icon = document.getElementById('icon');
+            var iconView = document.getElementById('icon-view');
+            var generate = document.getElementById('generate');
+            var qrcode = document.getElementById('qrcode');
+            function generateURL() {
+                var url = 'https://coco.codemao.cn/download/?url=' + apkinfo.url + '&icon=' + apkinfo.icon + '&name=' + apkinfo.name + '&projectId=' + apkinfo.id + '&version=' + apkinfo.version;
+                return url;
+            }
+            var QRcode = ''
+            name.addEventListener('input', () => {
+                if ((name.value).length > 50) {
+                    generate.disabled = true;
+                } else {
+                    apkinfo.name = name.value;
+                    generate.disabled = false;
+                }
+            })
+            id.addEventListener('input', () => {
+                if ((id.value).length > 50) {
+                    generate.disabled = true;
+                } else {
+                    apkinfo.id = id.value;
+                    generate.disabled = false;
+                }
+            })
+            version.addEventListener('input', () => {
+                if ((version.value).length > 5) {
+                    generate.disabled = true;
+                } else {
+                    apkinfo.version = version.value;
+                    generate.disabled = false;
+                }
+            })
+            url.addEventListener('input', () => {
+                if ((url.value).length > 250) {
+                    generate.disabled = true;
+                } else {
+                    apkinfo.url = url.value;
+                    generate.disabled = false;
+                }
+            })
+            icon.addEventListener('input', () => {
+                if ((icon.value).length > 250) {
+                    generate.disabled = true;
+                } else {
+                    apkinfo.icon = icon.value;
+                    iconView.style.backgroundImage = 'url(' + icon.value + ')';
+                    generate.disabled = false;
+                }
+            })
+            generate.onclick = () => {
+                console.log(generateURL());
+                qrcode.innerHTML = '';
+                new QRCode(qrcode, {
+                    text: generateURL(),
+                    width: 320,
+                    height: 320,
+                })
+            }
+            qrcode.onclick = () => {
+                var a = document.createElement('a');
+                var qrcodeurl = document.querySelector('#qrcode img');
+                a.href = qrcodeurl.src;
+                a.target = '_blank';
+                a.download = apkinfo.name + '.png';
+                a.style.display = 'none';
+                a.appendChild(document.createTextNode('下载二维码'));
+                a.click();
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        <div id="apk">
+            <input type="text" id="name" placeholder="应用名称" value="我的应用">
+            <input type="text" id="id" placeholder="应用ID" value="123456789">
+            <input type="number" id="version" placeholder="版本号" value="1">
+            <input type="text" id="url" placeholder="下载地址(APK直链或网盘分享地址)" value="">
+            <input type="text" id="icon" placeholder="图标地址"
+                value="https://static.codemao.cn/appcraft/package/icon00.png">
+            <div id="icon-view"></div>
+            <input type="button" id="generate" value="生成二维码">
+        </div>
+        <div id="qrcode"></div>
+    </div>
+</body>
+
+</html>
