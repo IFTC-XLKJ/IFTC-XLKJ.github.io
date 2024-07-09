@@ -14,16 +14,17 @@
         }
 
         #app {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             width: 100vw;
             height: 100vh;
-            background: linear-gradient(30deg, #575757, #fff);
             overflow: auto;
+            background: linear-gradient(30deg, #575757, #fff);
         }
 
         #apk {
-            position: fixed;
-            left: calc(50vw - 140px);
-            top: 50px;
             width: 294px;
         }
 
@@ -43,9 +44,7 @@
             height: 40px;
             border-radius: 5px;
             border: none;
-            position: relative;
-            left: calc(50% - 60px);
-            top: 120px;
+            margin-left: 29.5%;
         }
 
         #icon-view {
@@ -54,18 +53,18 @@
             background: url("https://static.codemao.cn/appcraft/package/icon00.png");
             background-size: 100px 100px;
             border-radius: 5px;
-            position: absolute;
-            left: calc(50% - 50px);
+            margin: auto;
         }
 
         #qrcode {
             width: 320px;
             height: 320px;
-            position: fixed;
-            left: calc(50vw - 160px);
-            top: 600px;
-            border: 1px solid #333;
             border-radius: 5px;
+            margin: auto;
+        }
+
+        #qrcode img {
+            border-radius: 10px;
         }
     </style>
     <script>
@@ -76,7 +75,19 @@
             url: "",
             icon: "https://static.codemao.cn/appcraft/package/icon00.png"
         };
+        if (!localStorage.getItem('apkinfo')) {
+            localStorage.setItem('apkinfo', JSON.stringify(apkinfo));
+        } else {
+            apkinfo = JSON.parse(localStorage.getItem('apkinfo'));
+        }
         window.onload = () => {
+            var QrCode = document.querySelector('#qrcode');
+            console.log(window.innerHeight);
+            if (window.innerHeight < 740) {
+                QrCode.style.marginBottom = '20px';
+            } else {
+                QrCode.style.margin = 'auto';
+            }
             var name = document.getElementById('name');
             name.focus();
             var id = document.getElementById('id');
@@ -86,11 +97,19 @@
             var iconView = document.getElementById('icon-view');
             var generate = document.getElementById('generate');
             var qrcode = document.getElementById('qrcode');
+            name.value = apkinfo.name;
+            id.value = apkinfo.id;
+            version.value = apkinfo.version;
+            url.value = apkinfo.url;
+            icon.value = apkinfo.icon;
+            iconView.style.backgroundImage = 'url(' + apkinfo.icon + ')';
             function generateURL() {
                 var url = 'https://coco.codemao.cn/download/?url=' + apkinfo.url + '&icon=' + apkinfo.icon + '&name=' + apkinfo.name + '&projectId=' + apkinfo.id + '&version=' + apkinfo.version;
                 return url;
             }
-            var QRcode = ''
+            function updateAPKINFO() {
+                localStorage.setItem('apkinfo', JSON.stringify(apkinfo));
+            }
             name.addEventListener('input', () => {
                 if ((name.value).length > 50) {
                     generate.disabled = true;
@@ -98,6 +117,7 @@
                     apkinfo.name = name.value;
                     generate.disabled = false;
                 }
+                updateAPKINFO();
             })
             id.addEventListener('input', () => {
                 if ((id.value).length > 50) {
@@ -106,6 +126,7 @@
                     apkinfo.id = id.value;
                     generate.disabled = false;
                 }
+                updateAPKINFO();
             })
             version.addEventListener('input', () => {
                 if ((version.value).length > 5) {
@@ -114,6 +135,7 @@
                     apkinfo.version = version.value;
                     generate.disabled = false;
                 }
+                updateAPKINFO();
             })
             url.addEventListener('input', () => {
                 if ((url.value).length > 250) {
@@ -122,6 +144,7 @@
                     apkinfo.url = url.value;
                     generate.disabled = false;
                 }
+                updateAPKINFO();
             })
             icon.addEventListener('input', () => {
                 if ((icon.value).length > 250) {
@@ -131,6 +154,7 @@
                     iconView.style.backgroundImage = 'url(' + icon.value + ')';
                     generate.disabled = false;
                 }
+                updateAPKINFO();
             })
             generate.onclick = () => {
                 console.log(generateURL());
@@ -152,6 +176,15 @@
                 a.click();
             }
         }
+        window.addEventListener('resize', () => {
+            var QrCode = document.querySelector('#qrcode');
+            console.log(window.innerHeight);
+            if (window.innerHeight < 740) {
+                QrCode.style.marginBottom = '20px';
+            } else {
+                QrCode.style.margin = 'auto';
+            }
+        })
     </script>
 </head>
 
