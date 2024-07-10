@@ -7,6 +7,8 @@
     width: 99%;
     height: auto;
     margin: 0 auto;
+    background-color: white;
+    min-height: calc(100vh - 76px);
 }
 
 #app_list {
