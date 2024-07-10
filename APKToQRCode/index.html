@@ -156,6 +156,10 @@
                 }
                 updateAPKINFO();
             })
+            iconView.onerror = () => {
+                alert('图标加载错误');
+                iconView.style.backgroundImage = 'url(' + 'https://static.codemao.cn/appcraft/package/icon00.png' + ')';
+            }
             generate.onclick = () => {
                 console.log(generateURL());
                 qrcode.innerHTML = '';
@@ -163,6 +167,8 @@
                     text: generateURL(),
                     width: 320,
                     height: 320,
+                    colorLight: "#ffffff00",
+                    colorDark: "#ffffff",
                 })
             }
             qrcode.onclick = () => {
