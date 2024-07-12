@@ -233,6 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                 reader.readAsDataURL(blob);
                                             },
                                             error: function (error) {
+                                                loading.close();
                                                 tiptext.innerHTML = `Error:${error}`;
                                                 tips.showModal();
                                                 setTimeout(() => {
@@ -241,6 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                             }
                                         })
                                     } else {
+                                        loading.close();
                                         tiptext.innerHTML = `Error:${data.msg}`;
                                         tips.showModal();
                                         setTimeout(() => {
