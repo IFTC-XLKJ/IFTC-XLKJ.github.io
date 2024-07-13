@@ -124,6 +124,7 @@
             height: 25px;
             padding: 0;
             cursor: pointer;
+            font-family: ErZiYuanXinYouShouHuiBJian;
         }
 
         .left {
@@ -135,6 +136,7 @@
         }
 
         #page-input {
+            font-family: ErZiYuanXinYouShouHuiBJian;
             width: 50px;
             height: 25px;
             border: none;
@@ -142,6 +144,10 @@
             padding: 0;
             background-color: #F0F0F0FF;
             text-align: center;
+        }
+
+        #page-input::placeholder {
+            font-family: ErZiYuanXinYouShouHuiBJian;
         }
 
         #page {
@@ -297,6 +303,24 @@
             text-shadow: 0 0 10px 0 white;
             box-shadow: 0 0 10px 0 rgba(20, 100, 200, 0.5);
             font-family: MoMoZhanJiShouXueTi;
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.1);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .poplrc {
+            /*animation-name: popIn;
+            animation-duration: 0.7s;
+            animation-fill-mode: forwards;*/
         }
     </style>
 </head>

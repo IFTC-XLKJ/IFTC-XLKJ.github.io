@@ -61,10 +61,10 @@ function updatetime() {
         var currentTime = Math.ceil(audio.currentTime);
         for (var i = 0; i < lrcstimes.length; i++) {
             if (lrcstimes[i + 1] <= currentTime + (lrcstimes[i + 1] - lrcstimes[i])) {
-                lrc.innerHTML = lrclist[i];
+                lrc.innerHTML = `<p class="poplrc">${lrclist[i]}</p>`;
             }
             if (currentTime >= lrcstimes[lrcstimes.length - 1]) {
-                lrc.innerHTML = lrclist[i];
+                lrc.innerHTML = `<p class="poplrc">${lrclist[i]}</p>`;
             }
         }
         time.innerHTML = formatSecondsToTime(currentTime);
