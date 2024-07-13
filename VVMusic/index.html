@@ -17,16 +17,24 @@
         ::-webkit-scrollbar {
             width: 0px;
         }
+
         @font-face {
             font-family: "MoMoZhanJiShouXueTi";
-            src: url("https://iftc-xlkj.github.io/fonts/MoMoZhanJiShouXueTi.ttf");
+            src: url("/fonts/MoMoZhanJiShouXueTi.ttf");
             font-weight: normal;
         }
+
+        @font-face {
+            font-family: "ErZiYuanXinYouShouHuiBJian";
+            src: url("/fonts/ErZiYuanXinYouShouHuiBJian.ttf");
+        }
+
         body {
             user-select: none;
             -webkit-user-drag: none;
             user-zoom: none;
             margin: 0;
+            font-family: ErZiYuanXinYouShouHuiBJian;
         }
 
         #s {
@@ -56,6 +64,15 @@
             border-left: none;
             border-radius: 0 5px 5px 0;
             cursor: pointer;
+            font-family: ErZiYuanXinYouShouHuiBJian;
+        }
+
+        input[type="text"] {
+            font-family: ErZiYuanXinYouShouHuiBJian;
+        }
+
+        input[type="text"]::placeholder {
+            font-family: ErZiYuanXinYouShouHuiBJian;
         }
 
         #clear {
@@ -258,11 +275,12 @@
             margin-top: 10px;
         }
 
-        #download  {
+        #download {
             width: 30px;
             height: 30px;
             cursor: pointer;
-            position: relative;/**/
+            position: relative;
+            /**/
             left: 60px;
             margin-top: 5px;
         }
@@ -330,25 +348,25 @@
             </div>
         </div>
     </div>
-    <div id="music-lrc">歌词推送(Making)</div>
+    <div id="music-lrc">歌词推送</div>
     <!--<div id="dialog">-->
-        <dialog id="loading">
-            <div class="loader">
-                <div class="loader-inner">
-                    <div class="loader-block"></div>
-                    <div class="loader-block"></div>
-                    <div class="loader-block"></div>
-                    <div class="loader-block"></div>
-                    <div class="loader-block"></div>
-                    <div class="loader-block"></div>
-                    <div class="loader-block"></div>
-                    <div class="loader-block"></div>
-                </div>
+    <dialog id="loading">
+        <div class="loader">
+            <div class="loader-inner">
+                <div class="loader-block"></div>
+                <div class="loader-block"></div>
+                <div class="loader-block"></div>
+                <div class="loader-block"></div>
+                <div class="loader-block"></div>
+                <div class="loader-block"></div>
+                <div class="loader-block"></div>
+                <div class="loader-block"></div>
             </div>
-        </dialog>
-        <dialog id="tips">
-            <div id="tiptext">default</div>
-        </dialog>
+        </div>
+    </dialog>
+    <dialog id="tips">
+        <div id="tiptext">default</div>
+    </dialog>
     <!--</div>-->
     <input id="check"
         style="position: fixed;top: 0;left: 0;width: 0;height: 0;margin: 0;padding: 0;outline: none;border: none;">
