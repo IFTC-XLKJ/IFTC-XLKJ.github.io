@@ -60,7 +60,8 @@ function updatetime() {
         }
         var currentTime = Math.ceil(audio.currentTime);
         for (var i = 0; i < lrcstimes.length; i++) {
-            if (i + 1 > lrcstimes.length) {
+            if (i + 2 > lrcstimes.length) {
+                console.log(lrcstimes.length);
                 lrc.innerHTML = lrclist[i];
             }
             if (lrcstimes[i + 1] <= currentTime + (lrcstimes[i + 1] - lrcstimes[i])) {
