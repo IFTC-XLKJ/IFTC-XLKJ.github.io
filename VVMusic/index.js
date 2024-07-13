@@ -9,6 +9,23 @@ var isPlay = false;
 var isSIFocus = false;
 var isPIFocus = false;
 var musicInfo = {};
+
+var lrcstimes = [];
+var lrclist = [];
+var lrcfile = '';
+
+function subsequenceFromStartLast(sequence, at1) {
+    var start = at1;
+    var end = sequence.length - 1 + 1;
+    return sequence.slice(start, end);
+}
+
+function textToDataUrl(text) {
+    var blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    var dataUrl = URL.createObjectURL(blob);
+    return dataUrl;
+}
+
 function formatSecondsToTime(seconds) {
     var minutes = Math.floor(seconds / 60);
     var remainingSeconds = seconds % 60;
@@ -36,11 +53,20 @@ function getURLAPI(ID) {
 
 function updatetime() {
     var time = document.getElementById('player-progress-time');
+    var lrc = document.getElementById('music-lrc');
     audio.ontimeupdate = function () {
         if (!isPlay) {
             return;
         }
         var currentTime = Math.ceil(audio.currentTime);
+        for (var i = 0; i < lrcstimes.length; i++) {
+            if (i + 1 > lrcstimes.length) {
+                lrc.innerHTML = lrclist[i];
+            }
+            if (lrcstimes[i + 1] <= currentTime + (lrcstimes[i + 1] - lrcstimes[i])) {
+                lrc.innerHTML = lrclist[i];
+            }
+        }
         time.innerHTML = formatSecondsToTime(currentTime);
         progress.value = currentTime;
     };
@@ -361,6 +387,10 @@ document.addEventListener('DOMContentLoaded', () => {
         a.href = musicInfo.src;
         a.download = `${musicInfo.name} - ${musicInfo.author}.mp3`;
         a.click();
+        var a = document.createElement('a');
+        a.href = textToDataUrl(lrcfile);
+        a.download = `${musicInfo.name} - ${musicInfo.author}.lrc`;
+        a.click();
     })
     function getlrc(ID) {
         $.ajax({
@@ -369,22 +399,17 @@ document.addEventListener('DOMContentLoaded', () => {
             success: function (data) {
                 console.log(data);
                 var lrcs = data.lrc.lyric ? data.lrc.lyric : null;
-                var tlyrics = data.tlyric.lyric ? data.tlyric.lyric : null;
-                var lrcstimes = [];
-                var tlyricstimes = [];
+                lrcfile = lrcs;
+                lrcstimes = [];
+                lrclist = [];
                 lrcs.split(/\n/).forEach((item, index) => {
                     console.log(item);
                     if (item.match(/^\[.+\]/)) {
                         lrcstimes.push(lrcTimeToNum(item.match(/^\[(.+)\]/)[1]));
+                        lrclist.push(subsequenceFromStartLast(item, ((item.indexOf(']') + 1 + 1) - 1)));
                     }
                 })
-                tlyrics.split(/\n/).forEach((item, index) => {
-                    console.log(item);
-                    if (item.match(/^\[.+\]/)) {
-                        tlyricstimes.push(lrcTimeToNum(item.match(/^\[(.+)\]/)[1]));
-                    }
-                })
-                console.log(lrcstimes, tlyricstimes);
+                console.log(lrcstimes, lrclist);
             },
             error: function (err) {
                 console.error(err);
@@ -398,12 +423,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     function lrcTimeToNum(time) {
         var times = time.split(':');
-        console.log(Number(times[0]).typeof);
-        if (Number(times[0]).typeof == 'number') {
-            return parseInt(times[0]) * 60 + parseFloat(times[1]);
-        } else {
-            return 0;
-        }
+        return parseInt(times[0]) * 60 + parseFloat(times[1]);
     }
 })
 
