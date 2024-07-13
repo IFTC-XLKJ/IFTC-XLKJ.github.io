@@ -60,11 +60,10 @@ function updatetime() {
         }
         var currentTime = Math.ceil(audio.currentTime);
         for (var i = 0; i < lrcstimes.length; i++) {
-            if (i + 2 > lrcstimes.length) {
-                console.log(lrcstimes.length);
+            if (lrcstimes[i + 1] <= currentTime + (lrcstimes[i + 1] - lrcstimes[i])) {
                 lrc.innerHTML = lrclist[i];
             }
-            if (lrcstimes[i + 1] <= currentTime + (lrcstimes[i + 1] - lrcstimes[i])) {
+            if (currentTime >= lrcstimes[lrcstimes.length - 1]) {
                 lrc.innerHTML = lrclist[i];
             }
         }
