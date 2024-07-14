@@ -400,6 +400,8 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     progress.addEventListener('change', (e) => {
         audio.currentTime = e.target.value;
+        last = 0;
+        current = 0;
         audio.play();
         isPlay = true;
     })
