@@ -14,6 +14,9 @@ var lrcstimes = [];
 var lrclist = [];
 var lrcfile = '';
 
+var last = 0;
+var current = 0;
+
 function subsequenceFromStartLast(sequence, at1) {
     var start = at1;
     var end = sequence.length - 1 + 1;
@@ -60,22 +63,42 @@ function updatetime() {
         }
         var currentTime = Math.ceil(audio.currentTime);
         for (var i = 0; i < lrcstimes.length; i++) {
-            if (lrcstimes[i + 1] <= currentTime + (lrcstimes[i + 1] - lrcstimes[i])) {
-                lrc.innerHTML = `<p class="poplrc">${lrclist[i]}</p>`;
-            }
-            if (currentTime >= lrcstimes[lrcstimes.length - 1]) {
-                lrc.innerHTML = `<p class="poplrc">${lrclist[i]}</p>`;
+            if (last < current) {
+                if (lrcstimes[i + 1] <= currentTime + (lrcstimes[i + 1] - lrcstimes[i])) {
+                    last = lrcstimes[i];
+                    lrc.innerHTML = `<p class="poplrc">${lrclist[i]}</p>`;
+                }
+                if (currentTime >= lrcstimes[lrcstimes.length - 1]) {
+                    last = lrcstimes[i];
+                    lrc.innerHTML = `<p class="poplrc">${lrclist[i]}</p>`;
+                }
+            } else {
+                if (lrcstimes[i + 1] <= currentTime + (lrcstimes[i + 1] - lrcstimes[i])) {
+                    current = lrcstimes[i];
+                }
+                if (currentTime >= lrcstimes[lrcstimes.length - 1]) {
+                    current = lrcstimes[i];
+                }
             }
         }
         time.innerHTML = formatSecondsToTime(currentTime);
         progress.value = currentTime;
     };
+    audio.onended = function () {
+        isPlay = false;
+        lrc.innerHTML = '';
+        last = 0;
+        current = 0;
+        audio.play();
+    };
 }
 
 function totaltime() {
     var totaltime = document.getElementById('player-progress-time-total');
+    var lrc = document.getElementById('music-lrc');
     audio.onloadedmetadata = function () {
         var duration = Math.ceil(audio.duration);
+        lrc.innerHTML = '';
         totaltime.innerHTML = formatSecondsToTime(duration);
         progress.max = duration;
     };
@@ -230,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                     author.innerHTML = data.name;
                                                     audio.src = url;
                                                     musicInfo.src = url;
-                                                    audio.loop = true;
+                                                    audio.loop = false;
                                                     audio.play();
                                                     totaltime();
                                                     updatetime();
