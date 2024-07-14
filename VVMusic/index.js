@@ -258,6 +258,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                                     totaltime();
                                                     updatetime();
                                                     console.log(audio);
+                                                    last = 0;
+                                                    current = 0;
                                                     var play = document.getElementById("player-play");
                                                     play.addEventListener('click', () => {
                                                         if (isPlay) {
