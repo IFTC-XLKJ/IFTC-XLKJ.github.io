@@ -51,8 +51,10 @@
 
 #app_list_content>table {
     margin-top: 50px;
-    width: 100%;
+    width: 90%;
     font-size: large;
+    margin-left: calc(50% - 45%);
+    margin-right: calc(50% - 45%);
 }
 
 .app_icon {
@@ -79,4 +81,5 @@
     cursor: pointer;
     border-radius: 5px;
     transform: scale(1.01);
+    z-index: 1000;
 }
