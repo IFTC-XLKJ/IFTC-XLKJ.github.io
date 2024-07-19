@@ -15,11 +15,17 @@ docuemnt.addEventListener('DOMContentLoaded', function () {
     share.addEventListener('click', function () {
         loading.showModal();
         console.log('share', ShareID());
+        localStorage.setItem('ShareID', ShareID());
         Share.onGetData((json, id, url) => {
             if (id == '添加分享') {
                 if (json.code == 200) {
                     loading.close();
-                    alert('分享成功');
+                    try {
+                        navigator.clipboard.writeText(`https://iftc-xlkj.github.io/VVMusic?share=${localStorage.getItem('ShareID')}`);
+                        alert('分享成功，链接已复制');
+                    } catch (err) {
+                        alert('分享成功，链接无法复制，链接：' + `https://iftc-xlkj.github.io/VVMusic?share=${localStorage.getItem('ShareID')}`);
+                    }
                 } else {
                     loading.close();
                     alert('分享失败');
@@ -28,7 +34,7 @@ docuemnt.addEventListener('DOMContentLoaded', function () {
         })
         Share.setTableData({
             type: 'INSERT',
-            fields: `('${localStorage.getItem('音乐ID')}','${ShareID()}')`,
+            fields: `('${localStorage.getItem('音乐ID')}','${localStorage.getItem('ShareID')}')`,
             filter: '音乐ID,分享ID',
             id: '添加分享'
         });
