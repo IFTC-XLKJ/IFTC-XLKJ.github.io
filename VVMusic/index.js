@@ -104,7 +104,7 @@ function totaltime() {
     };
 }
 document.addEventListener('DOMContentLoaded', () => {
-    localStorage.setItem('音乐ID', data.id);
+    localStorage.setItem('音乐ID', '');
     var winwidth = window.innerWidth;
     var winheight = window.innerHeight;
     var app = document.querySelector('#app');
