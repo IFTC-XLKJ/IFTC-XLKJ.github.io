@@ -9,7 +9,7 @@ function ShareID() {
     }
     return ShareID;
 }
-docuemnt.addEventListener('DOMContentLoaded', function () {
+/*docuemnt.addEventListener('DOMContentLoaded', function () {
     var share = document.getElementById('share');
     var Share = new pgdbs(dbs_09acf4d4695fb1a5f1f94b8dd8a0c877ed7099b0bccab1c904087a70445dc8b3);
     share.addEventListener('click', function () {
@@ -39,4 +39,4 @@ docuemnt.addEventListener('DOMContentLoaded', function () {
             id: '添加分享'
         });
     })
-})
+})*/
