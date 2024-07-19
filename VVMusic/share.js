@@ -15,5 +15,16 @@ docuemnt.addEventListener('DOMContentLoaded', function () {
     share.addEventListener('click', function () {
         loading.showModal();
         console.log('share', ShareID());
+        Share.onGetData((json, id, url) => {
+            if (id == '添加分享') {
+                if (json.code == 200) {
+                    loading.close();
+                    alert('分享成功');
+                } else {
+                    loading.close();
+                    alert('分享失败');
+                }
+            }
+        })
     })
 })
