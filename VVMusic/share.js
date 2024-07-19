@@ -26,5 +26,11 @@ docuemnt.addEventListener('DOMContentLoaded', function () {
                 }
             }
         })
+        Share.setTableData({
+            type: 'INSERT',
+            fields: `('${localStorage.getItem('音乐ID')}','${ShareID()}')`,
+            filter: '音乐ID,分享ID',
+            id: '添加分享'
+        });
     })
 })
