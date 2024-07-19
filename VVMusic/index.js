@@ -386,15 +386,18 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isSIFocus) {
                 searchinput.focus();
                 check.blur();
-                pageInput.blur();
+                if (pageInput)
+                    pageInput.blur();
             } else if (isPIFocus) {
                 searchinput.blur();
                 check.blur();
-                pageInput.focus();
+                if (pageInput)
+                    pageInput.focus();
             } else {
                 searchinput.blur();
                 check.focus();
-                pageInput.blur();
+                if (pageInput)
+                    pageInput.blur();
             }
         };
     })
