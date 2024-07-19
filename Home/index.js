@@ -2,7 +2,7 @@ var document = this.document;
 var window = this.window;
 var appnum = 1;
 var appsURL = [
-    'https://iftc-xlkj.github.io/apk/VV图书119.apk',
+    'https://iftc-xlkj.github.io/apk/VV图书120.apk',
     'https://iftc-xlkj.github.io/apk/VV账号中心15.apk'
 ]
 document.addEventListener('DOMContentLoaded', function () {
