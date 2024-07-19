@@ -104,6 +104,7 @@ function totaltime() {
     };
 }
 document.addEventListener('DOMContentLoaded', () => {
+    localStorage.setItem('音乐ID', data.id);
     var winwidth = window.innerWidth;
     var winheight = window.innerHeight;
     var app = document.querySelector('#app');
@@ -253,6 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                     author.innerHTML = data.name;
                                                     audio.src = url;
                                                     musicInfo.src = url;
+                                                    localStorage.setItem('音乐ID', data.id);
                                                     audio.loop = false;
                                                     audio.play();
                                                     totaltime();
