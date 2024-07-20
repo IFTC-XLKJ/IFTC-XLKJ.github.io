@@ -230,10 +230,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     })
                     pageInput.addEventListener('keyup', (e) => {
                         if (e.key == 'Enter') {
+                            pageNum = pageInput.value;
+                            if (pageNum <= 0) {
+                                pageNum = 1;
+                            }
                             getMusic();
                         }
                     })
                     pageInput.addEventListener('change', (e) => {
+                        pageNum = pageInput.value;
+                        if (pageNum <= 0) {
+                            pageNum = 1;
+                        }
                         getMusic();
                     })
                     var previous = document.getElementById('previous');
