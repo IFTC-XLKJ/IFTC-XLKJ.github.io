@@ -283,6 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                         musicInfo.author = data.name;
                                         musicInfo.src = data.src;
                                         musicInfo.ID = data.id;
+                                        musicInfo.cover = data.cover;
                                         $.ajax({
                                             url: musicInfo.src.replace("http://", "https://"),
                                             type: 'GET',
@@ -477,6 +478,33 @@ document.addEventListener('DOMContentLoaded', () => {
         a.href = textToDataUrl(lrcfile);
         a.download = `${musicInfo.name} - ${musicInfo.author}.lrc`;
         a.click();
+        $.ajax({
+            url: musicInfo.cover,
+            type: 'GET',
+            xhrFields: {
+                responseType: 'blob'
+            },
+            success: function (blob) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var dataURL = e.target.result;
+                    console.log('Data URL:', dataURL);
+                    var url = dataURL;
+                    var a = document.createElement('a');
+                    a.href = url;
+                    a.download = `${musicInfo.name} - ${musicInfo.author}.jpg`;
+                    a.click();
+                }
+                reader.readAsDataURL(blob);
+            },
+            error: function (err) {
+                tiptext.innerHTML = `封面下载失败，Error:${data.msg}`;
+                tips.showModal();
+                setTimeout(() => {
+                    tips.close();
+                }, 2000);
+            }
+        })
     })
 
     if (urlParams.share) {
