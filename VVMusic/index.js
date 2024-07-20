@@ -228,13 +228,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         isPIFocus = true;
                         check.blur();
                     })
-                    pageInput.oninput = () => {
-                        if (pageInput.value <= 0) {
-                            pageInput.value = pageNum;
-                        } else if (pageInput.value > pageNum) {
-                            pageNum = pageInput.value;
-                        }
-                    };
                     pageInput.addEventListener('keyup', (e) => {
                         if (e.key == 'Enter') {
                             getMusic();
