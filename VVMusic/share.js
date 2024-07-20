@@ -9,6 +9,22 @@ function ShareID() {
     }
     return ShareID;
 }
+
+function getURLParameters() {
+    const queryString = window.location.search.substring(1);
+    const params = {};
+
+    if (queryString) {
+        queryString.split('&').forEach(param => {
+            const [key, value] = param.split('=');
+            params[key] = decodeURIComponent(value);
+        });
+    }
+
+    return params;
+}
+
+const urlParams = getURLParameters();
 docuemnt.addEventListener('DOMContentLoaded', function () {
     var share = document.getElementById('share');
     var Share = new pgdbs(dbs_09acf4d4695fb1a5f1f94b8dd8a0c877ed7099b0bccab1c904087a70445dc8b3);
@@ -18,8 +34,9 @@ docuemnt.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem('ShareID', ShareID());
         Share.onGetData((json, id, url) => {
             if (id == '添加分享') {
+                loading.close();
+                console.log(json)
                 if (json.code == 200) {
-                    loading.close();
                     try {
                         navigator.clipboard.writeText(`https://iftc-xlkj.github.io/VVMusic?share=${localStorage.getItem('ShareID')}`);
                         alert('分享成功，链接已复制');
@@ -27,7 +44,6 @@ docuemnt.addEventListener('DOMContentLoaded', function () {
                         alert('分享成功，链接无法复制，链接：' + `https://iftc-xlkj.github.io/VVMusic?share=${localStorage.getItem('ShareID')}`);
                     }
                 } else {
-                    loading.close();
                     alert('分享失败');
                 }
             }
@@ -39,4 +55,14 @@ docuemnt.addEventListener('DOMContentLoaded', function () {
             id: '添加分享'
         });
     })
+    if (urlParams.share) {
+        Share.onGetData((json, id, url) => {
+        })
+        Share.getTableData({
+            fields: '*',
+            filter: '分享ID',
+            value: urlParams.share,
+            id: '获取分享'
+        });
+    }
 })
