@@ -167,6 +167,8 @@ docuemnt.addEventListener('DOMContentLoaded', () => {
                     code.变量(item.变量)
                 } else if (item.数据) {
                     code.数据(item.数据)
+                } else if (item.弹窗) {
+                    code.弹窗(item.弹窗)
                 }
                 for (; ;) {
                     if (isProg) {
