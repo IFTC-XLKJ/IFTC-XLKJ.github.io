@@ -1,6 +1,8 @@
 var docuemnt = this.document;
 var window = this.window;
 
+var variables = {}
+
 var returncode = {
     运算: function (text) {
         try {
@@ -10,6 +12,13 @@ var returncode = {
         }
         return eval(text);
     },
+    变量: function (text) {
+        if (!variables[text.名]) {
+            return `<br><p style="color: orange;">NaN</p>`;
+        } else {
+            return variables[text.名];
+        }
+    }
 }
 
 var code = {
@@ -27,6 +36,9 @@ var code = {
         console.log(print)
         output.innerHTML += `<br>${print}`;
     },
+    变量: function (text) {
+        variables[text.名] = text.值;
+    }
 }
 
 function isValidJsonString(str) {
@@ -47,7 +59,10 @@ function getReturncode(str) {
         } else {
             return 0;
         }
-    } else {
+    } else if (str.变量) {
+        returncode.变量(str.变量);
+    }
+    else {
         return `<br><p style="color: orange;">NaN</p>`;
     }
 }
