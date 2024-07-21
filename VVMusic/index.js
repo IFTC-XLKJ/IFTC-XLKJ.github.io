@@ -311,6 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                     musicInfo.src = url;
                                                     localStorage.setItem('音乐ID', data.id);
                                                     audio.loop = false;
+                                                    audio.play();
                                                     totaltime();
                                                     updatetime();
                                                     console.log(audio);
@@ -336,7 +337,6 @@ document.addEventListener('DOMContentLoaded', () => {
                                                         isPlay = false;
                                                         play.innerHTML = playicon;
                                                     }
-                                                    play.click();
                                                 };
                                                 reader.readAsDataURL(blob);
                                             },
@@ -562,7 +562,6 @@ document.addEventListener('DOMContentLoaded', () => {
                                                 musicInfo.src = url;
                                                 localStorage.setItem('音乐ID', data.id);
                                                 audio.loop = false;
-                                                audio.play();
                                                 totaltime();
                                                 updatetime();
                                                 console.log(audio);
@@ -588,6 +587,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                     isPlay = false;
                                                     play.innerHTML = playicon;
                                                 }
+                                                play.click();
                                             };
                                             reader.readAsDataURL(blob);
                                         },
