@@ -118,9 +118,8 @@ docuemnt.addEventListener('DOMContentLoaded', () => {
                 isProg = false;
                 async function updateData() {
                     await new Promise(resolve => setTimeout(resolve, 1000));
-                    data.key = true;
+                    isProg = true;
                 }
-
                 (async () => {
                     do {
                         if (item.打印) {
@@ -129,7 +128,7 @@ docuemnt.addEventListener('DOMContentLoaded', () => {
                             code.变量(item.变量)
                         }
                         await updateData();
-                    } while (!data.key);
+                    } while (!isProg);
 
                     console.log('Key is now true!');
                 })();
