@@ -114,13 +114,13 @@ docuemnt.addEventListener('DOMContentLoaded', () => {
             }
             output.innerHTML += `<br>`;
             (codes.主程序).forEach((item, index) => {
-                isProg = false;
                 async function updateData() {
                     await new Promise(resolve => setTimeout(resolve, 1));
                     isProg = true;
                 }
                 (async () => {
                     do {
+                        isProg = false;
                         console.log(item, index);
                         if (item.打印) {
                             code.打印(item.打印)
