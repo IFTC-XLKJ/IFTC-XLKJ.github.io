@@ -114,23 +114,15 @@ docuemnt.addEventListener('DOMContentLoaded', () => {
             }
             output.innerHTML += `<br>`;
             (codes.主程序).forEach((item, index) => {
-                async function updateData() {
-                    await new Promise(resolve => setTimeout(resolve, 1));
-                    isProg = true;
+                while (isProg) {
+                    isProg = false;
+                    console.log(item, index);
+                    if (item.打印) {
+                        code.打印(item.打印)
+                    } else if (item.变量) {
+                        code.变量(item.变量)
+                    }
                 }
-                (async () => {
-                    do {
-                        isProg = false;
-                        console.log(item, index);
-                        if (item.打印) {
-                            code.打印(item.打印)
-                        } else if (item.变量) {
-                            code.变量(item.变量)
-                        }
-                        await updateData();
-                    } while (!isProg);
-                    console.log('Key is now true!');
-                })();
             });
             output.innerHTML += `<br>WebVCHC程序，JSONScript执行结束`;
             output.innerHTML += `<br><div style="display: inline;">-> <div id="back" style="display: inline;cursor: pointer;">返回</div> <-</div>`;
