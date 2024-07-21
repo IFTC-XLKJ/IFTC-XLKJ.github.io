@@ -15,10 +15,10 @@ var returncode = {
         return eval(text);
     },
     变量: function (text) {
-        if (!variables[text.名]) {
+        if (!variables[text]) {
             return `<br><p style="color: orange;">NaN</p>`;
         } else {
-            return variables[text.名];
+            return variables[text];
         }
     }
 }
@@ -114,13 +114,17 @@ docuemnt.addEventListener('DOMContentLoaded', () => {
             }
             output.innerHTML += `<br>`;
             (codes.主程序).forEach((item, index) => {
-                while (isProg) {
-                    isProg = false;
-                    console.log(item, index);
-                    if (item.打印) {
-                        code.打印(item.打印)
-                    } else if (item.变量) {
-                        code.变量(item.变量)
+                isProg = false;
+                console.log(item, index);
+                if (item.打印) {
+                    code.打印(item.打印)
+                } else if (item.变量) {
+                    code.变量(item.变量)
+                }
+                for (; ;) {
+                    if (isProg) {
+                        console.log(`第${index + 1}行命令执行完成`);
+                        break;
                     }
                 }
             });
