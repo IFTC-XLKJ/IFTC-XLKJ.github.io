@@ -135,7 +135,7 @@ docuemnt.addEventListener('DOMContentLoaded', () => {
                 "打印": ["Hello World 运算：", {"运算": "1 + 1"}, " 变量a：", {"变量": "a"}, " 数据a：", {"数据": "a", "项": 1}]
             },
             {
-                "弹窗": ["Hello World"]
+                "弹窗": ["Hello World 运算：", {"运算": "1 + 1"}, " 变量a：", {"变量": "a"}, " 数据a：", {"数据": "a", "项": 1}]
             }
         ]
 }`;
