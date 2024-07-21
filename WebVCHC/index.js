@@ -114,30 +114,30 @@ function getScript(src) {
 docuemnt.addEventListener('DOMContentLoaded', () => {
     var editor = docuemnt.getElementById("editor-zoon");
     editor.innerHTML = `{
-        "程序名": "demo",
-        "版本": "1.0.0",
-        "作者": "IFTC",
-        "脚本": [],
-        "主程序": [
-            {
-                "变量":{
-                    "名": "a",
-                    "值": 1
-                }
-            },
-            {
-                "数据":{
-                    "名": "a",
-                    "值": ["1", "2", "3"]
-                }
-            },
-            {
-                "打印": ["Hello World 运算：", {"运算": "1 + 1"}, " 变量a：", {"变量": "a"}, " 数据a：", {"数据": "a", "项": 1}]
-            },
-            {
-                "弹窗": ["Hello World 运算：", {"运算": "1 + 1"}, " 变量a：", {"变量": "a"}, " 数据a：", {"数据": "a", "项": 1}]
+    "程序名": "demo",
+    "版本": "1.0.0",
+    "作者": "IFTC",
+    "脚本": [],
+    "主程序": [
+        {
+            "变量":{
+                "名": "a",
+                "值": 1
             }
-        ]
+        },
+        {
+            "数据":{
+                "名": "a",
+                "值": ["1", "2", "3"]
+            }
+        },
+        {
+            "打印": ["Hello World 运算：", {"运算": "1 + 1"}, " 变量a：", {"变量": "a"}, " 数据a：", {"数据": "a", "项": 1}]
+        },
+        {
+            "弹窗": ["Hello World 运算：", {"运算": "1 + 1"}, " 变量a：", {"变量": "a"}, " 数据a：", {"数据": "a", "项": 1}]
+        }
+    ]
 }`;
     var output = docuemnt.getElementById("output-zoon");
     var run = docuemnt.getElementById("run");
