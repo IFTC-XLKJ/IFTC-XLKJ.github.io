@@ -1,6 +1,8 @@
 var docuemnt = this.document;
 var window = this.window;
 
+var isProg = false;
+
 var variables = {}
 
 var returncode = {
@@ -35,9 +37,11 @@ var code = {
         })
         console.log(print)
         output.innerHTML += `<br>${print}`;
+        isProg = true;
     },
     变量: function (text) {
         variables[text.名] = text.值;
+        isProg = true;
     }
 }
 
@@ -51,6 +55,7 @@ function isValidJsonString(str) {
 }
 
 function getReturncode(str) {
+    console.log(str);
     var result = '';
     if (str.运算) {
         result = returncode.运算(str.运算);
@@ -60,7 +65,7 @@ function getReturncode(str) {
             return 0;
         }
     } else if (str.变量) {
-        returncode.变量(str.变量);
+        return returncode.变量(str.变量);
     }
     else {
         return `<br><p style="color: orange;">NaN</p>`;
@@ -79,7 +84,13 @@ docuemnt.addEventListener('DOMContentLoaded', () => {
     "脚本": [],
     "主程序": [
         {
-            "打印": ["Hello World", {"运算": "1 + 1"}]
+            "变量":{
+                "名": "a",
+                "值": 1
+            }
+        },
+        {
+            "打印": ["Hello World", {"运算": "1 + 1"}, {"变量": "a"}]
         }
     ]
 }`;
@@ -104,9 +115,24 @@ docuemnt.addEventListener('DOMContentLoaded', () => {
             output.innerHTML += `<br>`;
             (codes.主程序).forEach((item, index) => {
                 console.log(item, index);
-                if (item.打印) {
-                    code.打印(item.打印)
+                isProg = false;
+                async function updateData() {
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    data.key = true;
                 }
+
+                (async () => {
+                    do {
+                        if (item.打印) {
+                            code.打印(item.打印)
+                        } else if (item.变量) {
+                            code.变量(item.变量)
+                        }
+                        await updateData();
+                    } while (!data.key);
+
+                    console.log('Key is now true!');
+                })();
             });
             output.innerHTML += `<br>WebVCHC程序，JSONScript执行结束`;
             output.innerHTML += `<br><div style="display: inline;">-> <div id="back" style="display: inline;cursor: pointer;">返回</div> <-</div>`;
