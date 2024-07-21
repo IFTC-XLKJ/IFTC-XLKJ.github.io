@@ -4,7 +4,7 @@ var window = this.window;
 var isProg = false;
 
 var variables = {}
-var array = {};
+var AOdata = {};
 
 var returncode = {
     运算: function (text) {
@@ -16,17 +16,19 @@ var returncode = {
         return eval(text);
     },
     变量: function (text) {
+        console.log("变量", variables)
         if (!variables[text]) {
             return `<br><p style="color: orange;">NaN</p>`;
         } else {
             return variables[text];
         }
     },
-    列表: function (text) {
-        if (!array[text]) {
+    数据: function (text, item) {
+        console.log("读取数据", AOdata[text])
+        if (!AOdata[text]) {
             return `<br><p style="color: orange;">NaN</p>`;
         } else {
-            return array[text.名][text.项];
+            return (AOdata[text])[item];
         }
     }
 }
@@ -48,11 +50,13 @@ var code = {
         isProg = true;
     },
     变量: function (text) {
+        console.log("变量", variables)
         variables[text.名] = text.值;
         isProg = true;
     },
-    列表: function (text) {
-        array[text.名] = text.值;
+    数据: function (text) {
+        console.log("写入数据", AOdata)
+        AOdata[text.名] = text.值;
         isProg = true;
     }
 }
@@ -81,8 +85,8 @@ function getReturncode(str) {
         }
     } else if (str.变量) {
         return returncode.变量(str.变量);
-    } else if (str.列表) {
-
+    } else if (str.数据) {
+        return returncode.数据(str.数据, str.项);
     }
     else {
         return `<br><p style="color: orange;">NaN</p>`;
@@ -107,13 +111,13 @@ docuemnt.addEventListener('DOMContentLoaded', () => {
                 }
             },
             {
-                "变量":{
-                    "名": "b",
+                "数据":{
+                    "名": "a",
                     "值": ["1", "2", "3"]
                 }
             },
             {
-                "打印": ["Hello World 运算：", {"运算": "1 + 1"}, " 变量a：", {"变量": "a"}, " 变量b：",{"变量": "b"}, " 列表a：", {"列表": "a", "项": 1}]
+                "打印": ["Hello World 运算：", {"运算": "1 + 1"}, " 变量a：", {"变量": "a"}, " 数据a：", {"数据": "a", "项": 1}]
             }
         ]
 }`;
@@ -143,8 +147,8 @@ docuemnt.addEventListener('DOMContentLoaded', () => {
                     code.打印(item.打印)
                 } else if (item.变量) {
                     code.变量(item.变量)
-                } else if (item.列表) {
-                    code.列表(item.列表)
+                } else if (item.数据) {
+                    code.数据(item.数据)
                 }
                 for (; ;) {
                     if (isProg) {
@@ -152,8 +156,9 @@ docuemnt.addEventListener('DOMContentLoaded', () => {
                         break;
                     }
                 }
+                console.log(AOdata)
             });
-            output.innerHTML += `<br>WebVCHC程序，JSONScript执行结束`;
+            output.innerHTML += `<br>WebVCHC程序，JSONScript结束执行`;
             output.innerHTML += `<br><div style="display: inline;">-> <div id="back" style="display: inline;cursor: pointer;">返回</div> <-</div>`;
             docuemnt.getElementById("back").addEventListener('click', (e) => {
                 controls.style.display = 'flex';
