@@ -116,19 +116,19 @@ docuemnt.addEventListener('DOMContentLoaded', () => {
             (codes.主程序).forEach((item, index) => {
                 isProg = false;
                 async function updateData() {
-                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    await new Promise(resolve => setTimeout(resolve, 1));
                     isProg = true;
                 }
                 (async () => {
                     do {
+                        console.log(item, index);
+                        if (item.打印) {
+                            code.打印(item.打印)
+                        } else if (item.变量) {
+                            code.变量(item.变量)
+                        }
                         await updateData();
                     } while (!isProg);
-                    console.log(item, index);
-                    if (item.打印) {
-                        code.打印(item.打印)
-                    } else if (item.变量) {
-                        code.变量(item.变量)
-                    }
                     console.log('Key is now true!');
                 })();
             });
