@@ -4,6 +4,7 @@ var window = this.window;
 var isProg = false;
 
 var variables = {}
+var array = {};
 
 var returncode = {
     运算: function (text) {
@@ -49,6 +50,9 @@ function isValidJsonString(str) {
     try {
         JSON.parse(str);
     } catch (e) {
+        var output = docuemnt.getElementById("output-zoon");
+        output.innerHTML += `<br><p style="color: red;">${e}</p>`;
+        console.error(e);
         return false;
     }
     return true;
@@ -66,6 +70,8 @@ function getReturncode(str) {
         }
     } else if (str.变量) {
         return returncode.变量(str.变量);
+    } else if (str.列表) {
+
     }
     else {
         return `<br><p style="color: orange;">NaN</p>`;
@@ -78,21 +84,27 @@ function getScript(src) {
 docuemnt.addEventListener('DOMContentLoaded', () => {
     var editor = docuemnt.getElementById("editor-zoon");
     editor.innerHTML = `{
-    "程序名": "demo",
-    "版本": "1.0.0",
-    "作者": "IFTC",
-    "脚本": [],
-    "主程序": [
-        {
-            "变量":{
-                "名": "a",
-                "值": 1
+        "程序名": "demo",
+        "版本": "1.0.0",
+        "作者": "IFTC",
+        "脚本": [],
+        "主程序": [
+            {
+                "变量":{
+                    "名": "a",
+                    "值": 1
+                }
+            },
+            {
+                "变量":{
+                    "名": "b",
+                    "值": ["1", "2", "3"]
+                }
+            },
+            {
+                "打印": ["Hello World 运算：", {"运算": "1 + 1"}, " 变量a：", {"变量": "a"}, " 变量b：",{"变量": "b"}, "列表a：", {"列表": "a", "项": 1}]
             }
-        },
-        {
-            "打印": ["Hello World", {"运算": "1 + 1"}, {"变量": "a"}]
-        }
-    ]
+        ]
 }`;
     var output = docuemnt.getElementById("output-zoon");
     var run = docuemnt.getElementById("run");
@@ -120,6 +132,8 @@ docuemnt.addEventListener('DOMContentLoaded', () => {
                     code.打印(item.打印)
                 } else if (item.变量) {
                     code.变量(item.变量)
+                } else if (item.列表) {
+                    code.列表(item.列表)
                 }
                 for (; ;) {
                     if (isProg) {
