@@ -21,6 +21,13 @@ var returncode = {
         } else {
             return variables[text];
         }
+    },
+    列表: function (text) {
+        if (!array[text]) {
+            return `<br><p style="color: orange;">NaN</p>`;
+        } else {
+            return array[text.名][text.项];
+        }
     }
 }
 
@@ -42,6 +49,10 @@ var code = {
     },
     变量: function (text) {
         variables[text.名] = text.值;
+        isProg = true;
+    },
+    列表: function (text) {
+        array[text.名] = text.值;
         isProg = true;
     }
 }
@@ -102,7 +113,7 @@ docuemnt.addEventListener('DOMContentLoaded', () => {
                 }
             },
             {
-                "打印": ["Hello World 运算：", {"运算": "1 + 1"}, " 变量a：", {"变量": "a"}, " 变量b：",{"变量": "b"}, "列表a：", {"列表": "a", "项": 1}]
+                "打印": ["Hello World 运算：", {"运算": "1 + 1"}, " 变量a：", {"变量": "a"}, " 变量b：",{"变量": "b"}, " 列表a：", {"列表": "a", "项": 1}]
             }
         ]
 }`;
