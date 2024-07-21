@@ -40,6 +40,11 @@
             font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
             border-radius: 5px 5px 0 0;
             overflow-y: auto;
+            font-size: large;
+        }
+
+        #output-zoon>p {
+            margin: 0;
         }
 
         #output {
@@ -71,6 +76,7 @@
             align-items: center;
             top: calc(-50vh + 1.5px);
             left: 0;
+            user-select: none;
         }
 
         #run {
@@ -100,7 +106,7 @@
 <body>
     <div id="app">
         <div id="editor">
-            <div id="editor-zoon" contenteditable="true"></div>
+            <textarea id="editor-zoon" contenteditable="true"></textarea>
         </div>
         <div id="output">
             <div id="output-zoon"></div>
