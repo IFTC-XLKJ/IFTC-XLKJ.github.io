@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container {
+            width: 1000px;
+            height: 700px;
+        }
+    </style>
+    <script src="https://map.qq.com/api/gljs?v=1.exp&key=6MUBZ-DE3KQ-ZQ35J-2MRQF-P5VET-RSBPF"></script>
+</head>
+
+<body onload="initMap()">
+    <script>
+        function initMap() {
+            //定义地图中心点坐标
+            var center = new TMap.LatLng(39.984120, 116.307484)
+            //定义map变量，调用 TMap.Map() 构造函数创建地图
+            var map = new TMap.Map(document.getElementById('container'), {
+                center: center,//设置地图中心点坐标
+                zoom: 17.2,   //设置地图缩放级别
+                pitch: 43.5,  //设置俯仰角
+                rotation: 45    //设置地图旋转角度
+            });
+        }
+    </script>
+    <div id="container"></div>
+</body>
+
+</html>
