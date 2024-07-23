@@ -3,7 +3,21 @@ var window = this.window;
 var navigator = this.navigator;
 
 var version = '1.0.0-alpha-1';
-const helpText = `<br>&nbsp;VCC | VCC<br>&nbsp;清空 | 清空屏幕<br>&nbsp;IP | 获取您的IP<br>&nbsp;处理器核心数 | 获取设备的处理器的核心数<br>&nbsp;用户代理 | 获取用户代理<br>&nbsp;连接 [下行带宽/类型/往返延时] | 获取网络连接信息<br>&nbsp;时间 | 获取当前时间<br>&nbsp;窗口 {URL} | 在新的窗口打开一个网页<br>&nbsp;帮助 | 显示帮助`;
+const helpText = `<br>
+命令：<br>
+&nbsp;VCC | VCC<br>
+&nbsp;清空 | 清空屏幕<br>
+&nbsp;IP | 获取您的IP<br>
+&nbsp;处理器核心数 | 获取设备的处理器的核心数<br>
+&nbsp;用户代理 | 获取用户代理<br>
+&nbsp;连接 [下行带宽/类型/往返延时] | 获取网络连接信息<br>
+&nbsp;时间 | 获取当前时间<br>
+&nbsp;窗口 {URL} | 在新的窗口打开一个网页<br>
+&nbsp;帮助 | 显示帮助<br><br>
+快捷键：<br>
+&nbsp;对准输入框右键 | 粘贴文本<br>
+&nbsp;命令窗口双击左键 | 获取焦点<br>
+`;
 let excludes = {
     userAgent: true,
     audio: true,
@@ -19,6 +33,7 @@ function getNowTime() {
     return new Date().toLocaleString();
 }
 document.addEventListener('DOMContentLoaded', function () {
+    var main = document.getElementById('main');
     var murmur;
     console.log(document.querySelector('#main:first-child'));
     Fingerprint2.get(options, function (components) {
@@ -27,7 +42,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         murmur = Fingerprint2.x64hash128(values.join(''), 31);
     });
-    var main = document.getElementById('main');
     function inputWidth() {
         var ps = document.querySelectorAll('p');
         var p = ps[ps.length - 1];
@@ -36,8 +50,24 @@ document.addEventListener('DOMContentLoaded', function () {
     main.innerHTML += `VCC [版本：${version}] ${getNowTime()}<br>© IFTC 2020-2024 All Rights Reserved.<br>输入 帮助 以获得相关命令<br>`
     function inputer() {
         main.innerHTML += `<br><p class="user">IFTC://${murmur}></p>`;
-        main.innerHTML += `<input style="width: ${inputWidth() - 1}px;">`;
+        main.innerHTML += `<input style="width: ${inputWidth() - 2}px;">`;
         var input = document.querySelector('input');
+        document.oncontextmenu = function () {
+            return false;
+        };
+        input.oncontextmenu = async function () {
+            try {
+                const text = await navigator.clipboard.readText();
+                console.log('剪贴板的内容是:', text);
+                input.value = text;
+            } catch (err) {
+                console.error('无法读取剪贴板:', err);
+            }
+            input.focus();
+        };
+        main.ondblclick = function () {
+            input.focus();
+        }
         input.focus();
         input.addEventListener('keydown', function (e) {
             if (e.key == 'Enter') {
@@ -89,7 +119,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     main.innerHTML += `<br><br>VCC [版本：${version}] ${getNowTime()}<br>© IFTC 2020-2024 All Rights Reserved.<br>输入 帮助 以获得相关命令<br>`
                     inputer();
                 } else if (command[0] == "窗口") {
-                    main.innerHTML += `<br>正在打开${command[1]}`;
+                    if (command[1].trim() == undefined || command[1].trim() == "") {
+                        main.innerHTML += `<br>正在打开空白标签`;
+                    } else {
+                        main.innerHTML += `<br>正在打开${command[1]}`;
+                    }
                     try {
                         window.open(command[1]);
                         main.innerHTML += `<div style="color: green;">打开窗口成功</div>`;
