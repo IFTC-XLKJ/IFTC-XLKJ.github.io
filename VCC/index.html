@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>VCC</title>
+    <script src="./index.js"></script>
+    <script src="https://cdn.staticfile.org/fingerprintjs2/2.1.0/fingerprint2.min.js"></script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 0px;
+        }
+
+        ::selection {
+            background: white;
+            color: #333;
+        }
+
+        body {
+            margin: 0;
+            background-color: #333;
+        }
+
+        #app {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #main {
+            width: 90vw;
+            height: 90vh;
+            overflow-y: auto;
+            margin: 5vh 5vw;
+            color: white;
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+        }
+
+        input {
+            border: none;
+            outline: none;
+            background-color: #333;
+            color: white;
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            font-size: 16px;
+            display: inline;
+            padding: 0;
+        }
+
+        input::placeholder {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+        }
+
+        .user {
+            margin: 0;
+            display: inline;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div id="main"></div>
+    </div>
+</body>
+
+</html>
