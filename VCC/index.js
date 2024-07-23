@@ -1,8 +1,9 @@
 var document = this.document;
 var window = this.window;
+var navigator = this.navigator;
 
 var version = '1.0.0-alpha-1';
-const helpText = `<br>&nbsp;清空 | 清空屏幕<br>&nbsp;IP | 获取您的IP<br>&nbsp;帮助 | 显示帮助`;
+const helpText = `<br>&nbsp;清空 | 清空屏幕<br>&nbsp;IP | 获取您的IP<br>&nbsp;处理器核心数 | 获取设备的处理器的核心数<br>&nbsp;帮助 | 显示帮助`;
 let excludes = {
     userAgent: true,
     audio: true,
@@ -61,7 +62,11 @@ document.addEventListener('DOMContentLoaded', function () {
                             main.innerHTML += `<div style="color: red;">获取IP失败<br>${error}</div>`;
                             inputer();
                         });
-                } else {
+                } else if (command[0] == "处理器核心数") {
+                    main.innerHTML += `<br>${navigator.hardwareConcurrency}`;
+                    inputer();
+                }
+                else {
                     main.innerHTML += `<br><div style="color: red;">命令错误<br>输入 帮助 以获得相关命令</div>`;
                     inputer();
                 }
