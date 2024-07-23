@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 } else if (command[0] == "帮助") {
                     main.innerHTML += helpText;
                     inputer();
-                } else if (command[0] == "IP") {
+                } else if (command[0] == "IP" || command[0] == "ip") {
                     main.innerHTML += `<br>正在获取IP...`;
                     fetch('https://api.ipify.org?format=json')
                         .then(response => response.json())
@@ -79,6 +79,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         main.innerHTML += `<br><div style="color: red;">命令错误<br>输入 帮助 以获得相关命令</div>`;
                     }
                     inputer();
+                } else if (command[0] == "音频") {
+
                 }
                 else {
                     main.innerHTML += `<br><div style="color: red;">命令错误<br>输入 帮助 以获得相关命令</div>`;
