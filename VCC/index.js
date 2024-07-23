@@ -3,7 +3,7 @@ var window = this.window;
 var navigator = this.navigator;
 
 var version = '1.0.0-alpha-1';
-const helpText = `<br>&nbsp;清空 | 清空屏幕<br>&nbsp;IP | 获取您的IP<br>&nbsp;处理器核心数 | 获取设备的处理器的核心数<br>&nbsp;用户代理 | 获取用户代理<br>&nbsp;帮助 | 显示帮助`;
+const helpText = `<br>&nbsp;清空 | 清空屏幕<br>&nbsp;IP | 获取您的IP<br>&nbsp;处理器核心数 | 获取设备的处理器的核心数<br>&nbsp;用户代理 | 获取用户代理<br>&nbsp;连接 [下行带宽/类型/往返延时] | 获取网络连接信息<br>&nbsp;帮助 | 显示帮助`;
 let excludes = {
     userAgent: true,
     audio: true,
