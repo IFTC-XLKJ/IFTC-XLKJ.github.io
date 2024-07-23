@@ -2,6 +2,7 @@ var document = this.document;
 var window = this.window;
 
 var version = '1.0.0-alpha-1';
+const helpText = `<br>&nbsp;清空 | 清空屏幕<br>&nbsp;IP | 获取您的IP<br>&nbsp;帮助 | 显示帮助`;
 let excludes = {
     userAgent: true,
     audio: true,
@@ -28,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var p = ps[ps.length - 1];
         return main.offsetWidth - p.offsetWidth;
     }
-    main.innerHTML += `VCC [版本：${version}]<br>© IFTC 2020-2024 All Rights Reserved.<br>`
+    main.innerHTML += `VCC [版本：${version}]<br>© IFTC 2020-2024 All Rights Reserved.<br>输入 帮助 以获得相关命令<br>`
     function inputer() {
         main.innerHTML += `<br><p class="user">IFTC://${murmur}></p>`;
         main.innerHTML += `<input style="width: ${inputWidth() - 1}px;">`;
@@ -42,11 +43,24 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log(command);
                 if ((command[0]).trim() == "") {
                     inputer();
-                } else if (command[0] == "clear") {
+                } else if (command[0] == "清空") {
                     main.innerHTML = `VCC [版本：${version}]<br>© IFTC 2020-2024 All Rights Reserved.<br>`;
                     inputer();
-                } else if (command[0] == "help") {
-                    main.innerHTML += `<br>&nbsp;clear：清空屏幕<br>&nbsp;help：显示帮助<br>`;
+                } else if (command[0] == "帮助") {
+                    main.innerHTML += helpText;
+                    inputer();
+                } else if (command[0] == "IP") {
+                    main.innerHTML += `<br>正在获取IP...`;
+                    fetch('https://api.ipify.org?format=json')
+                        .then(response => response.json())
+                        .then(data => {
+                            main.innerHTML += `<br>您的IP为${data.ip}`;
+                            inputer();
+                        })
+                        .catch(error => {
+                            main.innerHTML += `<div style="color: red;">获取IP失败<br>${error}</div>`;
+                            inputer();
+                        });
                 }
             }
         });
