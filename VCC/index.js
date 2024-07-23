@@ -3,7 +3,7 @@ var window = this.window;
 var navigator = this.navigator;
 
 var version = '1.0.0-alpha-1';
-const helpText = `<br>&nbsp;清空 | 清空屏幕<br>&nbsp;IP | 获取您的IP<br>&nbsp;处理器核心数 | 获取设备的处理器的核心数<br>&nbsp;用户代理 | 获取用户代理<br>&nbsp;连接 [下行带宽/类型/往返延时] | 获取网络连接信息<br>&nbsp;帮助 | 显示帮助`;
+const helpText = `<br>&nbsp;VCC | VCC<br>&nbsp;清空 | 清空屏幕<br>&nbsp;IP | 获取您的IP<br>&nbsp;处理器核心数 | 获取设备的处理器的核心数<br>&nbsp;用户代理 | 获取用户代理<br>&nbsp;连接 [下行带宽/类型/往返延时] | 获取网络连接信息<br>&nbsp;时间 | 获取当前时间<br>&nbsp;帮助 | 显示帮助`;
 let excludes = {
     userAgent: true,
     audio: true,
@@ -15,6 +15,9 @@ let excludes = {
 };
 let options = { excludes: excludes }
 
+function getNowTime() {
+    return new Date().toLocaleString();
+}
 document.addEventListener('DOMContentLoaded', function () {
     var murmur;
     console.log(document.querySelector('#main:first-child'));
@@ -30,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var p = ps[ps.length - 1];
         return main.offsetWidth - p.offsetWidth;
     }
-    main.innerHTML += `VCC [版本：${version}]<br>© IFTC 2020-2024 All Rights Reserved.<br>输入 帮助 以获得相关命令<br>`
+    main.innerHTML += `VCC [版本：${version}] ${getNowTime()}<br>© IFTC 2020-2024 All Rights Reserved.<br>输入 帮助 以获得相关命令<br>`
     function inputer() {
         main.innerHTML += `<br><p class="user">IFTC://${murmur}></p>`;
         main.innerHTML += `<input style="width: ${inputWidth() - 1}px;">`;
@@ -45,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if ((command[0]).trim() == "") {
                     inputer();
                 } else if (command[0] == "清空") {
-                    main.innerHTML = `VCC [版本：${version}]<br>© IFTC 2020-2024 All Rights Reserved.<br>`;
+                    main.innerHTML = `VCC [版本：${version}] ${getNowTime()}<br>© IFTC 2020-2024 All Rights Reserved.<br>输入 帮助 以获得相关命令<br>`;
                     inputer();
                 } else if (command[0] == "帮助") {
                     main.innerHTML += helpText;
@@ -79,8 +82,13 @@ document.addEventListener('DOMContentLoaded', function () {
                         main.innerHTML += `<br><div style="color: red;">命令错误<br>输入 帮助 以获得相关命令</div>`;
                     }
                     inputer();
-                } else if (command[0] == "音频") {
-
+                } else if (command[0] == "时间") {
+                    main.innerHTML += `<br>${getNowTime()}`;
+                    inputer();
+                } else if (command[0] == "VCC") {
+                    main.innerHTML += `<br><br>VCC [版本：${version}] ${getNowTime()}<br>© IFTC 2020-2024 All Rights Reserved.<br>输入 帮助 以获得相关命令<br>`
+                    inputer();
+                } else if (command[0] == "窗口") {
                 }
                 else {
                     main.innerHTML += `<br><div style="color: red;">命令错误<br>输入 帮助 以获得相关命令</div>`;
