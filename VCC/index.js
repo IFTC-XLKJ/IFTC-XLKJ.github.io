@@ -2,7 +2,7 @@ var document = this.document;
 var window = this.window;
 var navigator = this.navigator;
 
-var version = '1.0.0-alpha-2';
+var version = '1.0.0-alpha-3';
 const helpText = `<br>
 命令：<br>
 &nbsp;VCC | VCC<br>
@@ -16,7 +16,10 @@ const helpText = `<br>
 &nbsp;帮助 | 显示帮助<br><br>
 快捷键：<br>
 &nbsp;对准输入框右键 | 粘贴文本<br>
-&nbsp;命令窗口双击左键 | 获取焦点<br>
+&nbsp;命令窗口双击左键 | 获取焦点<br><br>
+更多：<br>
+&nbsp;<a href="https://docs.qq.com/form/page/DR0N2Sm1SWk5FaHB4" target="_blank">VCC包添加申请</a><br>
+&nbsp;<a href="https://docs.qq.com/doc/DR21jZ2tvY3ZLdEZ5" target="_blank">VCC包制作教程</a><br>
 `;
 var commandRecord = [];
 let excludes = {
@@ -35,6 +38,7 @@ function getNowTime() {
 }
 document.addEventListener('DOMContentLoaded', function () {
     var main = document.getElementById('main');
+    var vcc = new pgdbs(dbs_6cdcdb5902f1897c878693621e0a9c05e31dfb3bd421d75663a4a017cfd01954);
     var murmur;
     console.log(document.querySelector('#main:first-child'));
     Fingerprint2.get(options, function (components) {
@@ -133,6 +137,28 @@ document.addEventListener('DOMContentLoaded', function () {
                         main.innerHTML += `<div style="color: red;">打开窗口失败</div>`;
                     }
                     inputer();
+                } else if (command[0] == "包") {
+                    if (command[1] == "安装") {
+                        main.innerHTML += `<br>正在查询并获取 ${command[2]} 的包...`;
+                        vcc.getTableData({
+                            page: 1,
+                            limit: 1,
+                            filter: `包名='${command[2]}'`
+                        }).then((json) => {
+                            console.log(json);
+                            if (json.code == 200) {
+                                if (json.fields.length != 1) {
+                                    main.innerHTML += `<br><div style="color: orange;">${command[2]} 未找到</div>`;
+                                    inputer();
+                                } else {
+                                    main.innerHTML += `<br>正在下载 ${command[2]} 的包...`;
+                                }
+                            } else {
+                                main.innerHTML += `<br><div style="color: red;">${json.msg}</div>`;
+                                inputer();
+                            }
+                        })
+                    }
                 }
                 else {
                     main.innerHTML += `<br><div style="color: red;">命令错误<br>输入 帮助 以获得相关命令</div>`;
