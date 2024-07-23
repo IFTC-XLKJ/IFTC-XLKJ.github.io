@@ -154,11 +154,11 @@ document.addEventListener('DOMContentLoaded', function () {
                                     main.innerHTML += `<br>正在下载 ${command[2]} 的包...`;
                                     var url = json.fields[0].URL;
                                     fetch(url)
-                                        .then(response => response.blob())
-                                        .then(blob => {
-                                            var file = new File([blob], `${command[2]}.zip`, { type: 'application/zip' });
-                                            var link = document.createElement('a');
-                                            link.href = URL.createObjectURL(file);
+                                        .then(response => response.text())
+                                        .then(data => {
+                                            localStorage.setItem(command[2], data);
+                                            main.innerHTML += `<br>包 ${command[2]} 下载完成<br>`;
+                                            inputer();
                                         })
                                 }
                             } else {
@@ -166,6 +166,11 @@ document.addEventListener('DOMContentLoaded', function () {
                                 inputer();
                             }
                         })
+                    } else if (command[1] == "卸载") {
+                        main.innerHTML += `<br>正在卸载 ${command[2]} 的包...`;
+                        localStorage.removeItem(command[2]);
+                        main.innerHTML += `<br>包 ${command[2]} 卸载完成<br>`;
+                        inputer();
                     }
                 }
                 else {
