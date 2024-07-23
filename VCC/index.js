@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             inputer();
                         })
                         .catch(error => {
-                            main.innerHTML += `<div style="color: red;">获取IP失败<br>${error}</div>`;
+                            main.innerHTML += `<div style="color: red;">获取IP失败<br></div>`;
                             inputer();
                         });
                 } else if (command[0] == "处理器核心数") {
