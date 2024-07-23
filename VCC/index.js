@@ -3,7 +3,7 @@ var window = this.window;
 var navigator = this.navigator;
 
 var version = '1.0.0-alpha-1';
-const helpText = `<br>&nbsp;清空 | 清空屏幕<br>&nbsp;IP | 获取您的IP<br>&nbsp;处理器核心数 | 获取设备的处理器的核心数<br>&nbsp;帮助 | 显示帮助`;
+const helpText = `<br>&nbsp;清空 | 清空屏幕<br>&nbsp;IP | 获取您的IP<br>&nbsp;处理器核心数 | 获取设备的处理器的核心数<br>&nbsp;用户代理 | 获取用户代理<br>&nbsp;帮助 | 显示帮助`;
 let excludes = {
     userAgent: true,
     audio: true,
@@ -64,6 +64,20 @@ document.addEventListener('DOMContentLoaded', function () {
                         });
                 } else if (command[0] == "处理器核心数") {
                     main.innerHTML += `<br>${navigator.hardwareConcurrency}`;
+                    inputer();
+                } else if (command[0] == "用户代理") {
+                    main.innerHTML += `<br>${navigator.userAgent}`;
+                    inputer();
+                } else if (command[0] == "连接") {
+                    if (command[1] == "下行带宽") {
+                        main.innerHTML += `<br>${navigator.connection.downlink}Mbps`;
+                    } else if (command[1] == "类型") {
+                        main.innerHTML += `<br>${navigator.connection.effectiveType}`;
+                    } else if (command[1] == "往返延时") {
+                        main.innerHTML += `<br>${navigator.connection.rtt}ms`;
+                    } else {
+                        main.innerHTML += `<br><div style="color: red;">命令错误<br>输入 帮助 以获得相关命令</div>`;
+                    }
                     inputer();
                 }
                 else {
