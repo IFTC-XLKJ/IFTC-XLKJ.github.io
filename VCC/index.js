@@ -2,7 +2,7 @@ var document = this.document;
 var window = this.window;
 var navigator = this.navigator;
 
-var version = '1.0.0-alpha-1';
+var version = '1.0.0-alpha-2';
 const helpText = `<br>
 命令：<br>
 &nbsp;VCC | VCC<br>
@@ -18,6 +18,7 @@ const helpText = `<br>
 &nbsp;对准输入框右键 | 粘贴文本<br>
 &nbsp;命令窗口双击左键 | 获取焦点<br>
 `;
+var commandRecord = [];
 let excludes = {
     userAgent: true,
     audio: true,
@@ -49,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     main.innerHTML += `VCC [版本：${version}] ${getNowTime()}<br>© IFTC 2020-2024 All Rights Reserved.<br>输入 帮助 以获得相关命令<br>`
     function inputer() {
+        var historyNum = commandRecord.length;
         main.innerHTML += `<br><p class="user">IFTC://${murmur}></p>`;
         main.innerHTML += `<input style="width: ${inputWidth() - 2}px;">`;
         var input = document.querySelector('input');
@@ -119,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     main.innerHTML += `<br><br>VCC [版本：${version}] ${getNowTime()}<br>© IFTC 2020-2024 All Rights Reserved.<br>输入 帮助 以获得相关命令<br>`
                     inputer();
                 } else if (command[0] == "窗口") {
-                    if (command[1].trim() == undefined || command[1].trim() == "") {
+                    if (command[1] == undefined || command[1].trim() == "") {
                         main.innerHTML += `<br>正在打开空白标签`;
                     } else {
                         main.innerHTML += `<br>正在打开${command[1]}`;
@@ -135,6 +137,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 else {
                     main.innerHTML += `<br><div style="color: red;">命令错误<br>输入 帮助 以获得相关命令</div>`;
                     inputer();
+                }
+                commandRecord.push(input.value);
+            } else if (e.key == "ArrowUp") {
+                if (historyNum > 0) {
+                    input.value = commandRecord[historyNum - 1];
+                    historyNum--;
+                }
+            } else if (e.key == "ArrowDown") {
+                if (historyNum < commandRecord.length - 1) {
+                    input.value = commandRecord[historyNum + 1];
+                    historyNum++;
                 }
             }
         });
