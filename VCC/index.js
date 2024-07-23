@@ -61,6 +61,9 @@ document.addEventListener('DOMContentLoaded', function () {
                             main.innerHTML += `<div style="color: red;">获取IP失败<br>${error}</div>`;
                             inputer();
                         });
+                } else {
+                    main.innerHTML += `<br><div style="color: red;">命令错误<br>输入 帮助 以获得相关命令</div>`;
+                    inputer();
                 }
             }
         });
