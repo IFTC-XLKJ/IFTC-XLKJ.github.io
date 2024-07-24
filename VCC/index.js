@@ -221,12 +221,13 @@ document.addEventListener('DOMContentLoaded', function () {
                                     }
                                     eval(code);
                                     inputer();
+                                } else {
+                                    main.innerHTML += `<br><div style="color: red;">命令错误<br>输入 帮助 以获得相关命令</div>`;
+                                    inputer();
                                 }
                             });
                         }
                     }
-                    //main.innerHTML += `<br><div style="color: red;">命令错误<br>输入 帮助 以获得相关命令</div>`;
-                    //inputer();
                 }
                 commandRecord.push(input.value);
             } else if (e.key == "ArrowUp") {
