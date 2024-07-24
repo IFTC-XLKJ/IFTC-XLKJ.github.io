@@ -32,7 +32,7 @@ let excludes = {
     canvas: true
 };
 let options = { excludes: excludes }
-var pkgs = [];
+var pkgs = {};
 
 function getNowTime() {
     return new Date().toLocaleString();
@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             inputer();
                         } else {
                             main.innerHTML += `<br>正在运行 ${command[2]} 的包...`;
-                            loadpkg(localStorage.getItem(command[2]))
+                            loadpkg(localStorage.getItem(command[2]),command[2])
                             main.innerHTML += `<br>包 ${command[2]} 运行完成`
                             inputer();
                         }
@@ -209,24 +209,35 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 }
                 else {
-                    function print() {
-                        main.innerText += `<br>${command}`;
+                    function print(text) {
+                        var main = document.getElementById("main");
+                        main.innerHTML += `<br>${text}`;
                     }
-                    for (var i = 0; i < pkgs.length; i++) {
-                        if (command[0] == pkgs[i]) {
-                            pkgs[i].forEach((item, index) => {
-                                if (command[1] == item.command) {
-                                    for (var j = 0; j < item.command.length; j++) {
-                                        code.replaceAll(`{${j}}`, command[j + 2])
-                                    }
-                                    eval(code);
-                                    inputer();
-                                } else {
-                                    main.innerHTML += `<br><div style="color: red;">命令错误<br>输入 帮助 以获得相关命令</div>`;
-                                    inputer();
+                    console.log(command[0]);
+                    console.log(pkgs[command[0]]);
+                    if (pkgs[command[0]]) {
+                        pkgs[command[0]].forEach((item, index) => {
+                            if (command[1] == item.command) {
+                                var code = item.code;
+                                for (var j = 0; j < command.length - 2; j++) {
+                                    code = code.replaceAll(`{${j}}`, command[j + 2])
+                                    console.log(`{${j}}`);
                                 }
-                            });
-                        }
+                                console.log(code);
+                                try {
+                                    eval(code);
+                                } catch (error) {
+                                    main.innerHTML += `<br><div style="color: red;">包代码错误</div>`;
+                                }
+                                inputer();
+                            } else {
+                                main.innerHTML += `<br><div style="color: red;">包命令错误<br>输入 帮助 以获得相关命令</div>`;
+                                inputer();
+                            }
+                        });
+                    } else {
+                        main.innerHTML += `<br><div style="color: red;">命令错误<br>输入 帮助 以获得相关命令</div>`;
+                        inputer();
                     }
                 }
                 commandRecord.push(input.value);
@@ -244,20 +255,16 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
     inputer();
-    function loadpkg(package) {
+    function loadpkg(package,name) {
         try {
             var pkg = JSON.parse(package);
-            pkgs.forEach((item, index) => {
-                if (item[pkg.name]) {
-                    main.innerHTML += `<br><div style="color: orange;">${pkg.name} 已存在</div>`;
-                    return false;
-                }
-            });
+            if (pkgs[pkg.name]) {
+                main.innerHTML += `<br><div style="color: orange;">${pkg.name} 已存在</div>`;
+                return false;
+            }
             try {
-                var pkg_options = {}
                 if (pkg.main) {
-                    pkg_options[pkg.name] = pkg.main;
-                    pkgs.push(pkg_options);
+                    pkgs[name] = pkg.main;
                 } else {
                     main.innerHTML += `<br><div style="color: red;">${pkg.name} 未找到主程序</div>`;
                 }
@@ -265,6 +272,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 main.innerHTML += `<br><div style="color: red;">包 运行失败，原因：为找到包配置->name</div>`;
             }
         } catch (error) {
+            console.log(error);
             main.innerHTML += `<br><div style="color: red;">包 运行失败，原因：不是一个有效包</div>`;
         }
     }
