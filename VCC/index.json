@@ -5,7 +5,7 @@
     "main": [
         {
             "commande": "输出 {0}",
-            "code": "main.innerHTML = '{0}';"
+            "code": "print({0});"
         }
     ]
 }
