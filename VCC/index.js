@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
         input.addEventListener('keydown', function (e) {
             if (e.key == 'Enter') {
                 input.remove();
-                main.innerHTML += `${input.value}`;
+                main.innerHTML += `${((input.value).replaceAll("<","&lt")).replaceAll(">","&gt")}`;
                 var command = (input.value).split(' ');
                 console.log(command);
                 if ((command[0]).trim() == "") {
@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 else {
                     function print(text) {
                         var main = document.getElementById("main");
-                        main.innerHTML += `<br>${text}`;
+                        main.innerHTML += `<br>${((text).replaceAll("<","&lt")).replaceAll(">","&gt")}`;
                     }
                     console.log(command[0]);
                     console.log(pkgs[command[0]]);
