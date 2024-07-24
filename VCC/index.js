@@ -39,7 +39,6 @@ function getNowTime() {
 }
 document.addEventListener('DOMContentLoaded', function () {
     var main = document.getElementById('main');
-    function print() { }
     var vcc = new pgdbs(dbs_6cdcdb5902f1897c878693621e0a9c05e31dfb3bd421d75663a4a017cfd01954);
     var murmur;
     console.log(document.querySelector('#main:first-child'));
@@ -210,8 +209,24 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 }
                 else {
-                    main.innerHTML += `<br><div style="color: red;">命令错误<br>输入 帮助 以获得相关命令</div>`;
-                    inputer();
+                    function print() {
+                        main.innerText += `<br>${command}`;
+                    }
+                    for (var i = 0; i < pkgs.length; i++) {
+                        if (command[0] == pkgs[i]) {
+                            pkgs[i].forEach((item, index) => {
+                                if (command[1] == item.command) {
+                                    for (var j = 0; j < item.command.length; j++) {
+                                        code.replaceAll(`{${j}}`, command[j + 2])
+                                    }
+                                    eval(code);
+                                    inputer();
+                                }
+                            });
+                        }
+                    }
+                    //main.innerHTML += `<br><div style="color: red;">命令错误<br>输入 帮助 以获得相关命令</div>`;
+                    //inputer();
                 }
                 commandRecord.push(input.value);
             } else if (e.key == "ArrowUp") {
@@ -231,18 +246,22 @@ document.addEventListener('DOMContentLoaded', function () {
     function loadpkg(package) {
         try {
             var pkg = JSON.parse(package);
-            if (pkg.name in pkgs) {
-                main.innerHTML += `<br><div style="color: orange;">${pkg.name} 已存在</div>`;
-            } else {
-                try {
-                    pkgs.push(pkg.name);
-                    if (pkg.main) {
-                    } else {
-                        main.innerHTML += `<br><div style="color: red;">${pkg.name} 未找到主程序</div>`;
-                    }
-                } catch (error) {
-                    main.innerHTML += `<br><div style="color: red;">包 运行失败，原因：为找到包配置->name</div>`;
+            pkgs.forEach((item, index) => {
+                if (item[pkg.name]) {
+                    main.innerHTML += `<br><div style="color: orange;">${pkg.name} 已存在</div>`;
+                    return false;
                 }
+            });
+            try {
+                var pkg_options = {}
+                if (pkg.main) {
+                    pkg_options[pkg.name] = pkg.main;
+                    pkgs.push(pkg_options);
+                } else {
+                    main.innerHTML += `<br><div style="color: red;">${pkg.name} 未找到主程序</div>`;
+                }
+            } catch (error) {
+                main.innerHTML += `<br><div style="color: red;">包 运行失败，原因：为找到包配置->name</div>`;
             }
         } catch (error) {
             main.innerHTML += `<br><div style="color: red;">包 运行失败，原因：不是一个有效包</div>`;
