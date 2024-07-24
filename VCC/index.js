@@ -210,10 +210,14 @@ document.addEventListener('DOMContentLoaded', function () {
     function loadpkg(package) {
         try {
             var pkg = JSON.parse(package);
-            if (pkg.main) {
-                eval(pkg.main);
-            } else {
-                main.innerHTML += `<br><div style="color: red;">${pkg.name} 未找到主程序</div>`;
+            try {
+                pkgs.push(pkg.name);
+                if (pkg.main) {
+                } else {
+                    main.innerHTML += `<br><div style="color: red;">${pkg.name} 未找到主程序</div>`;
+                }
+            } catch (error) {
+                main.innerHTML += `<br><div style="color: red;">包 运行失败，原因：为找到包配置->name</div>`;
             }
         } catch (error) {
             main.innerHTML += `<br><div style="color: red;">包 运行失败，原因：不是一个有效包</div>`;
