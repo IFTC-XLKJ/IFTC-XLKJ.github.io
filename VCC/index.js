@@ -171,6 +171,15 @@ document.addEventListener('DOMContentLoaded', function () {
                         localStorage.removeItem(command[2]);
                         main.innerHTML += `<br>包 ${command[2]} 卸载完成<br>`;
                         inputer();
+                    } else if (command[1] == "运行") {
+                        if (localStorage.getItem(command[2]) == undefined) {
+                            main.innerHTML += `<br><div style="color: red;">${command[2]} 未安装</div>`;
+                            inputer();
+                        } else {
+                            main.innerHTML += `<br>正在运行 ${command[2]} 的包...`;
+                            loadpkg(localStorage.getItem(command[2]))
+                            main.innerHTML += `<br>包 ${command[2]} 运行`
+                        }
                     }
                 }
                 else {
@@ -192,4 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
     inputer();
+    function loadpkg(package) {
+        var pkg = JSON.parse(package);
+    }
 });
