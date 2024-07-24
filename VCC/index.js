@@ -32,6 +32,7 @@ let excludes = {
     canvas: true
 };
 let options = { excludes: excludes }
+var pkgs = [];
 
 function getNowTime() {
     return new Date().toLocaleString();
@@ -125,14 +126,18 @@ document.addEventListener('DOMContentLoaded', function () {
                     main.innerHTML += `<br><br>VCC [版本：${version}] ${getNowTime()}<br>© IFTC 2020-2024 All Rights Reserved.<br>输入 帮助 以获得相关命令<br>`
                     inputer();
                 } else if (command[0] == "窗口") {
-                    if (command[1] == undefined || command[1].trim() == "") {
-                        main.innerHTML += `<br>正在打开空白标签`;
-                    } else {
-                        main.innerHTML += `<br>正在打开${command[1]}`;
-                    }
                     try {
-                        window.open(command[1]);
-                        main.innerHTML += `<div style="color: green;">打开窗口成功</div>`;
+                        if (command[1] == undefined || command[1].trim() == "") {
+                            main.innerHTML += `<br>正在打开空白标签`;
+                        } else {
+                            main.innerHTML += `<br>正在打开${command[1]}`;
+                        }
+                        try {
+                            window.open(command[1]);
+                            main.innerHTML += `<div style="color: green;">打开窗口成功</div>`;
+                        } catch (error) {
+                            main.innerHTML += `<div style="color: red;">打开窗口失败</div>`;
+                        }
                     } catch (error) {
                         main.innerHTML += `<div style="color: red;">打开窗口失败</div>`;
                     }
@@ -179,6 +184,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             main.innerHTML += `<br>正在运行 ${command[2]} 的包...`;
                             loadpkg(localStorage.getItem(command[2]))
                             main.innerHTML += `<br>包 ${command[2]} 运行`
+                            inputer();
                         }
                     }
                 }
@@ -202,6 +208,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     inputer();
     function loadpkg(package) {
-        var pkg = JSON.parse(package);
+        try {
+            var pkg = JSON.parse(package);
+            if (pkg.main) {
+                eval(pkg.main);
+            } else {
+                main.innerHTML += `<br><div style="color: red;">${pkg.name} 未找到主程序</div>`;
+            }
+        } catch (error) {
+            main.innerHTML += `<br><div style="color: red;">包 运行失败，原因：不是一个有效包</div>`;
+        }
     }
 });
