@@ -4,7 +4,7 @@
     "version": "1.0.0",
     "main": [
         {
-            "command": "输出 {0}",
+            "command": "输出",
             "code": "print('{0}');"
         }
     ]
