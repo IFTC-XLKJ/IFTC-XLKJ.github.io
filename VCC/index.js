@@ -14,6 +14,7 @@ const helpText = `<br>
 &nbsp;时间 | 获取当前时间<br>
 &nbsp;窗口 {URL} | 在新的窗口打开一个网页<br>
 &nbsp;包 [安装/运行/卸载/搜索] {包名（搜索时，使用关键词）} | JS包<br>
+&nbsp;请求 | 该命令完整<a href="https://docs.qq.com/doc/DR0h3UGx2UmtFZE12" traget="_blank">帮助文档</a><br>
 &nbsp;帮助 | 显示帮助<br><br>
 快捷键：<br>
 &nbsp;对准输入框右键 | 粘贴文本<br>
@@ -211,6 +212,56 @@ document.addEventListener('DOMContentLoaded', function () {
                                 main.innerHTML += `<br><div style="color: red;">搜索失败 ${json.msg}</div>`;
                             }
                         })
+                    }
+                } else if (command[0] == "请求") {
+                    if (command[1] == "GET") {
+                        main.innerHTML += `<br>正在发送请求...`;
+                        try {
+                            $.ajax({
+                                url: command[2],
+                                type: "GET",
+                                headers: JSON.parse(command[3]),
+                                data: JSON.parse(command[4]),
+                                success: function (data) {
+                                    main.innerHTML += `<br><div style="color: green;">请求成功</div><br>`;
+                                    main.innerHTML += `<br>${((((JSON.stringify(data)).replaceAll("<", "&lt")).replaceAll(">", "&gt")).replaceAll("\\r\\n", "<br>")).replaceAll(" ", "&nbsp;")}<br>`;
+                                    inputer();
+                                },
+                                error: function (xhr, status, error) {
+                                    main.innerHTML += `<div style="color: red;">请求失败<br>${error}</div>`;
+                                    inputer();
+                                }
+                            })
+                        } catch (error) {
+                            main.innerHTML += `<div style="color: red;">请求失败<br>${error}</div>`;
+                            inputer();
+                        }
+                    } else if (command[1] == "POST") {
+                        main.innerHTML += `<br>正在发送请求...`;
+                        try {
+                            $.ajax({
+                                url: command[2],
+                                type: "POST",
+                                headers: JSON.parse(command[3]),
+                                data: JSON.parse(command[4]),
+                                success: function (data) {
+                                    main.innerHTML += `<br><div style="color: green;">请求成功</div><br>`;
+                                    main.innerHTML += `<br>${((((JSON.stringify(data)).replaceAll("<", "&lt")).replaceAll(">", "&gt")).replaceAll("\\r\\n", "<br>")).replaceAll(" ", "&nbsp;")}<br>`;
+                                    inputer();
+                                },
+                                error: function (xhr, status, error) {
+                                    main.innerHTML += `<div style="color: red;">请求失败<br>${error}</div>`;
+                                    inputer();
+                                }
+                            })
+                        } catch (error) {
+                            main.innerHTML += `<div style="color: red;">请求失败<br>${error}</div>`;
+                            inputer();
+                        }
+                    }
+                    else {
+                        main.innerHTML += `<div style="color: red;">请求命令错误</div>`;
+                        inputer();
                     }
                 }
                 else {
