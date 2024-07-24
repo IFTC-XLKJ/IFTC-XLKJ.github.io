@@ -2,7 +2,7 @@ var document = this.document;
 var window = this.window;
 var navigator = this.navigator;
 
-var version = '1.0.0-alpha-3';
+var version = '1.0.0-beta-1';
 const helpText = `<br>
 命令：<br>
 &nbsp;VCC | VCC<br>
@@ -13,6 +13,7 @@ const helpText = `<br>
 &nbsp;连接 [下行带宽/类型/往返延时] | 获取网络连接信息<br>
 &nbsp;时间 | 获取当前时间<br>
 &nbsp;窗口 {URL} | 在新的窗口打开一个网页<br>
+&nbsp;包 [安装/运行/卸载/搜索] {包名（搜索时，使用关键词）} | JS包<br>
 &nbsp;帮助 | 显示帮助<br><br>
 快捷键：<br>
 &nbsp;对准输入框右键 | 粘贴文本<br>
