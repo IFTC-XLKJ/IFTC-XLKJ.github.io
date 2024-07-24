@@ -186,6 +186,26 @@ document.addEventListener('DOMContentLoaded', function () {
                             main.innerHTML += `<br>包 ${command[2]} 运行`
                             inputer();
                         }
+                    } else if (command[1] == "搜索") {
+                        main.innerHTML += `<br>搜索中...`;
+                        if (command[2] == undefined || command[2].trim() == "") {
+                            command[2] = "";
+                        }
+                        vcc.getTableData({
+                            page: 1,
+                            limit: 10000,
+                            filter: `包名 LIKE '%${command[2]}%'`
+                        }).then((json) => {
+                            if (json.code == 200) {
+                                main.innerHTML += `<br>找到 ${json.fields.length} 个包`;
+                                for (var i = 0; i < json.fields.length; i++) {
+                                    main.innerHTML += `<br>${json.fields[i].包名}<br>`
+                                }
+                                inputer();
+                            } else {
+                                main.innerHTML += `<br><div style="color: red;">搜索失败 ${json.msg}</div>`;
+                            }
+                        })
                     }
                 }
                 else {
