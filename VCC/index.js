@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
         input.addEventListener('keydown', function (e) {
             if (e.key == 'Enter') {
                 input.remove();
-                main.innerHTML += `${((input.value).replaceAll("<","&lt")).replaceAll(">","&gt")}`;
+                main.innerHTML += `${((input.value).replaceAll("<", "&lt")).replaceAll(">", "&gt")}`;
                 var command = (input.value).split(' ');
                 console.log(command);
                 if ((command[0]).trim() == "") {
@@ -166,6 +166,10 @@ document.addEventListener('DOMContentLoaded', function () {
                                             main.innerHTML += `<br>包 ${command[2]} 下载完成<br>`;
                                             inputer();
                                         })
+                                        .then(error => {
+                                            main.innerHTML += `<div style="color: red;">下载失败</div>`;
+                                            inputer();
+                                        })
                                 }
                             } else {
                                 main.innerHTML += `<br><div style="color: red;">${json.msg}</div>`;
@@ -183,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             inputer();
                         } else {
                             main.innerHTML += `<br>正在运行 ${command[2]} 的包...`;
-                            loadpkg(localStorage.getItem(command[2]),command[2])
+                            loadpkg(localStorage.getItem(command[2]), command[2])
                             main.innerHTML += `<br>包 ${command[2]} 运行完成`
                             inputer();
                         }
@@ -212,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 else {
                     function print(text) {
                         var main = document.getElementById("main");
-                        main.innerHTML += `<br>${((text).replaceAll("<","&lt")).replaceAll(">","&gt")}`;
+                        main.innerHTML += `<br>${((text).replaceAll("<", "&lt")).replaceAll(">", "&gt")}`;
                     }
                     console.log(command[0]);
                     console.log(pkgs[command[0]]);
@@ -256,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
     inputer();
-    function loadpkg(package,name) {
+    function loadpkg(package, name) {
         try {
             var pkg = JSON.parse(package);
             if (pkgs[pkg.name]) {
