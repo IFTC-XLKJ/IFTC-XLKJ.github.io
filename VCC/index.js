@@ -270,11 +270,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 else {
                     function print(text) {
                         var main = document.getElementById("main");
-                        main.innerHTML += `<br>${((text).replaceAll("<", "&lt")).replaceAll(">", "&gt")}`;
+                        main.innerHTML += `<br>${(String(text).replaceAll("<", "&lt")).replaceAll(">", "&gt")}`;
                     }
                     console.log(command[0]);
                     console.log(pkgs[command[0]]);
                     if (pkgs[command[0]]) {
+                        var execute = false;
+                        var times = 0;
                         pkgs[command[0]].forEach((item, index) => {
                             if (command[1] == item.command) {
                                 var code = item.code;
@@ -288,11 +290,14 @@ document.addEventListener('DOMContentLoaded', function () {
                                 } catch (error) {
                                     main.innerHTML += `<br><div style="color: red;">包代码错误</div>`;
                                 }
+                                execute = true;
+                                times = index;
                                 inputer();
                             } else {
-                                main.innerHTML += `<br><div style="color: red;">包命令错误<br>输入 帮助 以获得相关命令</div>`;
-                                inputer();
-                                break;
+                                if (times == pkgs[command[0]] && !execute) {
+                                    main.innerHTML += `<br><div style="color: red;">包命令错误<br>输入 帮助 以获得相关命令</div>`;
+                                    inputer();
+                                }
                             }
                         });
                     } else {
