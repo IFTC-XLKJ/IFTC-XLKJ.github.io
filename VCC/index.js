@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                         type: 'GET',
                                         dataType: 'json',
                                         success: function (data) {
-                                            localStorage.setItem(command[2], data);
+                                            localStorage.setItem(command[2], JSON.stringify(data));
                                             main.innerHTML += `<br>包 ${command[2]} 下载完成<br>`;
                                             inputer();
                                         },
@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             inputer();
                         } else {
                             main.innerHTML += `<br>正在运行 ${command[2]} 的包...`;
-                            loadpkg(localStorage.getItem(command[2]), command[2])
+                            loadpkg(JSON.parse(localStorage.getItem(command[2])), command[2])
                             main.innerHTML += `<br>包 ${command[2]} 运行完成`
                             inputer();
                         }
