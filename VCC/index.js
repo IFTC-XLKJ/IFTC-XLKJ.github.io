@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             inputer();
                         } else {
                             main.innerHTML += `<br>正在运行 ${command[2]} 的包...`;
-                            loadpkg(JSON.parse(localStorage.getItem(command[2])), command[2])
+                            loadpkg(localStorage.getItem(command[2]), command[2])
                             main.innerHTML += `<br>包 ${command[2]} 运行完成`
                             inputer();
                         }
@@ -292,6 +292,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             } else {
                                 main.innerHTML += `<br><div style="color: red;">包命令错误<br>输入 帮助 以获得相关命令</div>`;
                                 inputer();
+                                break;
                             }
                         });
                     } else {
