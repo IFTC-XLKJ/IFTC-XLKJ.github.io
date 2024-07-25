@@ -160,17 +160,20 @@ document.addEventListener('DOMContentLoaded', function () {
                                 } else {
                                     main.innerHTML += `<br>正在下载 ${command[2]} 的包...`;
                                     var url = json.fields[0].URL;
-                                    fetch(url)
-                                        .then(response => response.text())
-                                        .then(data => {
+                                    $.ajax({
+                                        url: url,
+                                        type: 'GET',
+                                        dataType: 'json',
+                                        success: function (data) {
                                             localStorage.setItem(command[2], data);
                                             main.innerHTML += `<br>包 ${command[2]} 下载完成<br>`;
                                             inputer();
-                                        })
-                                        .then(error => {
+                                        },
+                                        error: function (xhr, status, error) {
                                             main.innerHTML += `<div style="color: red;">下载失败</div>`;
                                             inputer();
-                                        })
+                                        }
+                                    })
                                 }
                             } else {
                                 main.innerHTML += `<br><div style="color: red;">${json.msg}</div>`;
