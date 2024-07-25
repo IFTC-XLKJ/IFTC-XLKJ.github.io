@@ -43,3 +43,15 @@ a {
     color: cornflowerblue;
     text-decoration: none;
 }
+
+#footer {
+    width: 100vw;
+    height: auto;
+    background-color: #333;
+}
+
+#author {
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
