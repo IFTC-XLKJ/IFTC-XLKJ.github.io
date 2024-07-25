@@ -6,6 +6,10 @@
         {
             "command": "输出",
             "code": "print('{0}');"
+        },
+        {
+            "command": "运算",
+            "code": "print(eval('{0}'));"
         }
     ]
 }
