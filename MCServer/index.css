@@ -50,7 +50,8 @@ a {
     background-color: #333;
 }
 
-#author {
+#author,
+#copyright {
     color: white;
     text-align: center;
     padding: 10px;
