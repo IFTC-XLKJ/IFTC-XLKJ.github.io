@@ -36,6 +36,10 @@ let excludes = {
 let options = { excludes: excludes }
 var pkgs = {};
 
+function ToBottom() {
+    var main = document.getElementById('main');
+    main.scrollTop = main.scrollHeight;
+}
 function getNowTime() {
     return new Date().toLocaleString();
 }
@@ -61,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
         main.innerHTML += `<br><p class="user">IFTC://${murmur}></p>`;
         main.innerHTML += `<input style="width: ${inputWidth() - 2}px;">`;
         var input = document.querySelector('input');
+        ToBottom();
         document.oncontextmenu = function () {
             return false;
         };
@@ -94,6 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     inputer();
                 } else if (command[0] == "IP" || command[0] == "ip") {
                     main.innerHTML += `<br>正在获取IP...`;
+                    ToBottom();
                     fetch('https://api.ipify.org?format=json')
                         .then(response => response.json())
                         .then(data => {
@@ -134,6 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         } else {
                             main.innerHTML += `<br>正在打开${command[1]}`;
                         }
+                        ToBottom();
                         try {
                             window.open(command[1]);
                             main.innerHTML += `<div style="color: green;">打开窗口成功</div>`;
@@ -147,6 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 } else if (command[0] == "包") {
                     if (command[1] == "安装") {
                         main.innerHTML += `<br>正在查询并获取 ${command[2]} 的包...`;
+                        ToBottom();
                         vcc.getTableData({
                             page: 1,
                             limit: 1,
@@ -159,6 +167,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     inputer();
                                 } else {
                                     main.innerHTML += `<br>正在下载 ${command[2]} 的包...`;
+                                    ToBottom();
                                     var url = json.fields[0].URL;
                                     $.ajax({
                                         url: url,
@@ -182,6 +191,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         })
                     } else if (command[1] == "卸载") {
                         main.innerHTML += `<br>正在卸载 ${command[2]} 的包...`;
+                        ToBottom();
                         localStorage.removeItem(command[2]);
                         main.innerHTML += `<br>包 ${command[2]} 卸载完成<br>`;
                         inputer();
@@ -191,12 +201,14 @@ document.addEventListener('DOMContentLoaded', function () {
                             inputer();
                         } else {
                             main.innerHTML += `<br>正在运行 ${command[2]} 的包...`;
+                            ToBottom();
                             loadpkg(localStorage.getItem(command[2]), command[2])
                             main.innerHTML += `<br>包 ${command[2]} 运行完成`
                             inputer();
                         }
                     } else if (command[1] == "搜索") {
                         main.innerHTML += `<br>搜索中...`;
+                        ToBottom();
                         if (command[2] == undefined || command[2].trim() == "") {
                             command[2] = "";
                         }
@@ -207,18 +219,21 @@ document.addEventListener('DOMContentLoaded', function () {
                         }).then((json) => {
                             if (json.code == 200) {
                                 main.innerHTML += `<br>找到 ${json.fields.length} 个包`;
+                                ToBottom();
                                 for (var i = 0; i < json.fields.length; i++) {
                                     main.innerHTML += `<br>${json.fields[i].包名}<br>`
                                 }
                                 inputer();
                             } else {
                                 main.innerHTML += `<br><div style="color: red;">搜索失败 ${json.msg}</div>`;
+                                inputer();
                             }
                         })
                     }
                 } else if (command[0] == "请求") {
                     if (command[1] == "GET") {
                         main.innerHTML += `<br>正在发送请求...`;
+                        ToBottom();
                         try {
                             $.ajax({
                                 url: command[2],
@@ -227,6 +242,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 data: JSON.parse(command[4]),
                                 success: function (data) {
                                     main.innerHTML += `<br><div style="color: green;">请求成功</div><br>`;
+                                    ToBottom();
                                     main.innerHTML += `<br>${((((JSON.stringify(data)).replaceAll("<", "&lt")).replaceAll(">", "&gt")).replaceAll("\\r\\n", "<br>")).replaceAll(" ", "&nbsp;")}<br>`;
                                     inputer();
                                 },
@@ -241,6 +257,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     } else if (command[1] == "POST") {
                         main.innerHTML += `<br>正在发送请求...`;
+                        ToBottom();
                         try {
                             $.ajax({
                                 url: command[2],
@@ -249,6 +266,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 data: JSON.parse(command[4]),
                                 success: function (data) {
                                     main.innerHTML += `<br><div style="color: green;">请求成功</div><br>`;
+                                    ToBottom();
                                     main.innerHTML += `<br>${((((JSON.stringify(data)).replaceAll("<", "&lt")).replaceAll(">", "&gt")).replaceAll("\\r\\n", "<br>")).replaceAll(" ", "&nbsp;")}<br>`;
                                     inputer();
                                 },
@@ -271,6 +289,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     function print(text) {
                         var main = document.getElementById("main");
                         main.innerHTML += `<br>${(String(text).replaceAll("<", "&lt")).replaceAll(">", "&gt")}`;
+                        ToBottom();
                     }
                     console.log(command[0]);
                     console.log(pkgs[command[0]]);
