@@ -370,6 +370,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         main.innerHTML += `<br>${(String(text).replaceAll("<", "&lt")).replaceAll(">", "&gt")}`;
                         ToBottom();
                     }
+                    function error(text) {
+                        var main = document.getElementById("main");
+                        main.innerHTML += `<br><div style="color: red;">${(String(text).replaceAll("<", "&lt")).replaceAll(">", "&gt")}</div>`;
+                        ToBottom();
+                    }
                     console.log(command[0]);
                     console.log(pkgs[command[0]]);
                     if (pkgs[command[0]]) {
