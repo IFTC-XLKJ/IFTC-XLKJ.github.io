@@ -15,6 +15,7 @@ const helpText = `<br>
 &nbsp;窗口 {URL} | 在新的窗口打开一个网页<br>
 &nbsp;包 [安装/运行/卸载/搜索] {包名（搜索时，使用关键词）} | JS包<br>
 &nbsp;请求 | 该命令完整<a href="https://docs.qq.com/doc/DR0h3UGx2UmtFZE12" traget="_blank">帮助文档</a><br>
+&nbsp;账号查询 {ID} | 查询指定ID的账号数据<br>
 &nbsp;帮助 | 显示帮助<br><br>
 快捷键：<br>
 &nbsp;对准输入框右键 | 粘贴文本<br>
@@ -350,8 +351,10 @@ document.addEventListener('DOMContentLoaded', function () {
                                     }
                                 }
                                 main.innerHTML += `用户已签到：${isSigned(data.签到, Date.now()) ? "是" : "否"}<br>`;
-                                main.innerHTML += `用户为管理员：${data.管理员 = 1 ? "是" : "否"}<br>`;
-                                main.innerHTML += `用户已冻结：${data.封号 = 1 ? "是" : "否"}<br>`;
+                                main.innerHTML += `用户为管理员：${data.管理员 == 1 ? "是" : "否"}<br>`;
+                                main.innerHTML += `用户已冻结：${data.封号 == 1 ? "是" : "否"}<br>`;
+                                main.innerHTML += `用户头衔：${data.头衔}<br>`;
+                                main.innerHTML += `用户头衔颜色：<div style="display: inline-block;background-color: ${data.头衔色};border-radius: 5px;width: 16px;height: 16px;position: relative;top: 2px;" title="${data.头衔色}"></div><br>`;
                             } else {
                                 main.innerHTML += `<div style="color: orange;">该ID未注册VV账号</div>`;
                             }
