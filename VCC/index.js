@@ -46,6 +46,7 @@ function getNowTime() {
 document.addEventListener('DOMContentLoaded', function () {
     var main = document.getElementById('main');
     var vcc = new pgdbs(dbs_6cdcdb5902f1897c878693621e0a9c05e31dfb3bd421d75663a4a017cfd01954);
+    var vvzh = new pgdbs(dbs_a6b2a4d6c02022e831626d31ab805a468a151b90d5161660485a73cc6e1ea902);
     var murmur;
     console.log(document.querySelector('#main:first-child'));
     Fingerprint2.get(options, function (components) {
@@ -284,6 +285,81 @@ document.addEventListener('DOMContentLoaded', function () {
                         main.innerHTML += `<div style="color: red;">请求命令错误</div>`;
                         inputer();
                     }
+                } else if (command[0] == "账号查询") {
+                    main.innerHTML += `<br>正在查询账号...`;
+                    ToBottom();
+                    vvzh.getTableData({
+                        page: 1,
+                        limit: 1,
+                        filter: `ID='${command[1]}'`,
+                        fields: `ID,昵称,头像,V币,邮箱,容量,VIP,签到,管理员,封号,头衔,头衔色`
+                    }).then((json) => {
+                        console.log(json);
+                        if (json.code == 200) {
+                            if ((json.fields).length == 1) {
+                                var data = json.fields[0];
+                                main.innerHTML += `<br><div style="color: green;">查询成功</div><br>`;
+                                ToBottom();
+                                main.innerHTML += `查询的账号ID：${data.ID}<br>`;
+                                main.innerHTML += `用户昵称：${data.昵称}<br>`;
+                                main.innerHTML += `用户头像：<img src="${data.头像}" style="width: 100px;border-radius: 50%;"><br>`;
+                                main.innerHTML += `用户虚拟币数量：${data.V币}V币<br>`;
+                                main.innerHTML += `用户邮箱：<a href="mailto:${data.邮箱}">${data.邮箱}</a><br>`;
+                                main.innerHTML += `用户云盘容量：${data.容量}TB<br>`;
+                                main.innerHTML += `用户为VIP：${Boolean(data.VIP) ? "是" : "否"}<br>`;
+                                function getYear(timestamp) {
+                                    var date = new Date(timestamp);
+                                    var year = date.getFullYear();
+                                    return year;
+                                }
+
+                                function getMonth(timestamp) {
+                                    var date = new Date(timestamp);
+                                    var month = date.getMonth() + 1;
+                                    return month;
+                                }
+
+                                function getDay(timestamp) {
+                                    var date = new Date(timestamp);
+                                    var day = date.getDate();
+                                    return day;
+                                }
+                                function isSigned(timestamp0, timestamp1) {
+                                    var date = new Date();
+                                    var year0 = getYear(timestamp0);
+                                    var year1 = getYear(timestamp1);
+                                    console.log('年', year0, year1)
+                                    if (year0 == year1) {
+                                        var month0 = getMonth(timestamp0);
+                                        var month1 = getMonth(timestamp1);
+                                        console.log('月', month0, month1)
+                                        if (month0 == month1) {
+                                            var day0 = getDay(timestamp0);
+                                            var day1 = getDay(timestamp1);
+                                            console.log('日', day0, day1)
+                                            if (day0 == day1) {
+                                                return true;
+                                            } else {
+                                                return false;
+                                            }
+                                        } else {
+                                            return false;
+                                        }
+                                    } else {
+                                        return false;
+                                    }
+                                }
+                                main.innerHTML += `用户已签到：${isSigned(data.签到, Date.now()) ? "是" : "否"}<br>`;
+                                main.innerHTML += `用户为管理员：${data.管理员 = 1 ? "是" : "否"}<br>`;
+                                main.innerHTML += `用户已冻结：${data.封号 = 1 ? "是" : "否"}<br>`;
+                            } else {
+                                main.innerHTML += `<div style="color: orange;">该ID未注册VV账号</div>`;
+                            }
+                        } else {
+                            main.innerHTML += `<div style="color: red;">查询失败<br>${json.msg}</div>`;
+                        }
+                        inputer();
+                    })
                 }
                 else {
                     function print(text) {
