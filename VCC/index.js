@@ -3,26 +3,26 @@ var window = this.window;
 var navigator = this.navigator;
 
 var version = '1.0.0-beta-1';
-const helpText = `<br>
-命令：<br>
-&nbsp;VCC | VCC<br>
-&nbsp;清空 | 清空屏幕<br>
-&nbsp;IP | 获取您的IP<br>
-&nbsp;处理器核心数 | 获取设备的处理器的核心数<br>
-&nbsp;用户代理 | 获取用户代理<br>
-&nbsp;连接 [下行带宽/类型/往返延时] | 获取网络连接信息<br>
-&nbsp;时间 | 获取当前时间<br>
-&nbsp;窗口 {URL} | 在新的窗口打开一个网页<br>
-&nbsp;包 [安装/运行/卸载/搜索] {包名（搜索时，使用关键词）} | JS包<br>
-&nbsp;请求 | 该命令完整<a href="https://docs.qq.com/doc/DR0h3UGx2UmtFZE12" traget="_blank">帮助文档</a><br>
-&nbsp;账号查询 {ID} | 查询指定ID的账号数据<br>
-&nbsp;帮助 | 显示帮助<br><br>
-快捷键：<br>
-&nbsp;对准输入框右键 | 粘贴文本<br>
-&nbsp;命令窗口双击左键 | 获取焦点<br><br>
-更多：<br>
-&nbsp;<a href="https://docs.qq.com/form/page/DR0N2Sm1SWk5FaHB4" target="_blank">VCC包添加申请</a><br>
-&nbsp;<a href="https://docs.qq.com/doc/DR21jZ2tvY3ZLdEZ5" target="_blank">VCC包制作教程</a><br>
+const helpText = `
+命令：
+&nbsp;VCC | VCC
+&nbsp;清空 | 清空屏幕
+&nbsp;IP | 获取您的IP
+&nbsp;处理器核心数 | 获取设备的处理器的核心数
+&nbsp;用户代理 | 获取用户代理
+&nbsp;连接 [下行带宽/类型/往返延时] | 获取网络连接信息
+&nbsp;时间 | 获取当前时间
+&nbsp;窗口 {URL} | 在新的窗口打开一个网页
+&nbsp;包 [安装/运行/卸载/搜索] {包名（搜索时，使用关键词）} | JS包
+&nbsp;请求 | 该命令完整<a href="https://docs.qq.com/doc/DR0h3UGx2UmtFZE12" traget="_blank">帮助文档</a>
+&nbsp;账号查询 {ID} | 查询指定ID的账号数据
+&nbsp;帮助 | 显示帮助<br>
+快捷键：
+&nbsp;对准输入框右键 | 粘贴文本
+&nbsp;命令窗口双击左键 | 获取焦点<br>
+更多：
+&nbsp;<a href="https://docs.qq.com/form/page/DR0N2Sm1SWk5FaHB4" target="_blank">VCC包添加申请</a>
+&nbsp;<a href="https://docs.qq.com/doc/DR21jZ2tvY3ZLdEZ5" target="_blank">VCC包制作教程</a>
 `;
 var commandRecord = [];
 let excludes = {
