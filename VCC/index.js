@@ -375,6 +375,16 @@ document.addEventListener('DOMContentLoaded', function () {
                         main.innerHTML += `<br><div style="color: red;">${(String(text).replaceAll("<", "&lt")).replaceAll(">", "&gt")}</div>`;
                         ToBottom();
                     }
+                    function warn(text) {
+                        var main = document.getElementById("main");
+                        main.innerHTML += `<br><div style="color: orange;">${(String(text).replaceAll("<", "&lt")).replaceAll(">", "&gt")}</div>`;
+                        ToBottom();
+                    }
+                    function info(text) {
+                        var main = document.getElementById("main");
+                        main.innerHTML += `<br><div style="color: green;">${(String(text).replaceAll("<", "&lt")).replaceAll(">", "&gt")}</div>`;
+                        ToBottom();
+                    }
                     console.log(command[0]);
                     console.log(pkgs[command[0]]);
                     if (pkgs[command[0]]) {
