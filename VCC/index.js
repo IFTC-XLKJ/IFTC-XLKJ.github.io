@@ -363,6 +363,35 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                         inputer();
                     })
+                } else if (command[0] == "MC服务器") {
+                    main.innerHTML += `<br>正在查询"IFTC"服务器...`;
+                    ToBottom();
+                    $.ajax({
+                        url: "https://api.sageded.top/api/mc/serverMsg?ip=play.simpfun.cn&port=25079",
+                        type: "get",
+                        dataType: "json",
+                        success: function (data) {
+                            console.log(data);
+                            if (data.flag) {
+                                main.innerHTML += `<br><div style="color: green;">查询成功</div><br>`;
+                                main.innerHTML += `服务器最大玩家数：${data.data.players.max}<br>`;
+                                main.innerHTML += `服务器在线玩家数：${data.data.players.online}<br>`;
+                                if (data.data.players.sample) {
+                                    (data.data.players.sample).forEach((item, index) => {
+                                        main.innerHTML += `第${index + 1}名玩家，玩家名：${item.name}，玩家ID：${item.id}<br>`;
+                                    });
+                                }
+                                main.innerHTML += `<br>服务器延迟：${data.data.ping}<br>`;
+                            } else {
+                                main.innerHTML += `<div style="color: red;">查询失败</div><br>`;
+                            }
+                            inputer();
+                        },
+                        error: function (data) {
+                            main.innerHTML += `<div style="color: red;">查询失败</div><br>`;
+                            inputer();
+                        }
+                    })
                 }
                 else {
                     function print(text) {
