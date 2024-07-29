@@ -375,7 +375,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             if (data.flag) {
                                 main.innerHTML += `<br><div style="color: green;">查询成功</div><br>`;
                                 main.innerHTML += `服务器最大玩家数：${data.data.players.max}<br>`;
-                                main.innerHTML += `服务器在线玩家数：${data.data.players.online}<br>`;
+                                main.innerHTML += `服务器在线玩家数：${data.data.players.online}<br><br>`;
                                 if (data.data.players.sample) {
                                     (data.data.players.sample).forEach((item, index) => {
                                         main.innerHTML += `第${index + 1}名玩家，玩家名：${item.name}，玩家ID：${item.id}<br>`;
