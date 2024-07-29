@@ -16,6 +16,7 @@ const helpText = `
 &nbsp;包 [安装/运行/卸载/搜索] {包名（搜索时，使用关键词）} | JS包
 &nbsp;请求 | 该命令完整<a href="https://docs.qq.com/doc/DR0h3UGx2UmtFZE12" traget="_blank">帮助文档</a>
 &nbsp;账号查询 {ID} | 查询指定ID的账号数据
+&nbsp;MC服务器 | 查询"IFTC"服务器的相关信息
 &nbsp;帮助 | 显示帮助<br>
 快捷键：
 &nbsp;对准输入框右键 | 粘贴文本
