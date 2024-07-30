@@ -3,12 +3,22 @@
 
 <head>
     <link rel="stylesheet" href="editor.md/css/editormd.min.css" />
+    <link rel="stylesheet" href="editor.md/css/editormd.preview.css" />
+    <style>
+        body {
+            margin: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
     <div id="editor">
         <!-- Tips: Editor.md can auto append a `<textarea>` tag -->
         <textarea style="display:none;">### Hello Editor.md !</textarea>
     </div>
     <script src="/jquery-2.2.4.min.js"></script>
     <script src="editor.md/editormd.min.js"></script>
+    <script src="editormd/lib/marked.min.js"></script>
+    <script src="editormd/lib/prettify.min.js"></script>
     <script type="text/javascript">
         $(function () {
             var editor = editormd("editor", {
@@ -22,7 +32,10 @@
 </head>
 
 <body>
-
+    <div id="test-markdown-view">
+        <!-- Server-side output Markdown text -->
+        <textarea style="display:none;">### Hello world!</textarea>
+    </div>
 </body>
 
 </html>
