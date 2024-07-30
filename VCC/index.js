@@ -393,6 +393,42 @@ document.addEventListener('DOMContentLoaded', function () {
                             inputer();
                         }
                     })
+                } else if (command[0] == "IP查询") {
+                    if (command[1]) {
+                        main.innerHTML += `<br>正在查询"${(command[1]).replaceAll(",", " ")}"的IP地址...`;
+                        ToBottom();
+                        $.ajax({
+                            url: "https://api.sageded.top/api/other/ip?ips=" + command[1],
+                            type: "get",
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.flag) {
+                                    main.innerHTML += `<br><div style="color: green;">查询成功</div>`;
+                                    (data.data).forEach((item, index) => {
+                                        main.innerHTML += `<br>第${index + 1}条IP地址（${item.ip}）<br>`;
+                                        main.innerHTML += `IP地址所属位置：${item.addr}<br>`;
+                                        main.innerHTML += `省份编码：${item.proCode}<br>`;
+                                        main.innerHTML += `城市编码：${item.cityCode}<br>`;
+                                    })
+                                } else {
+                                    main.innerHTML += `<div style="color: red;">查询失败</div><br>`;
+                                }
+                                inputer();
+                            },
+                            error: function (err) {
+                                main.innerHTML += `<div style="color: red;">查询失败</div><br>`;
+                                inputer();
+                            }
+                        })
+                    } else {
+                        main.innerHTML += `<br>正在查询""的IP地址...`;
+                        $.ajax({
+                            url: "https://api.ipify.org?format=json",
+                            type: "get",
+                            dataType: "json",
+                            success: function (data) { }
+                        })
+                    }
                 }
                 else {
                     function print(text) {
