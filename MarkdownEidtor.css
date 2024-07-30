@@ -1,0 +1,20 @@
+.editormd-preview h1,
+.editormd-preview h2,
+.editormd-preview h3,
+.editormd-preview h4,
+.editormd-preview h5,
+.editormd-preview h6 {
+    color: cornflowerblue;
+}
+
+.editormd-preview a {
+    color: lightskyblue;
+}
+
+.editormd-preview>div>pre,
+.editormd-preview>div>pre li {
+    background-color: rgb(151, 151, 151);
+}
+.editormd-preview>div>pre li::marker {
+    color: white;
+}
