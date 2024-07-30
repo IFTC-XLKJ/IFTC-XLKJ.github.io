@@ -32,8 +32,12 @@
             var editor = editormd("editor", {
                 width: "100%",
                 height: "100%",
-                markdown: ``,     // dynamic set Markdown text
-                path: "editor.md/lib/"  // Autoload modules mode, codemirror, marked... dependents libs path
+                markdown: "# 114514\n## 114514",     // dynamic set Markdown text
+                path: "editor.md/lib/",  // Autoload modules mode, codemirror, marked... dependents libs path
+                onchange: function () {
+                    console.dir(this.getMarkdown());
+                },
+                mode: "gfm"
             });
         });
     </script>
