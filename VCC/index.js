@@ -395,8 +395,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     })
                 } else if (command[0] == "IP查询") {
                     if (command[1]) {
-                        const IPRex = new RegExp("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")
-                        if (IPRex.test(command[1])) {
+                        var IP = 0;
+                        const IPRex = new RegExp("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
+                        (command[1].split(",")).forEach((item, index) => {
+                            if (IPRex.test(item)) {
+                                IP ++;
+                            }
+                        });
+                        if (IP == (command[1].split(",")).length) {
                             main.innerHTML += `<br>正在查询"${(command[1]).replaceAll(",", " ")}"的IP地址...`;
                             ToBottom();
                             $.ajax({
@@ -423,7 +429,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 }
                             })
                         } else {
-                            main.innerHTML += `<div style="color: red;">IP地址格式错误</div><br>`;
+                            main.innerHTML += `<div style="color: red;">IP地址格式错误</div>`;
                             inputer();
                         }
                     } else {
