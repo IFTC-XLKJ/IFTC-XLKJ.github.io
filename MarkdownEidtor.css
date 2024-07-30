@@ -15,6 +15,7 @@
 .editormd-preview>div>pre li {
     background-color: rgb(151, 151, 151);
 }
+
 .editormd-preview>div>pre li::marker {
     color: white;
 }
