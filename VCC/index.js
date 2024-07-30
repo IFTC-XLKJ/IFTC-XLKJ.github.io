@@ -17,7 +17,7 @@ const helpText = `
 &nbsp;请求 | 该命令完整<a href="https://docs.qq.com/doc/DR0h3UGx2UmtFZE12" traget="_blank">帮助文档</a>
 &nbsp;账号查询 {ID} | 查询指定ID的账号数据
 &nbsp;MC服务器 | 查询"IFTC"服务器的相关信息
-&nbsp;IP查询 | 查询对应IP的省份编码、城市编码、归属地，多个IP请用英文格式下的逗号分开
+&nbsp;IP查询 {IP(s)}| 查询对应IP的省份编码、城市编码、归属地，多个IP请用英文格式下的逗号分开
 &nbsp;帮助 | 显示帮助<br>
 快捷键：
 &nbsp;对准输入框右键 | 粘贴文本
