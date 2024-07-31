@@ -20,7 +20,7 @@ const helpText = `
 &nbsp;账号查询 {ID} | 查询指定ID的账号数据
 &nbsp;MC服务器 | 查询"IFTC"服务器的相关信息
 &nbsp;IP查询 {IP(s)} | 查询对应IP的省份编码、城市编码、归属地，多个IP请用英文格式下的逗号分开
-&nbsp;图文本 [标准/幽灵/(<a href="javascript:viod;;">更多字体...</a>)] {ASCII字符(共128个)} | 生成ASCII艺术字（统称为“图文本”）
+&nbsp;图文本 [标准/幽灵/(<a class="morefonts" href="javascript:;">更多字体...</a>)] {ASCII字符(共128个)} | 生成ASCII艺术字（统称为“图文本”）
 &nbsp;图文本字体 | 查看所有图文本的可用字体
 &nbsp;帮助 | 显示帮助<br>
 快捷键：
@@ -77,6 +77,20 @@ document.addEventListener("DOMContentLoaded", function () {
     main.innerHTML += `<br><p class="user">IFTC://${murmur}></p>`;
     main.innerHTML += `<input style="width: ${inputWidth() - 2}px;">`;
     var input = document.querySelector("input");
+    var morefonts = document.querySelectorAll(".morefonts");
+    morefonts.forEach((item, index) => {
+      item.addEventListener("click", function () {
+        input.value = "图文本字体";
+        input.focus();
+        const enterKeyEvent = new KeyboardEvent('keydown', {
+          bubbles: true,
+          cancelable: true,
+          key: 'Enter',
+          code: 'Enter',
+        });
+        input.dispatchEvent(enterKeyEvent);
+      });
+    });
     ToBottom();
     document.oncontextmenu = function () {
       return false;
