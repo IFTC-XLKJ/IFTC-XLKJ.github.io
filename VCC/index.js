@@ -3,6 +3,8 @@ var window = this.window;
 var navigator = this.navigator;
 
 var version = "1.0.0-beta-1";
+const fonts = ["Standard", "Ghost", "Wow"];
+const fontsName = ["标准", "幽灵", "哇"];
 const helpText = `
 命令：
 &nbsp;VCC | VCC
@@ -510,7 +512,7 @@ document.addEventListener("DOMContentLoaded", function () {
           figlet.defaults({
             fontPath: "./figlet/fonts",
           });
-          figlet.preloadFonts(["Standard", "Ghost"], function () {
+          figlet.preloadFonts(fonts, function () {
             console.log("prefetching done (only did it for 2 fonts)!");
           });
           var font;
@@ -518,7 +520,10 @@ document.addEventListener("DOMContentLoaded", function () {
             font = "Standard";
           } else if ((command[1] == "幽灵")) {
             font = "Ghost";
-          } else {
+          } else if ((command[1] == "哇")) {
+            font = "Wow";
+          }
+          else {
             main.innerHTML += `<div style="color: red;">字体错误</div>`;
             inputer();
             return;
@@ -536,7 +541,14 @@ document.addEventListener("DOMContentLoaded", function () {
             main.innerHTML += `<br>${text}<br>`;
             inputer();
           });
-        } else {
+        } else if (command[0] == "图文本字体") {
+          main.innerHTML += `<br>`;
+          fontsName.forEach((font, n) => {
+            main.innerHTML += `${n + 1} | ${font}<br>`;
+          });
+          inputer();
+        }
+        else {
           function print(text) {
             var main = document.getElementById("main");
             main.innerHTML += `<br>${String(text)
