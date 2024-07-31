@@ -514,15 +514,16 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log("prefetching done (only did it for 2 fonts)!");
           });
           var font;
-          if ((command[1] = "标准")) {
-            font = "Standard"
-          } else if ((command[1] = "幽灵")) {
-            font = "Ghost"
+          if ((command[1] == "标准")) {
+            font = "Standard";
+          } else if ((command[1] == "幽灵")) {
+            font = "Ghost";
           } else {
             main.innerHTML += `<div style="color: red;">字体错误</div>`;
             inputer();
             return;
           }
+          console.log(`选择的字体${font}`)
           figlet(Text, font, function (err, text) {
             if (err) {
               console.log("something went wrong...");
