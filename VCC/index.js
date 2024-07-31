@@ -542,7 +542,7 @@ document.addEventListener("DOMContentLoaded", function () {
             var maxWidth = 0;
             for (var i = 0; i < (text.split("\n")).length; i++) {
               if (maxWidth < (text.split("\n")[i]).length) {
-                maxWidth = (text.split("\n")[i]).length * 8.79;
+                maxWidth = (text.split("\n")[i]).length * 8.7899;
               }
             }
             main.innerHTML += `<br><div class="figlet-container" style="grid-template-rows: repeat(${(text.split("\n")).length}, 18px);width: ${maxWidth}px;"><div class="figlrt-item">${text}</div></div><br>`;
