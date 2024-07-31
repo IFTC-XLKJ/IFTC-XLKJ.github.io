@@ -36,31 +36,16 @@
                 markdown: "# 114514\n## 114514",
                 path: "editor.md/lib/",
                 onchange: function () {
-                    console.dir(this.getMarkdown()); var items = document.querySelectorAll('.item');
-                    items.forEach(function (item) {
-                        var divs = item.querySelectorAll('div');
-                        if (divs.length >= 2) {
-                            var img = divs[1].querySelectorAll('img');
-                            img.forEach(function (img) {
-                                img.style.borderRadius = '5px';
-                            });
-                            var table = divs[1].querySelectorAll('table');
-                            table.forEach(function (table) {
-                                table.style.border = '1px solid #333';
-                                table.style.borderRadius = '5px';
-                                const width = table.offsetWidth;
-                                const margin = 160 - (width / 2);
-                                table.style.marginLeft = `${margin}px`;
-                                table.style.marginTop = '0px';
-                                table.style.marginBotton = '0px';
-                            });
-                            var hr = divs[1].querySelectorAll('hr');
-                            hr.forEach(function (hr) {
-                                hr.style.border = '1px solid #5473F8';
-                                hr.style.height = '0px';
-                                hr.style.boderRadius = '1px';
-                            });
-                        }
+                    console.dir(this.getMarkdown());
+                    var items = document.querySelectorAll('div.editormd-preview>div>table');
+                    console.log(items)
+                    items.forEach(function (table) {
+                        const width = table.offsetWidth;
+                        const totalWidth = document.querySelector('div.editormd-preview>div').offsetWidth;
+                        const margin = totalWidth - (width / 2);
+                        table.style.marginLeft = `${margin}px`;
+                        table.style.marginTop = '0px';
+                        table.style.marginBotton = '0px';
                     });
                 },
                 onpreviewing: function () {
