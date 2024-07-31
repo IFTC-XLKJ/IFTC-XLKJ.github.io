@@ -471,6 +471,14 @@ document.addEventListener('DOMContentLoaded', function () {
                             }
                         })
                     }
+                } else if (command[0] == "图文本") {
+                    var Text = "";
+                    for(var i = 2; i < command.length; i++) {
+                        Text += command[i] + ` `;
+                    }
+                    if (command[1] = "标准") {
+                        
+                    }
                 }
                 else {
                     function print(text) {
