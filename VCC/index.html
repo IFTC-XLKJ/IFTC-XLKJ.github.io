@@ -84,24 +84,14 @@
         }
 
         .figlet-container {
-            display: flex;
-            flex-wrap: wrap;
-            max-width: 1000px;
+            display: grid;
             overflow-x: auto;
-            white-space: nowrap;
-
-            &::before,
-            &::after {
-                content: "";
-                flex: 0 0 auto;
-                width: 100%;
-            }
+            overflow-y: hidden;
         }
 
         .figlet-item {
-            flex: 0 0 auto;
             padding: 10px;
-            margin-right: 10px;
+            margin: 5px;
         }
     </style>
 </head>
