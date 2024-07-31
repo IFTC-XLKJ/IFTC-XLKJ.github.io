@@ -3,8 +3,8 @@ var window = this.window;
 var navigator = this.navigator;
 
 var version = "1.0.0-beta-1";
-const fonts = ["Standard", "Ghost", "Wow", "3D-ASCII"];
-const fontsName = ["标准", "幽灵", "哇", "3DASCII"];
+const fonts = ["Standard", "Ghost", "Wow", "3D-ASCII", "Alpha"];
+const fontsName = ["标准", "幽灵", "哇", "3DASCII", "阿尔法"];
 const helpText = `
 命令：
 &nbsp;VCC | VCC
@@ -538,7 +538,14 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             console.log(text);
             main.innerHTML += `<br><div style="color: green;">生成成功</div>`;
-            main.innerHTML += `<br><div style="">${text}</div><br>`;
+            console.log((text.split("\n")).length);
+            var maxWidth = 0;
+            for (var i = 0; i < (text.split("\n")).length; i++) {
+              if (maxWidth < (text.split("\n")[i]).length) {
+                maxWidth = (text.split("\n")[i]).length * 8.79;
+              }
+            }
+            main.innerHTML += `<br><div class="figlet-container" style="grid-template-rows: repeat(${(text.split("\n")).length}, 18px);width: ${maxWidth}px;"><div class="figlrt-item">${text}</div></div><br>`;
             inputer();
           });
         } else if (command[0] == "图文本字体") {
