@@ -3,8 +3,8 @@ var window = this.window;
 var navigator = this.navigator;
 
 var version = "1.0.0-beta-1";
-const fonts = ["Standard", "Ghost", "Wow"];
-const fontsName = ["标准", "幽灵", "哇"];
+const fonts = ["Standard", "Ghost", "Wow", "3D-ASCII"];
+const fontsName = ["标准", "幽灵", "哇", "3DASCII"];
 const helpText = `
 命令：
 &nbsp;VCC | VCC
@@ -516,14 +516,14 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log("prefetching done (only did it for 2 fonts)!");
           });
           var font;
-          if ((command[1] == "标准")) {
-            font = "Standard";
-          } else if ((command[1] == "幽灵")) {
-            font = "Ghost";
-          } else if ((command[1] == "哇")) {
-            font = "Wow";
-          }
-          else {
+          var isFont = false;
+          fontsName.forEach((item, index) => {
+            if (command[1] == item) {
+              font = fonts[index];
+              isFont = true;
+            }
+          });
+          if (!isFont) {
             main.innerHTML += `<div style="color: red;">字体错误</div>`;
             inputer();
             return;
@@ -538,7 +538,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             console.log(text);
             main.innerHTML += `<br><div style="color: green;">生成成功</div>`;
-            main.innerHTML += `<br>${text}<br>`;
+            main.innerHTML += `<br><div style="">${text}</div><br>`;
             inputer();
           });
         } else if (command[0] == "图文本字体") {
