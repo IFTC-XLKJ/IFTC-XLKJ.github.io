@@ -19,3 +19,7 @@
 .editormd-preview>div>pre li::marker {
     color: white;
 }
+
+.editormd-preview>div>p>img {
+    border-radius: 15px;
+}
