@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function inputer() {
     var historyNum = commandRecord.length;
     main.innerHTML += `<br><p class="user">IFTC://${murmur}></p>`;
-    main.innerHTML += `<input style="width: ${inputWidth() - 2}px;">`;
+    main.innerHTML += `<input style="width: ${inputWidth() - 16}px;">`;
     var input = document.querySelector("input");
     var morefonts = document.querySelectorAll(".morefonts");
     morefonts.forEach((item, index) => {
@@ -566,9 +566,12 @@ document.addEventListener("DOMContentLoaded", function () {
           });
         } else if (command[0] == "图文本字体") {
           main.innerHTML += `<br>`;
+          var fontnum = 0;
           fontsName.forEach((font, n) => {
             main.innerHTML += `${n + 1} | ${font}<br>`;
+            fontnum = n + 1;
           });
+          main.innerHTML += `共有${fontnum}种字体<br>`;
           inputer();
         }
         else {
