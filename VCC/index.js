@@ -529,7 +529,7 @@ document.addEventListener("DOMContentLoaded", function () {
             fontPath: "./figlet/fonts",
           });
           figlet.preloadFonts(fonts, function () {
-            console.log("prefetching done (only did it for 2 fonts)!");
+            console.log(`字体加载完成，共${fonts.length}个字体`);
           });
           var font;
           var isFont = false;
