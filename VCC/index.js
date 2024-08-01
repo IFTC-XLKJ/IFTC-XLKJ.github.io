@@ -3,8 +3,8 @@ var window = this.window;
 var navigator = this.navigator;
 
 var version = "1.0.0-beta-1";
-const fonts = ["Standard", "Ghost", "Wow", "3D-ASCII", "Alpha", "Banner", "Basic", "Bear", "Big Chief", "Block"];
-const fontsName = ["标准", "幽灵", "哇", "3DASCII", "阿尔法", "横幅", "基础", "熊", "大首", "块"];
+const fonts = ["Standard", "Ghost", "Wow", "3D-ASCII", "Alpha", "Banner", "Basic", "Bear", "Big Chief", "Block", "Bubble"];
+const fontsName = ["标准", "幽灵", "哇", "3DASCII", "阿尔法", "横幅", "基础", "熊", "大首", "块", "泡泡"];
 const helpText = `
 命令：
 &nbsp;VCC | VCC
