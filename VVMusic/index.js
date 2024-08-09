@@ -561,7 +561,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                                 audio.src = url;
                                                 musicInfo.src = url;
                                                 localStorage.setItem('音乐ID', data.id);
-                                                audio.loop = false;                                                audio.autoPlay = true;
+                                                audio.loop = false;
+                                                audio.autoPlay = true;
                                                 totaltime();
                                                 updatetime();
                                                 console.log(audio);
