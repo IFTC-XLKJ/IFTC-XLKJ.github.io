@@ -1,5 +1,5 @@
 # VV Ad Engine
-
+---
 [![VV Ad Engine](https://static.codemao.cn/IFTC-Studio/By-nD9aqR.png "VV Ad Engine")](https://static.codemao.cn/IFTC-Studio/By-nD9aqR.png "VV Ad Engine")
 
 VV Ad Engine produced by IFTC (Interplanetary Federal Technology Clique \[a Studio\]).
@@ -18,3 +18,21 @@ Access VV advertising engine only JS class SDK, That is, only Web pages or Andro
 JS class SDK：https://iftc-xlkj.github.io/vvads.js
 
 ## Calling methods
+
+```JavaScript
+const ads = new vvads(); //Create a Example
+
+ads.get() //Get the Array of Ads, passing in a parameter
+    .then(json => {
+        ads.render(); //Render Ads
+    });
+/*
+get() method parameter:
+param1:
+    name: n
+    type: int
+    defaultValue: 10
+    require: false
+    description: Number of Ads to return(random)
+*/
+```

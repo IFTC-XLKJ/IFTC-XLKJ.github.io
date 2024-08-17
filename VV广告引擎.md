@@ -18,3 +18,21 @@ VV广告引擎有IFTC（星联科技集团【工作室】）主持制作。
 JS类SDK：https://iftc-xlkj.github.io/vvads.js
 
 ## 调用方法
+
+```JavaScript
+const ads = new vvads(); //创建一个实例
+
+ads.get() //获取广告列表，可传入一个参数
+    .then(json => {
+        ads.render(); //渲染广告
+    });
+/*
+get()方法参数：
+参数1：
+    名称：n
+    类型：int
+    默认值：10
+    必填：否
+    说明：需要返回广告的个数（随机）
+*/
+```
