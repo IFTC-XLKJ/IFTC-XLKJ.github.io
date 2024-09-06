@@ -1,0 +1,12 @@
+{
+    "name": "违禁词",
+    "author": "IFTC",
+    "version": "1.0.0",
+    "main": [{
+        "command": "检测 {0}",
+        "code": "var word = ('{0}').replaceAll('\\s',' ');print('word');"
+    }, {
+        "command": "帮助",
+        "code": "print('请将空格转换成\\s')"
+    }]
+}

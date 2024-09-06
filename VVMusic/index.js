@@ -562,6 +562,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                 musicInfo.src = url;
                                                 localStorage.setItem('音乐ID', data.id);
                                                 audio.loop = false;
+                                                play.innerHTML = playicon;
                                                 totaltime();
                                                 updatetime();
                                                 console.log(audio);
