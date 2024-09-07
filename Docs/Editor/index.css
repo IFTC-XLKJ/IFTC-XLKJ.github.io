@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+}
+
+#main {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+#widgets {
+    width: 100px;
+    height: calc(100vh - 2px);
+    border: 1px solid #47474788;
+    border-radius: 0 7px 7px 0;
+}
+
+#docmain {
+    width: calc(100vw - 2px - 100px - 500px);
+    height: 100vh;
+    border-radius: 7px;
+    background-color: #F0F0F0FF;
+}
+
+#properties {
+    width: 500px;
+    height: 100vh;
+}
+
+.widget {
+    border: #47474788;
+    border-radius: 7px;
+    user-select: none;
+    width: 80px;
+    height: 80px;
+    margin: auto;
+}
+
+#doc {
+    width: 80%;
+    height: auto;
+    background-color: white;
+    margin: auto;
+}
