@@ -10,9 +10,9 @@ window.mathRandomInt = (a, b) => {
 window.docdata = {
     title: "新的文档",
     docconfig: {
-        bgcolor: "#000000FF",
+        bgcolor: "#FFFFFF",
         width: 0,
-        height: 0,
+        height: 10,
     },
     docbody: [],
 }
@@ -143,6 +143,47 @@ window.onload = () => {
         docwidgets.forEach(docwidget => {
             docwidget.style.border = "none";
         })
+        const form = new Form("properties", [
+            {
+                type: "text",
+                text: "文档配置",
+                id: "text",
+            },
+            {
+                type: "input",
+                placeholder: "",
+                valueType: "number",
+                min: 1,
+                max: Infinity,
+                value: docdata.docconfig.width,
+                label: "宽",
+                disabled: true,
+            },
+            {
+                type: "input",
+                placeholder: "",
+                valueType: "number",
+                min: 10,
+                max: Infinity,
+                value: docdata.docconfig.height,
+                label: "高",
+            },
+            {
+                type: "input",
+                placeholder: "",
+                valueType: "color",
+                min: 10,
+                max: Infinity,
+                value: docdata.docconfig.bgcolor,
+                label: "背景颜色",
+            },
+        ]);
+        const height = form.form[2].querySelector("input")
+        console.log(form.formdata, height)
+        height.oninput = e => {
+            docbody.style.height = height.value + "px";
+            docdata.docconfig.height = docbody.offsetHeight;
+        }
     }
 
     let lastScrollTop = docmain.scrollTop;
