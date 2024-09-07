@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="274px"
+    height="160px" viewBox="0 0 274 160" version="1.1" preserveAspectRatio="none">
+    <defs>
+        <rect id="path-1" x="0" y="0" width="274" height="160" rx="8" />
+        <linearGradient x1="41.5686997%" y1="18.661215%" x2="50%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#EDEAFE" offset="0%" />
+            <stop stop-color="#E0DBF7" offset="100%" />
+        </linearGradient>
+        <linearGradient x1="50%" y1="42.8504658%" x2="78.3804594%" y2="62.0208117%"
+            id="linearGradient-4">
+            <stop stop-color="#DAD4F5" offset="0%" />
+            <stop stop-color="#EDE8FF" offset="100%" />
+        </linearGradient>
+        <linearGradient x1="40.9756578%" y1="71.8204408%" x2="30.3097097%" y2="38.3275906%"
+            id="linearGradient-5">
+            <stop stop-color="#EFECFF" offset="0%" />
+            <stop stop-color="#E0DBF7" offset="100%" />
+        </linearGradient>
+    </defs>
+    <g id="Docs/IMG" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="IMG" transform="translate(-198.000000, -382.000000)">
+            <g id="/IMG" transform="translate(180.000000, 187.000000)">
+                <g id="props" transform="translate(17.996364, 54.000000)">
+                    <g id="props/IMG" transform="translate(0.003636, 116.000000)">
+                        <g id="pic_tupian" transform="translate(0.000000, 25.000000)">
+                            <mask id="mask-2" fill="white">
+                                <use xlink:href="#path-1" />
+                            </mask>
+                            <use id="蒙版" fill="#F5F3FE" xlink:href="#path-1" />
+                            <circle id="椭圆形" fill="url(#linearGradient-3)" mask="url(#mask-2)"
+                                cx="225" cy="35" r="21" />
+                            <path
+                                d="M178.702616,98.9857914 L245,164 L245,164 L102.239873,164 C99.4784495,164 97.2398732,161.761424 97.2398732,159 C97.2398732,157.656979 97.780162,156.370422 98.7390557,155.430087 L156.297384,98.9857914 C162.519518,92.8840854 172.480482,92.8840854 178.702616,98.9857914 Z"
+                                id="三角形备份" fill="url(#linearGradient-4)" mask="url(#mask-2)" />
+                            <path
+                                d="M64.903171,56.1379971 L183,166 L183,166 L-13,166 C-14.1045695,166 -15,165.104569 -15,164 L-15,110.19357 L-15,110.19357 L43.1073676,56.1379971 C49.2492857,50.4243515 58.7612529,50.4243515 64.903171,56.1379971 Z"
+                                id="三角形" fill="url(#linearGradient-5)" mask="url(#mask-2)" />
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
