@@ -19,6 +19,7 @@ body {
     height: 100vh;
     border-radius: 7px;
     background-color: #F0F0F0FF;
+    overflow-y: auto;
 }
 
 #properties {
@@ -40,4 +41,21 @@ body {
     height: auto;
     background-color: white;
     margin: auto;
+    margin-top: 60px;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+input {
+    outline: none;
+    border: none;
+}
+
+#doctitle input {
+    width: 98%;
+    height: 40px;
+    border-bottom: 1px solid #333;
+    margin: auto;
+    padding: 10px;
+    font-size: 36px;
 }

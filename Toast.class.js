@@ -40,6 +40,6 @@ class Toast {
             if (toast) {
                 toast.remove();
             }
-        }, time)
+        }, time);
     }
 }

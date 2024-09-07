@@ -1,5 +1,6 @@
 .error-toast {
     border: 1px solid #FFCCC7FF;
+    color: #F14952FF;
     background-color: #FFF2F0FF;
     border-radius: 5px;
     position: fixed;
@@ -13,7 +14,22 @@
 
 .normal-toast {
     border: 1px solid #91CAFFFF;
+    color: lightskyblue;
     background-color: #E6F4FFFF;
+    border-radius: 5px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    z-index: 10000;
+    user-select: none;
+}
+
+.warn-toast {
+    border: 1px solid #FFE58FFF;
+    color: orange;
+    background-color: #FFFBE6FF;
     border-radius: 5px;
     position: fixed;
     top: 50%;
