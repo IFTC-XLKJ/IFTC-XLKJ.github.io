@@ -29,10 +29,36 @@ class Toast {
         }, time);
     }
 
+    success(text, time) {
+        const id = `toast${mathRandomInt(100000, 999999)}`
+        const html = `<div class="success-toast" id="${id}">${text}</div>`;
+        document.body.insertAdjacentHTML('beforeend', html);
+        var toast = document.getElementById(id);
+        setTimeout(() => {
+            const toast = document.getElementById(id);
+            if (toast) {
+                toast.remove();
+            }
+        }, time);
+    }
+
     error(text, time) {
-        console.log("error")
         const id = `toast${mathRandomInt(100000, 999999)}`
         const html = `<div class="error-toast" id="${id}">${text}</div>`;
+        document.body.insertAdjacentHTML('beforeend', html);
+        var toast = document.getElementById(id);
+        setTimeout(() => {
+            const toast = document.getElementById(id);
+            if (toast) {
+                toast.remove();
+            }
+        }, time);
+    }
+
+
+    warn(text, time) {
+        const id = `toast${mathRandomInt(100000, 999999)}`
+        const html = `<div class="warn-toast" id="${id}">${text}</div>`;
         document.body.insertAdjacentHTML('beforeend', html);
         var toast = document.getElementById(id);
         setTimeout(() => {

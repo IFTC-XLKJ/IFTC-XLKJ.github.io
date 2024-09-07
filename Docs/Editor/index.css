@@ -22,6 +22,10 @@ body {
     overflow-y: auto;
 }
 
+#docmain::-webkit-scrollbar {
+    width: 0;
+}
+
 #properties {
     width: 500px;
     height: 100vh;
@@ -39,9 +43,11 @@ body {
 #doc {
     width: 80%;
     height: auto;
+    min-height: 100px;
     background-color: white;
     margin: auto;
     margin-top: 60px;
+    margin-bottom: 20px;
     border-radius: 10px;
     padding: 20px;
 }
@@ -58,4 +64,16 @@ input {
     margin: auto;
     padding: 10px;
     font-size: 36px;
+}
+
+[data-widget="true"]:hover {
+    cursor: grab;
+}
+
+[data-widget="true"]:active {
+    cursor: grabbing;
+}
+
+p {
+    width: fit-content;
 }

@@ -39,3 +39,17 @@
     z-index: 10000;
     user-select: none;
 }
+
+.success-toast {
+    border: 1px solid #F6FFEDFF;
+    color: #37E547FF;
+    background-color: #F1FAE8FF;
+    border-radius: 5px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    z-index: 10000;
+    user-select: none;
+}
