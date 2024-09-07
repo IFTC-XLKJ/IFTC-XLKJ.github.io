@@ -23,6 +23,7 @@ window.onload = () => {
     docdata.docconfig.height = docbody.offsetHeight;
     const widgetlist = [
         "TEXT",
+        "IMG"
     ]
     var toast = new Toast();
     toast.normal("欢迎使用VV文档可视化编辑器", 2000)
