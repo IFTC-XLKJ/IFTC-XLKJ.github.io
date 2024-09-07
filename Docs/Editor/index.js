@@ -1,17 +1,19 @@
-var docdata = {
+window.docdata = {
     title: "新的文档",
     docconfig: {
         bgcolor: "#000000FF",
-        width,
-        height,
+        width: 0,
+        height: 0,
     },
     docbody: [],
 }
 window.onload = () => {
     console.log("编辑器加载完成");
-    console.log("欢迎使用可视化文档编辑器")
+    console.log("欢迎使用可视化文档编辑器");
+    docdata.docconfig.width = docbody.offsetWidth;
+    docdata.docconfig.height = docbody.offsetHeight;
     var toast = new Toast();
-    toast.normal("欢迎使用VV文档编辑器", 2000)
+    toast.normal("欢迎使用VV文档可视化编辑器", 2000)
     var docTitle = document.querySelector("#doctitle > input");
     docTitle.value = docdata.title;
     docTitle.oninput = e => {
@@ -35,5 +37,6 @@ window.onload = () => {
 }
 
 window.addEventListener("resize", e => {
-    
+    docdata.docconfig.width = docbody.offsetWidth;
+    docdata.docconfig.height = docbody.offsetHeight;
 })
