@@ -33,7 +33,7 @@ class Form {
                     id: item.id,
                     value: item.value,
                 })
-                renderid.innerHTML += `<div id="${item.id}" class="form form-input">${item.label}<input placeholder="${item.placeholder}" type="${item.valueType}" ${item.min ? `max="${item.min}"` : ""} ${item.max ? `max="${item.max}"` : ""} value="${item.value}" ${item.disabled ? 'disabled="true"' : ""} ${item.valueType == "file" && item.accept ? `accept="${item.accept}"` : ""}></div>`
+                renderid.innerHTML += `<div id="${item.id}" class="form form-input">${item.label}<input placeholder="${item.placeholder}" type="${item.valueType}" ${item.min ? `min="${item.min}"` : ""} ${item.max ? `max="${item.max}"` : ""} value="${item.value}" ${item.disabled ? 'disabled="true"' : ""} ${item.valueType == "file" && item.accept ? `accept="${item.accept}"` : ""}></div>`
             }
         })
         const formitems = renderid.querySelectorAll(".form");
