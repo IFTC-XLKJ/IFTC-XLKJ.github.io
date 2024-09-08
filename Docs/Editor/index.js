@@ -235,6 +235,12 @@ window.onload = () => {
             docbody.style.height = height.value + "px";
             docdata.docconfig.height = docbody.offsetHeight;
         }
+        const bgcolor = form.form[3].querySelector("input")
+        bgcolor.oninput = e => {
+            doc.style.backgroundColor = bgcolor.value;
+            docTitle.style.backgroundColor = bgcolor.value;
+            docdata.docconfig.bgcolor = bgcolor.value;
+        }
     }
 
     let lastScrollTop = docmain.scrollTop;
