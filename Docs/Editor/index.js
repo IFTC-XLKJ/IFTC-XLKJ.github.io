@@ -122,6 +122,10 @@ window.onload = () => {
                 initialOffset.y = docWidget.offsetTop;
                 document.addEventListener('mousemove', Moving);
                 document.addEventListener('mouseup', MoveUp);
+                docwidgets.forEach(docwidget => {
+                    docwidget.style.border = "none";
+                })
+                docWidget.style.border = "1px solid #333";
             });
 
             docWidget.addEventListener('touchstart', function (e) {
@@ -135,6 +139,10 @@ window.onload = () => {
                 initialOffset.y = docWidget.offsetTop;
                 document.addEventListener('touchmove', TMoving);
                 document.addEventListener('touchend', TMoveUp);
+                docwidgets.forEach(docwidget => {
+                    docwidget.style.border = "none";
+                })
+                docWidget.style.border = "1px solid #333";
             });
             function TMoving(e) {
                 if (isDragging) {
