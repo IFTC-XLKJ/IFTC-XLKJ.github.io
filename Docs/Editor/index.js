@@ -135,10 +135,6 @@ window.onload = () => {
                 docwidgets.forEach(docwidget => {
                     docwidget.style.border = "none";
                 })
-                console.log(e.target.id)
-                setTimeout(() => {
-                    renderProps(e.target.id, WidgetProps);
-                }, 1)
                 docWidget.style.border = "1px solid #333";
             }
 
@@ -176,6 +172,7 @@ window.onload = () => {
                 isDragging = true;
                 const touch = e.changedTouches[0];
                 console.log("按下", touch.target)
+                renderProps(e.target.id, WidgetProps);
                 dragStartPos.x = touch.clientX;
                 dragStartPos.y = touch.clientY;
                 initialOffset.x = docWidget.offsetLeft;
