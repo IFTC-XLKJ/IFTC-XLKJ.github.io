@@ -80,8 +80,22 @@ window.onload = () => {
 
     function renderWidget(Widget, e) {
         const id = `${Widget.dataset.id}${mathRandomInt(100000, 999999)}`;
+        let WidgetProps = [
+            {
+                type: "text",
+                text: `组件配置 ${id}`,
+                id: `widget_${id}`,
+            }]
+        const type = Widget.dataset.id;
         if (Widget.dataset.id == "TEXT") {
             docbody.innerHTML += `<${Widget.dataset.element} id="${id}" data-type="TEXT" data-widget="true" style="position: absolute;top: ${e.clientY}px;left: ${e.clientX}px;user-select: none;">${Widget.dataset.value}</${Widget.dataset.element}>`;
+            WidgetProps.push({
+                type: "input",
+                valueType: "text",
+                value: document.getElementById(id).innerHTML,
+                label: "内容",
+                placeholder: "内容",
+            })
         }
         else if (Widget.dataset.id == "IMG") {
             docbody.innerHTML += `<${Widget.dataset.element} id="${id}" src="${Widget.dataset.src}" data-type="IMG" data-widget="true" style="position: absolute;top: ${e.clientY}px;left: ${e.clientX}px;user-select: none;">`;
@@ -102,10 +116,29 @@ window.onload = () => {
                 docWidget.style.border = "1px solid #333";
             }
 
+            docWidget.onclick = e => {
+                setTimeout(() => {
+                    const form = new Form("properties", WidgetProps);
+                    if (type == "TEXT") {
+                        const content = form.form[1].querySelector("input");
+                        content.oninput = e => {
+                            widget.innerHTML = content.value;
+                            WidgetProps[1] = {
+                                type: "input",
+                                valueType: "text",
+                                value: widget.innerHTML,
+                                label: "内容",
+                                placeholder: "内容",
+                            }
+                            widget.style.maxWidth = `${doc.offsetWidth - 1}px`;
+                            if (widget.offsetWidth >= doc.offsetWidth - Number(widget.style.left.slice(0, widget.style.left.length - 2))) {
+                                widget.style.left = `101px`;
+                            }
+                        }
+                    }
+                }, 50)
+            }
             var isDragging = false;
-            docWidget.addEventListener("toychstart", e => {
-                console.log("123456")
-            })
             var initialOffset = { x: 0, y: 0 };
             var dragStartPos = { x: 0, y: 0 };
             var newX = 0;
@@ -192,8 +225,29 @@ window.onload = () => {
         docwidgets.forEach(docwidget => {
             docwidget.style.border = "none";
         })
-        document.getElementById(id).style.border = "1px solid #333";
-        toast.success("添加成功", 2000)
+        const widget = document.getElementById(id);
+        widget.style.border = "1px solid #333";
+        toast.success("添加成功", 2000);
+        const form = new Form("properties", WidgetProps);
+        if (type == "TEXT")
+            TextEvents()
+        function TextEvents() {
+            const content = form.form[1].querySelector("input");
+            content.oninput = e => {
+                widget.innerHTML = content.value;
+                WidgetProps[1] = {
+                    type: "input",
+                    valueType: "text",
+                    value: widget.innerHTML,
+                    label: "内容",
+                    placeholder: "内容",
+                }
+                widget.style.maxWidth = `${doc.offsetWidth - 1}px`;
+                if (widget.offsetWidth >= doc.offsetWidth - Number(widget.style.left.slice(0, widget.style.left.length - 2))) {
+                    widget.style.left = `101px`;
+                }
+            }
+        }
     }
 
     docmain.onclick = e => {
@@ -222,7 +276,7 @@ window.onload = () => {
                 type: "input",
                 placeholder: "",
                 valueType: "number",
-                min: 10,
+                min: 1,
                 max: Infinity,
                 value: docdata.docconfig.height,
                 label: "高",
@@ -231,8 +285,6 @@ window.onload = () => {
                 type: "input",
                 placeholder: "",
                 valueType: "color",
-                min: 10,
-                max: Infinity,
                 value: docdata.docconfig.bgcolor,
                 label: "背景颜色",
             },
@@ -245,8 +297,13 @@ window.onload = () => {
                 label: "背景图片",
             },
         ]);
+        console.log(form.formdata)
+        const width = form.form[1].querySelector("input");
+        window.addEventListener("resize", e => {
+            width.value = docbody.offsetWidth;
+            docdata.docconfig.height = docbody.offsetHeight;
+        })
         const height = form.form[2].querySelector("input")
-        console.log(form.formdata, height)
         height.oninput = e => {
             docbody.style.height = height.value + "px";
             docdata.docconfig.height = docbody.offsetHeight;
