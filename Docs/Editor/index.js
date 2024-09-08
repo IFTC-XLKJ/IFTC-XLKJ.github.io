@@ -73,7 +73,7 @@ window.onload = () => {
             if (isMobile) {
                 const e = {
                     clientX: 100,
-                    clientY: 0,
+                    clientY: 100,
                 };
                 renderWidget(Widget, e);
             }
