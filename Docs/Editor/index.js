@@ -236,6 +236,14 @@ window.onload = () => {
                 value: docdata.docconfig.bgcolor,
                 label: "背景颜色",
             },
+            {
+                type: "input",
+                placeholder: "",
+                valueType: "file",
+                accept: "image/*",
+                value: docdata.docconfig.bgimg,
+                label: "背景图片",
+            },
         ]);
         const height = form.form[2].querySelector("input")
         console.log(form.formdata, height)
@@ -246,8 +254,19 @@ window.onload = () => {
         const bgcolor = form.form[3].querySelector("input")
         bgcolor.oninput = e => {
             doc.style.backgroundColor = bgcolor.value;
-            docTitle.style.backgroundColor = bgcolor.value;
             docdata.docconfig.bgcolor = bgcolor.value;
+        }
+        const bgimg = form.form[4].querySelector("input")
+        bgimg.onchange = e => {
+            const file = bgimg.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    doc.style.backgroundImage = `url(${e.target.result})`;
+                    docdata.docconfig.bgimg = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
         }
     }
 
