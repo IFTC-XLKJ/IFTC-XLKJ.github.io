@@ -80,10 +80,12 @@ window.onload = () => {
 
     function renderWidget(Widget, e) {
         const id = `${Widget.dataset.id}${mathRandomInt(100000, 999999)}`;
-        if (Widget.dataset.id == "TEXT")
+        if (Widget.dataset.id == "TEXT") {
             docbody.innerHTML += `<${Widget.dataset.element} id="${id}" data-type="TEXT" data-widget="true" style="position: absolute;top: ${e.clientY}px;left: ${e.clientX}px;user-select: none;">${Widget.dataset.value}</${Widget.dataset.element}>`;
-        else if (Widget.dataset.id == "IMG")
+        }
+        else if (Widget.dataset.id == "IMG") {
             docbody.innerHTML += `<${Widget.dataset.element} id="${id}" src="${Widget.dataset.src}" data-type="IMG" data-widget="true" style="position: absolute;top: ${e.clientY}px;left: ${e.clientX}px;user-select: none;">`;
+        }
         const docwidgets = document.querySelectorAll(`[data-widget="true"]`);
         docwidgets.forEach(docWidget => {
             docWidget.onmousedown = e => {
