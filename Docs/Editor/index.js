@@ -42,8 +42,10 @@ window.onload = () => {
             toast.error("文档标题不能为空", 2000);
         } else {
             docdata.title = trimmedValue;
-            return 0;
         }
+    }
+    docTitle.onfocus = e => {
+        docTitle.select();
     }
     var Widgets = document.querySelectorAll(".widget");
     Widgets.forEach((Widget, num) => {
@@ -86,20 +88,30 @@ window.onload = () => {
                 text: `组件配置 ${id}`,
                 id: `widget_${id}`,
             }]
-        const type = Widget.dataset.id;
         if (Widget.dataset.id == "TEXT") {
             docbody.innerHTML += `<${Widget.dataset.element} id="${id}" data-type="TEXT" data-widget="true" style="position: absolute;top: ${e.clientY}px;left: ${e.clientX}px;user-select: none;">${Widget.dataset.value}</${Widget.dataset.element}>`;
-            WidgetProps.push({
-                type: "input",
-                valueType: "text",
-                value: document.getElementById(id).innerHTML,
-                label: "内容",
-                placeholder: "内容",
+            docdata.docbody.push({
+                type: "TEXT",
+                id: id,
+                text: "默认文本",
+                x: e.clientX,
+                y: e.clientY,
             })
         }
         else if (Widget.dataset.id == "IMG") {
             docbody.innerHTML += `<${Widget.dataset.element} id="${id}" src="${Widget.dataset.src}" data-type="IMG" data-widget="true" style="position: absolute;top: ${e.clientY}px;left: ${e.clientX}px;user-select: none;">`;
+            docdata.docbody.push({
+                type: "IMG",
+                id: id,
+                url: "https://iftc-xlkj.github.io/Docs/Editor/index.svg",
+                x: e.clientX,
+                y: e.clientY,
+                width: 274,
+                height: 160,
+                size: 1,
+            })
         }
+        const widget = document.getElementById(id);
         const docwidgets = document.querySelectorAll(`[data-widget="true"]`);
         docwidgets.forEach(docWidget => {
             docWidget.onmousedown = e => {
@@ -116,27 +128,11 @@ window.onload = () => {
                 docWidget.style.border = "1px solid #333";
             }
 
-            docWidget.onclick = e => {
+            docbody.onclick = e => {
+                console.log(e.target.id)
                 setTimeout(() => {
-                    const form = new Form("properties", WidgetProps);
-                    if (type == "TEXT") {
-                        const content = form.form[1].querySelector("input");
-                        content.oninput = e => {
-                            widget.innerHTML = content.value;
-                            WidgetProps[1] = {
-                                type: "input",
-                                valueType: "text",
-                                value: widget.innerHTML,
-                                label: "内容",
-                                placeholder: "内容",
-                            }
-                            widget.style.maxWidth = `${doc.offsetWidth - 1}px`;
-                            if (widget.offsetWidth >= doc.offsetWidth - Number(widget.style.left.slice(0, widget.style.left.length - 2))) {
-                                widget.style.left = `101px`;
-                            }
-                        }
-                    }
-                }, 50)
+                    renderProps(e.target.id, WidgetProps);
+                }, 1)
             }
             var isDragging = false;
             var initialOffset = { x: 0, y: 0 };
@@ -191,6 +187,20 @@ window.onload = () => {
                     if (newY >= 0 && newY <= docmain.offsetHeight - docWidget.offsetHeight) {
                         docWidget.style.top = newY - 20 + 'px';
                     }
+                    WidgetProps[2] = {
+                        type: "input",
+                        valueType: "number",
+                        value: Number(widget.style.left.slice(0, widget.style.left.length - 2)),
+                        label: "X坐标",
+                        placeholder: "X",
+                    }
+                    WidgetProps[3] = {
+                        type: "input",
+                        valueType: "number",
+                        value: Number(widget.style.top.slice(0, widget.style.top.length - 2)),
+                        label: "Y坐标",
+                        placeholder: "Y",
+                    }
                 }
             }
             function Moving(e) {
@@ -206,6 +216,20 @@ window.onload = () => {
                     if (newY >= 0 && newY <= docmain.offsetHeight - docWidget.offsetHeight) {
                         docWidget.style.top = newY - 20 + 'px';
                     }
+                }
+                WidgetProps[2] = {
+                    type: "input",
+                    valueType: "number",
+                    value: Number(widget.style.left.slice(0, widget.style.left.length - 2)),
+                    label: "X坐标",
+                    placeholder: "X",
+                }
+                WidgetProps[3] = {
+                    type: "input",
+                    valueType: "number",
+                    value: Number(widget.style.top.slice(0, widget.style.top.length - 2)),
+                    label: "Y坐标",
+                    placeholder: "Y",
                 }
             }
             function TMoveUp() {
@@ -225,29 +249,9 @@ window.onload = () => {
         docwidgets.forEach(docwidget => {
             docwidget.style.border = "none";
         })
-        const widget = document.getElementById(id);
         widget.style.border = "1px solid #333";
         toast.success("添加成功", 2000);
-        const form = new Form("properties", WidgetProps);
-        if (type == "TEXT")
-            TextEvents()
-        function TextEvents() {
-            const content = form.form[1].querySelector("input");
-            content.oninput = e => {
-                widget.innerHTML = content.value;
-                WidgetProps[1] = {
-                    type: "input",
-                    valueType: "text",
-                    value: widget.innerHTML,
-                    label: "内容",
-                    placeholder: "内容",
-                }
-                widget.style.maxWidth = `${doc.offsetWidth - 1}px`;
-                if (widget.offsetWidth >= doc.offsetWidth - Number(widget.style.left.slice(0, widget.style.left.length - 2))) {
-                    widget.style.left = `101px`;
-                }
-            }
-        }
+        renderProps(id);
     }
 
     docmain.onclick = e => {
@@ -323,6 +327,172 @@ window.onload = () => {
                     docdata.docconfig.bgimg = e.target.result;
                 };
                 reader.readAsDataURL(file);
+            }
+        }
+    }
+
+    function renderProps(id) {
+        const widgetData = docdata.docbody.find(items => items.id == id);
+        const widget = document.getElementById(id);
+        if (!widget) {
+            toast.error("出现未知问题", 2000);
+            return 0;
+        }
+        console.log("widgetData", widgetData);;
+        let WidgetProps = [{
+            type: "text",
+            text: `组件配置 ${id}`,
+            id: `widget_${id}`,
+        }];
+        if (widgetData.type == "TEXT") {
+            WidgetProps.push({
+                type: "input",
+                valueType: "text",
+                value: widget.innerHTML,
+                label: "内容",
+                placeholder: "内容",
+            })
+            WidgetProps.push({
+                type: "input",
+                valueType: "number",
+                value: Number(widget.style.left.slice(0, widget.style.left.length - 2)),
+                label: "X坐标",
+                placeholder: "X",
+            })
+            WidgetProps.push({
+                type: "input",
+                valueType: "number",
+                value: Number(widget.style.top.slice(0, widget.style.top.length - 2)),
+                label: "Y坐标",
+                placeholder: "Y",
+            })
+        } else if (widgetData.type == "IMG") {
+            WidgetProps.push({
+                type: "input",
+                valueType: "file",
+                label: "图片",
+                accept: "image/*",
+            })
+            WidgetProps.push({
+                type: "input",
+                valueType: "number",
+                value: widget.offsetWidth,
+                label: "宽",
+                placeholder: "宽",
+            })
+            WidgetProps.push({
+                type: "input",
+                valueType: "number",
+                value: widget.offsetHeight,
+                label: "高",
+                placeholder: "高",
+            })
+            WidgetProps.push({
+                type: "input",
+                valueType: "number",
+                value: Number(widget.style.left.slice(0, widget.style.left.length - 2)),
+                label: "X坐标",
+                placeholder: "X",
+            })
+            WidgetProps.push({
+                type: "input",
+                valueType: "number",
+                value: Number(widget.style.top.slice(0, widget.style.top.length - 2)),
+                label: "Y坐标",
+                placeholder: "Y",
+            })
+            WidgetProps.push({
+                type: "input",
+                valueType: "number",
+                value: widgetData.size,
+                label: "缩放",
+                placeholder: "缩放",
+            })
+        }
+        const form = new Form("properties", WidgetProps);
+        if (widgetData.type == "TEXT") {
+            const content = form.form[1].querySelector("input");
+            content.oninput = e => {
+                widget.innerHTML = content.value;
+                WidgetProps[1] = {
+                    type: "input",
+                    valueType: "text",
+                    value: widget.innerHTML,
+                    label: "内容",
+                    placeholder: "内容",
+                }
+                widgetData.text = content.value;
+                if (content.value == "") {
+                    widget.innerHTML = " ";
+                }
+                widget.style.maxWidth = `${doc.offsetWidth - 1}px`;
+                if (widget.offsetWidth >= doc.offsetWidth - Number(widget.style.left.slice(0, widget.style.left.length - 2))) {
+                    widget.style.left = `101px`;
+                }
+            }
+            const X = form.form[2].querySelector("input");
+            X.oninput = e => {
+                if (X.value >= 100 || X.value <= (docmain.offsetWidth + 100) - docWidget.offsetWidth) {
+                    widget.style.left = `${X.value}px`;
+                    widgetData.x = X.value;
+                }
+            }
+            const Y = form.form[3].querySelector("input");
+            Y.oninput = e => {
+                if (Y.value >= 0 && Y.value <= docmain.offsetHeight - widget.offsetHeight) {
+                    widget.style.top = `${Y.value}px`;
+                    widgetData.y = Y.value;
+                }
+            }
+        } else if (widgetData.type == "IMG") {
+            const img = form.form[1].querySelector("input")
+            img.onchange = e => {
+                const file = img.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        widget.src = e.target.result;
+                        widget.style.left = "100px";
+                        widget.style.top = '0px';
+                        widgetData.url = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        }
+        const X = form.form[4].querySelector("input");
+        X.oninput = e => {
+            if (X.value >= 100 || X.value <= (docmain.offsetWidth + 100) - widget.offsetWidth * widget.size) {
+                widget.style.left = `${X.value}px`;
+                widgetData.x = X.value;
+            }
+        }
+        const Y = form.form[5].querySelector("input");
+        Y.oninput = e => {
+            if (Y.value >= 0 && Y.value <= docmain.offsetHeight - widget.offsetHeight * widget.size) {
+                widget.style.top = `${Y.value}px`;
+                widgetData.y = Y.value;
+            }
+        }
+        const width = form.form[2].querySelector("input");
+        width.oninput = e => {
+            if (width.value >= 0 || width.value * widget.size <= doc.offsetWidth) {
+                widget.style.width = `${width.value}px`;
+                widgetData.width = width.value;
+            }
+        }
+        const height = form.form[3].querySelector("input");
+        height.oninput = e => {
+            if (height.value >= 0 && height.value * widget.size <= doc.offsetHeight) {
+                widget.style.height = `${height.value}px`;
+                widgetData.height = height.value;
+            }
+        }
+        const size = form.form[6].querySelector("input");
+        size.oninput = e => {
+            if (size.value >= 0 && widget.offsetWidth * size.value <= doc.offsetWidth) {
+                widget.style.transform = `scale(${size.value})`;
+                widgetData.size = size.value;
             }
         }
     }
