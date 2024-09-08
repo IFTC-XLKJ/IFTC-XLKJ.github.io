@@ -135,6 +135,10 @@ window.onload = () => {
                 docwidgets.forEach(docwidget => {
                     docwidget.style.border = "none";
                 })
+                console.log(e.target.id)
+                setTimeout(() => {
+                    renderProps(e.target.id, WidgetProps);
+                }, 1)
                 docWidget.style.border = "1px solid #333";
             }
 
