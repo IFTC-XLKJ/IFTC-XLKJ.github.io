@@ -110,6 +110,16 @@ window.onload = () => {
                 height: 160,
                 size: 1,
             })
+        } else if (Widget.dataset.id == "A") {
+            docbody.innerHTML += `<${Widget.dataset.element} id="${id}" href="javascript:;" data-type="A" data-widget="true" style="position: absolute;top: ${e.clientY}px;left: ${e.clientX}px;user-select: none;">${Widget.dataset.value}</${Widget.dataset.element}>`;
+            docdata.docbody.push({
+                type: "A",
+                id: id,
+                text: "超链接",
+                href: "https://iftc-xlkj.github.io/Docs/Editor/index.svg",
+                x: e.clientX,
+                y: e.clientY,
+            })
         }
         const widget = document.getElementById(id);
         const docwidgets = document.querySelectorAll(`[data-widget="true"]`);
@@ -408,7 +418,7 @@ window.onload = () => {
                 label: "缩放",
                 placeholder: "缩放",
             })
-        }
+        } else if (widgetData.type == "A") {}
         const form = new Form("properties", WidgetProps);
         if (widgetData.type == "TEXT") {
             const content = form.form[1].querySelector("input");
@@ -459,42 +469,43 @@ window.onload = () => {
                     reader.readAsDataURL(file);
                 }
             }
-        }
-        const X = form.form[4].querySelector("input");
-        X.oninput = e => {
-            if (X.value >= 100 || X.value <= (docmain.offsetWidth + 100) - widget.offsetWidth * widget.size) {
-                widget.style.left = `${X.value}px`;
-                widgetData.x = X.value;
+            const X = form.form[4].querySelector("input");
+            X.oninput = e => {
+                if (X.value >= 100 || X.value <= (docmain.offsetWidth + 100) - widget.offsetWidth * widget.size) {
+                    widget.style.left = `${X.value}px`;
+                    widgetData.x = X.value;
+                }
             }
-        }
-        const Y = form.form[5].querySelector("input");
-        Y.oninput = e => {
-            if (Y.value >= 0 && Y.value <= docmain.offsetHeight - widget.offsetHeight * widget.size) {
-                widget.style.top = `${Y.value}px`;
-                widgetData.y = Y.value;
+            const Y = form.form[5].querySelector("input");
+            Y.oninput = e => {
+                if (Y.value >= 0 && Y.value <= docmain.offsetHeight - widget.offsetHeight * widget.size) {
+                    widget.style.top = `${Y.value}px`;
+                    widgetData.y = Y.value;
+                }
             }
-        }
-        const width = form.form[2].querySelector("input");
-        width.oninput = e => {
-            if (width.value >= 0 || width.value * widget.size <= doc.offsetWidth) {
-                widget.style.width = `${width.value}px`;
-                widgetData.width = width.value;
+            const width = form.form[2].querySelector("input");
+            width.oninput = e => {
+                if (width.value >= 0 || width.value * widget.size <= doc.offsetWidth) {
+                    widget.style.width = `${width.value}px`;
+                    widgetData.width = width.value;
+                }
             }
-        }
-        const height = form.form[3].querySelector("input");
-        height.oninput = e => {
-            if (height.value >= 0 && height.value * widget.size <= doc.offsetHeight) {
-                widget.style.height = `${height.value}px`;
-                widgetData.height = height.value;
+            const height = form.form[3].querySelector("input");
+            height.oninput = e => {
+                if (height.value >= 0 && height.value * widget.size <= doc.offsetHeight) {
+                    widget.style.height = `${height.value}px`;
+                    widgetData.height = height.value;
+                }
             }
-        }
-        const size = form.form[6].querySelector("input");
-        size.oninput = e => {
-            if (size.value >= 0 && widget.offsetWidth * size.value <= doc.offsetWidth) {
-                widget.style.transform = `scale(${size.value})`;
-                widgetData.size = size.value;
+            const size = form.form[6].querySelector("input");
+            size.oninput = e => {
+                if (size.value >= 0 && widget.offsetWidth * size.value <= doc.offsetWidth) {
+                    widget.style.transform = `scale(${size.value})`;
+                    widgetData.size = size.value;
+                }
             }
-        }
+        } else if (widgetData.type == "A") {}
+
     }
 
     let lastScrollTop = docmain.scrollTop;
