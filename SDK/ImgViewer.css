@@ -1,0 +1,39 @@
+.viewer-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9000;
+}
+
+.viewer-close {
+    font-size: 24px;
+    float: right;
+    border: none;
+    color: white;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 9001;
+}
+
+.viewer-img {
+    width: 100vmin;
+    height: 100vmin;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+}
+
+.viewer-scale {
+    width: fit-content;
+    color: white;
+    font-size: 12;
+    z-index: 1000;
+}
+
+.viewer-reset {
+    color: white;
+    z-index: 1000;
+}
