@@ -68,11 +68,13 @@ window.onload = () => {
             return 0;
         })
         Widget.addEventListener("click", () => {
-            const e = {
-                clientX: 100,
-                clientY: 0,
-            };
-            renderWidget(Widget, e);
+            if (isMobile) {
+                const e = {
+                    clientX: 100,
+                    clientY: 0,
+                };
+                renderWidget(Widget, e);
+            }
         })
     })
 
