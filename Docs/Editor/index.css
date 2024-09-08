@@ -1,5 +1,7 @@
 body {
     margin: 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 #main {
@@ -10,8 +12,9 @@ body {
 #widgets {
     width: 100px;
     height: calc(100vh - 2px);
-    border: 1px solid #47474788;
     border-radius: 0 7px 7px 0;
+    z-index: 10000;
+    box-shadow: 0 0 10px #47474788;
 }
 
 #docmain {
@@ -29,6 +32,7 @@ body {
 #properties {
     width: 500px;
     height: 100vh;
+    box-shadow: 0 0 10px #47474788;
 }
 
 .widget {
@@ -38,6 +42,7 @@ body {
     width: 80px;
     height: 80px;
     margin: auto;
+    z-index: 10000;
 }
 
 #doc {
@@ -78,4 +83,21 @@ input {
 #doc p {
     width: fit-content;
     white-space: pre-wrap;
+}
+
+#doc img {
+    max-width: 99.9%;
+    width: auto;
+    white-space: pre-wrap;
+}
+
+#nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    width: 100%;
+    height: 80px;
+    background-color: white;
+    box-shadow: 0 0 10px #47474788;
 }
