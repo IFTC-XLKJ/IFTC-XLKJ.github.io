@@ -101,3 +101,10 @@ input {
     background-color: white;
     box-shadow: 0 0 10px #47474788;
 }
+
+#Export {
+    font-size: 28px;
+    padding: 20px;
+    user-select: none;
+    cursor: pointer;
+}
