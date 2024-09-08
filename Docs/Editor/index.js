@@ -122,6 +122,34 @@ window.onload = () => {
                 document.addEventListener('mouseup', MoveUp);
             });
 
+            docWidget.addEventListener('touchstart', function (e) {
+                e.preventDefault();
+                isDragging = true;
+                const touch = e.changedTouches[0];
+                console.log("按下", touch.target)
+                dragStartPos.x = touch.clientX;
+                dragStartPos.y = touch.clientY;
+                initialOffset.x = docWidget.offsetLeft;
+                initialOffset.y = docWidget.offsetTop;
+                document.addEventListener('touchmove', TMoving);
+                document.addEventListener('touchend', TMoveUp);
+            });
+            function TMoving(e) {
+                if (isDragging) {
+                    console.log("移动")
+                    const touch = e.changedTouches[0];
+                    CX = touch.clientX - dragStartPos.x;
+                    CY = touch.clientY - dragStartPos.y;
+                    newX = initialOffset.x + touch.clientX - dragStartPos.x;
+                    newY = initialOffset.y + touch.clientY - dragStartPos.y;
+                    if (newX >= 100 && newX <= (docmain.offsetWidth + 100) - docWidget.offsetWidth) {
+                        docWidget.style.left = newX + 'px';
+                    }
+                    if (newY >= 0 && newY <= docmain.offsetHeight - docWidget.offsetHeight) {
+                        docWidget.style.top = newY - 20 + 'px';
+                    }
+                }
+            }
             function Moving(e) {
                 if (isDragging) {
                     console.log("移动")
@@ -136,6 +164,12 @@ window.onload = () => {
                         docWidget.style.top = newY - 20 + 'px';
                     }
                 }
+            }
+            function TMoveUp() {
+                console.log("松开")
+                document.removeEventListener('touchove', TMoving);
+                document.removeEventListener('touchend', TMoveUp);
+                isDragging = false;
             }
             function MoveUp() {
                 console.log("松开")
