@@ -75,6 +75,7 @@ input {
     cursor: grabbing;
 }
 
-p {
+#doc p {
     width: fit-content;
+    white-space: pre-wrap;
 }
