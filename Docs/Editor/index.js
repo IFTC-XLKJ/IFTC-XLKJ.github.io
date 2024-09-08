@@ -415,13 +415,6 @@ window.onload = () => {
                 label: "Y坐标",
                 placeholder: "Y",
             })
-            WidgetProps.push({
-                type: "input",
-                valueType: "number",
-                value: widgetData.size,
-                label: "缩放",
-                placeholder: "缩放",
-            })
         } else if (widgetData.type == "A") {
             WidgetProps.push({
                 type: "input",
@@ -496,8 +489,13 @@ window.onload = () => {
                     reader.onload = function (e) {
                         widget.src = e.target.result;
                         widget.style.left = "100px";
-                        widget.style.top = '0px';
+                        widget.style.top = '100px';
                         widgetData.url = e.target.result;
+                        widget.onload = e => {
+                            if (widget.offsetWidth >= doc.offsetWidth - 10) {
+                                widget.style.width = `${doc.offsetWidth}px`;
+                            }
+                        }
                     };
                     reader.readAsDataURL(file);
                 }
@@ -518,23 +516,16 @@ window.onload = () => {
             }
             const width = form.form[2].querySelector("input");
             width.oninput = e => {
-                if (width.value >= 0 || width.value * widget.size <= doc.offsetWidth) {
+                if (width.value >= 0 || width.value <= doc.offsetWidth) {
                     widget.style.width = `${width.value}px`;
                     widgetData.width = width.value;
                 }
             }
             const height = form.form[3].querySelector("input");
             height.oninput = e => {
-                if (height.value >= 0 && height.value * widget.size <= doc.offsetHeight) {
+                if (height.value >= 0 && height.value <= doc.offsetHeight) {
                     widget.style.height = `${height.value}px`;
                     widgetData.height = height.value;
-                }
-            }
-            const size = form.form[6].querySelector("input");
-            size.oninput = e => {
-                if (size.value >= 0 && widget.offsetWidth * size.value <= doc.offsetWidth) {
-                    widget.style.transform = `scale(${size.value})`;
-                    widgetData.size = size.value;
                 }
             }
         } else if (widgetData.type == "A") {
@@ -609,6 +600,17 @@ window.onload = () => {
             return 0;
         }
     };
+
+    Export.onclick = e => {
+        var a = document.createElement("a");
+        console.log(JSON.stringify(docdata));
+        const blob = new Blob([JSON.stringify(docdata)], { type: 'application/vdoc' });
+        const dataUrl = URL.createObjectURL(blob);
+        a.href = dataUrl;
+        a.download = `${Date.now()}.vdoc`;
+        document.body.appendChild(a);
+        a.click();
+    }
 }
 
 window.addEventListener("resize", e => {
