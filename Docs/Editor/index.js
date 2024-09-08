@@ -7,6 +7,12 @@ window.mathRandomInt = (a, b) => {
     return Math.floor(Math.random() * (b - a + 1) + a);
 }
 
+function isMobileDevice() {
+    var mobileRegex = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+    return mobileRegex.test(navigator.userAgent);
+}
+window.isMobile = isMobileDevice();
+
 window.docdata = {
     title: "新的文档",
     docconfig: {
@@ -60,6 +66,13 @@ window.onload = () => {
                 toast.warn("请拖动到文档主体中", 2000);
             }
             return 0;
+        })
+        Widget.addEventListener("click", () => {
+            const e = {
+                clientX: 100,
+                clientY: 0,
+            };
+            renderWidget(Widget, e);
         })
     })
 
