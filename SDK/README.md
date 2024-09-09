@@ -27,8 +27,8 @@ imgViewer.__createViewer__({图片路径});
 
 使用方法：
 ```JavaScript
-    //创建一个实例
-    const toast = new Toast();
+//创建一个实例
+const toast = new Toast();
     //默认
     const id = toast.normal({内容}, {时长(单位：毫秒)})
     //成功
