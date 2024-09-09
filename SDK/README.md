@@ -12,4 +12,11 @@ imgViewer.__createViewer__({图片路径});
     imgViewer.onclose = () => {
         console.log("图片查看器已被关闭");
     }
+    //重置
+    imgViewer.onreset = () => {
+        console.log("图片查看器已重置");
+    }
+    //倍数改变
+    imgViewer.onchange = scale => {
+        console.log("图片查看器倍数已改变：" + scale);
 ```
