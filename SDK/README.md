@@ -43,7 +43,7 @@ const toast = new Toast();
     const id = toast.loading({内容})
     //结束加载
     toast.loadend({ID})
-    //取消提示：
+    //取消提示
     toast.cancel({ID(不填则会取消所有)})
     //获取所有提示(ID列表)
     const toasts = toast.toasts
