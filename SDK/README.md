@@ -69,6 +69,7 @@ dialog.open({表单数据(列表)});
         style: {}, //样式(选填)
         event: {}, //事件(选填)
         property: {}, //属性(选填)
+        data: {}, //自定义属性(选填)
     }
 //关闭对话框
 dialog.close();
