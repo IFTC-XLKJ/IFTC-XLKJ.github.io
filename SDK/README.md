@@ -57,15 +57,30 @@ const toast = new Toast();
 ```JavaScript
 //创建一个实例
 const dialog = new Dialog();
-//打开一个对话框
+//打开对话框
 dialog.open({表单数据(列表)});
     //表单数据
     {
         name: "h1", //元素名
         id: "h1", //元素ID(选填)
+        html: "html", //内容(富文本)(选填)
+        text: "text", //内容(纯文本)(选填)
         class: "h1", //元素类名(选填)
         style: {}, //样式(选填)
         event: {}, //事件(选填)
         property: {}, //属性(选填)
+    }
+//关闭对话框
+dialog.close();
+//创建一个关闭按钮
+dialog.closeButton({内容(HTML), {样式}, {回调函数(当关闭按钮被点击时)});
+//事件
+    //关闭
+    dialog.onclose = () => {
+        console.log("关闭");
+    }
+    //打开
+    dialog.onopen = id => {
+        console.log("打开，对话框ID：" + id);
     }
 ```
