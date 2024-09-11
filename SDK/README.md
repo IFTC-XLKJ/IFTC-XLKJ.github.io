@@ -48,3 +48,7 @@ const toast = new Toast();
     //获取所有提示(ID列表)
     const toasts = toast.toasts
 ```
+
+# 对话框
+
+需先导入 https://iftc-xlkj.github.io/SDK/Dialog.css 文件，否则排版会出错，CSS允许修改颜色之类的，乱修改容易导致排版出错
