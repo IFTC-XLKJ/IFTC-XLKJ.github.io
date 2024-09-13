@@ -82,3 +82,9 @@ let year = getYaer(timestamp)
 ```JavaScript
 let month = getMonth(timestamp)
 ```
+## getDay(timestamp[number])
+获取时间戳为 *timestamp* 的日
+### 用法
+```JavaScript
+getDay(timestamp)
+```
