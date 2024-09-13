@@ -64,3 +64,21 @@ let json = parseXmlToJsonObject(xmlStr)
 ```JavaScript
 let number = mathRandomInt(a, b)
 ```
+## nowTimestemp()
+获取当前时间的时间戳
+### 用法
+```JavaScript
+let timestamp = nowTimestamp();
+```
+## getYear(timestamp[number])
+获取时间戳为 *timestamp* 的年份
+### 用法
+```JavaScript
+let year = getYaer(timestamp)
+```
+## getMonth(timestamp[number])
+获取时间戳为 *timestamp* 的月份
+### 用法
+```JavaScript
+let month = getMonth(timestamp)
+```
