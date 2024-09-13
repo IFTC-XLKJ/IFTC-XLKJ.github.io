@@ -26,6 +26,20 @@ loadScript(url)
 ```
 
 ## print(content[string])
-控制台输出 *content*
+控制台输出日志 *content*
 ### 用法
+```JavaScript
 print(content)
+```
+## warn(content[string])
+控制台输出警告 *content*
+### 用法
+```JavaScript
+warn(content)
+```
+## error(content[string])
+控制台输出错误 *content*
+### 用法
+```JavaScript
+error(content)
+```
