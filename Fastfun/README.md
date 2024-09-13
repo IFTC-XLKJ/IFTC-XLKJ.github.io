@@ -112,3 +112,18 @@ let minutes = getMinutes(timestamp)
 ```JavaScript
 let seconds = getSeconds(content)
 ```
+## createBinFile(array[array], mimeType = "applcation/octet-stream"[string])
+通过Uint8Array( *array* )创建一个MIME类型为 *mimeType* 的二进制文件，并返回dataURL
+### 用法
+```JavaScript
+let dataUrl = createBinFile(array)
+```
+## readBinFile(url[string])
+通过 *url* 获取二进制文件的Uint8Array
+### 用法
+```JavaScript
+readBinFile(url)
+    .then(array => {
+        console.log(array)
+    })
+```
