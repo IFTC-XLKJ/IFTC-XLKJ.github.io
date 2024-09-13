@@ -1,4 +1,4 @@
-# 快捷函数
+# 快捷函数(全局)
 
 ## querySelector(selector)
 用于获取选择器为 *select* 的1个元素
