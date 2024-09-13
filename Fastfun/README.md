@@ -43,3 +43,12 @@ warn(content)
 ```JavaScript
 error(content)
 ```
+## readFileAsDataURL(file[File])
+读取文件为 *file* 的dataURL， *file* 是File对象中的某一个文件
+### 用法
+```JavaScript
+readFileAsDataURL(file)
+    .then(data => {
+        console.log("dataURL", data);
+    })
+```
