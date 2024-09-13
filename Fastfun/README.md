@@ -16,3 +16,10 @@ let elements = querySelectorAll(selector)
 
 ## loadScript(url)
 加载链接为 *url* 的脚本文件
+### 用法
+```JavaScript
+loadScript(url)
+    .then(success => {
+        console("脚本加载成功：", success);
+    })
+```
