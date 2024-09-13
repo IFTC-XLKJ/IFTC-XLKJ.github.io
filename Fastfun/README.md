@@ -127,3 +127,9 @@ readBinFile(url)
         console.log(array)
     })
 ```
+## getOS()
+获取操作系统，返回操作系统名称和版本
+### 用法
+```JavaScript
+let OS = getOS()
+```
