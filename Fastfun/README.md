@@ -86,5 +86,5 @@ let month = getMonth(timestamp)
 获取时间戳为 *timestamp* 的日
 ### 用法
 ```JavaScript
-getDay(timestamp)
+let day = getDay(timestamp)
 ```
