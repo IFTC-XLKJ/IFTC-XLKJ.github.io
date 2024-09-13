@@ -88,3 +88,27 @@ let month = getMonth(timestamp)
 ```JavaScript
 let day = getDay(timestamp)
 ```
+## getWeek(timestamp[number])
+获取时间戳为 *timestamp* 的周
+### 用法
+```JavaScript
+let week = getWeek(timestamp)
+```
+## getHours(timestamp[number])
+获取时间戳为 *timestamp* 的小时
+### 用法
+```JavaScript
+let hours = getHours(content)
+```
+## getMinutes(timestamp[number])
+获取时间戳为 *timestamp* 的分钟
+### 用法
+```JavaScript
+let minutes = getMinutes(timestamp)
+```
+## getSeconds(timestamp[number])
+获取时间戳为 *timestamp* 的秒
+### 用法
+```JavaScript
+let seconds = getSeconds(content)
+```
