@@ -58,3 +58,9 @@ readFileAsDataURL(file)
 ```JavaScript
 let json = parseXmlToJsonObject(xmlStr)
 ```
+## mathRandomInt(a[number], b[number])
+在 *a* 和 *b* 之间取随机整数
+### 用法
+```JavaScript
+let number = mathRandomInt(a, b)
+```
