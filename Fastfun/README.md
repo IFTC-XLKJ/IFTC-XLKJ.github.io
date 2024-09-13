@@ -44,7 +44,7 @@ warn(content)
 error(content)
 ```
 ## readFileAsDataURL(file[File])
-读取文件为 *file* 的dataURL， *file* 是File对象中的某一个文件
+读取文件为 *file* 的dataURL， *file* 是File对象中的第n个文件
 ### 用法
 ```JavaScript
 readFileAsDataURL(file)
