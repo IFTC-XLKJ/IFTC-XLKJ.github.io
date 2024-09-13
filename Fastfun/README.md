@@ -52,3 +52,9 @@ readFileAsDataURL(file)
         console.log("dataURL", data);
     })
 ```
+## parseXmlToJsonObject(xmlStr[string])
+将 *xmlStr* 的XML转换成JSON，支持中文字符
+### 用法
+```JavaScript
+let json = parseXmlToJsonObject(xmlStr)
+```
