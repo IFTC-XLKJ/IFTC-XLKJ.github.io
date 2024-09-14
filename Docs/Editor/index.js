@@ -130,6 +130,15 @@ window.onload = () => {
                 x: e.clientX,
                 y: e.clientY,
             })
+        } else if (Widget.dataset.id == "H2") {
+            docbody.innerHTML += `<${Widget.dataset.element} id="${id}" data-type="H1" data-widget="true" style="position: absolute;top: ${e.clientY}px;left: ${e.clientX}px;user-select: none;">${Widget.dataset.value}</${Widget.dataset.element}>`;
+            docdata.docbody.push({
+                type: "H2",
+                id: id,
+                text: "二级标题",
+                x: e.clientX,
+                y: e.clientY,
+            })
         }
         const widget = document.getElementById(id);
         const docwidgets = document.querySelectorAll(`[data-widget="true"]`);
