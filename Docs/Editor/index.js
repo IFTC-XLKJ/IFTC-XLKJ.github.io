@@ -15,6 +15,7 @@ window.isMobile = isMobileDevice();
 
 window.docdata = {
     title: "新的文档",
+    id: mathRandomInt(10000000000000, 99999999999999),
     docconfig: {
         bgcolor: "#FFFFFF",
         width: 0,
