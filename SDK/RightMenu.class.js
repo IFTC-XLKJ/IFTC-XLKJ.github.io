@@ -1,9 +1,9 @@
 class RightMenu {
     constructor(css) {
-        if (!document.querySelector(`link[href="${css ? css : "./RightMenu.css"}"]`)) {
+        if (!document.querySelector(`link[href="${css ? css : "/SDK/RightMenu.css"}"]`)) {
             const link = document.createElement("link");
             link.rel = "stylesheet";
-            link.href = `${css ? css : "./RightMenu.css"}`;
+            link.href = `${css ? css : "/SDK/RightMenu.css"}`;
             document.head.appendChild(link);
         }
     }
