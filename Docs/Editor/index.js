@@ -788,8 +788,7 @@ window.onload = () => {
 
     document.oncontextmenu = function (e) {
         console.log(e.target.tagName)
-        if (e.target.tagName == "A") {
-            window.open(e.target.dataset.href);
+        if (e.target.dataset.widget) {
             return 0;
         }
     };
