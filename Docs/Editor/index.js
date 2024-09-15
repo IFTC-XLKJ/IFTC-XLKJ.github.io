@@ -789,6 +789,14 @@ window.onload = () => {
     document.oncontextmenu = function (e) {
         console.log(e.target.tagName)
         if (e.target.dataset.widget) {
+            const rightMebu = new RightMenu();
+            rightMebu.show([
+                {
+                    text: "test",
+                },
+                e.clientX,
+                e.clientY
+            ])
             return 0;
         }
     };
