@@ -482,6 +482,50 @@ window.onload = () => {
                 label: "Y坐标",
                 placeholder: "Y",
             })
+        } else if (widgetData.type == "H2") {
+            WidgetProps.push({
+                type: "input",
+                valueType: "text",
+                value: widget.innerHTML,
+                label: "内容",
+                placeholder: "内容",
+            })
+            WidgetProps.push({
+                type: "input",
+                valueType: "number",
+                value: Number(widget.style.left.slice(0, widget.style.left.length - 2)),
+                label: "X坐标",
+                placeholder: "X",
+            })
+            WidgetProps.push({
+                type: "input",
+                valueType: "number",
+                value: Number(widget.style.top.slice(0, widget.style.top.length - 2)),
+                label: "Y坐标",
+                placeholder: "Y",
+            })
+        } else if (widgetData.type == "H3") {
+            WidgetProps.push({
+                type: "input",
+                valueType: "text",
+                value: widget.innerHTML,
+                label: "内容",
+                placeholder: "内容",
+            })
+            WidgetProps.push({
+                type: "input",
+                valueType: "number",
+                value: Number(widget.style.left.slice(0, widget.style.left.length - 2)),
+                label: "X坐标",
+                placeholder: "X",
+            })
+            WidgetProps.push({
+                type: "input",
+                valueType: "number",
+                value: Number(widget.style.top.slice(0, widget.style.top.length - 2)),
+                label: "Y坐标",
+                placeholder: "Y",
+            })
         }
         const form = new Form("properties", WidgetProps);
         if (widgetData.type == "TEXT") {
@@ -616,6 +660,74 @@ window.onload = () => {
                 }
             }
         } else if (widgetData.type == "H1") {
+            const content = form.form[1].querySelector("input");
+            content.oninput = e => {
+                widget.innerHTML = content.value;
+                WidgetProps[1] = {
+                    type: "input",
+                    valueType: "text",
+                    value: widget.innerHTML,
+                    label: "内容",
+                    placeholder: "内容",
+                }
+                widgetData.text = content.value;
+                if (content.value == "") {
+                    widget.innerHTML = " ";
+                }
+                widget.style.maxWidth = `${doc.offsetWidth - 1}px`;
+                if (widget.offsetWidth >= doc.offsetWidth - Number(widget.style.left.slice(0, widget.style.left.length - 2))) {
+                    widget.style.left = `101px`;
+                }
+            }
+            const X = form.form[2].querySelector("input");
+            X.oninput = e => {
+                if (X.value >= 100 || X.value <= (docmain.offsetWidth + 100) - docWidget.offsetWidth) {
+                    widget.style.left = `${X.value}px`;
+                    widgetData.x = X.value;
+                }
+            }
+            const Y = form.form[3].querySelector("input");
+            Y.oninput = e => {
+                if (Y.value >= 0 && Y.value <= docmain.offsetHeight - widget.offsetHeight) {
+                    widget.style.top = `${Y.value}px`;
+                    widgetData.y = Y.value;
+                }
+            }
+        } else if (widgetData.type == "H2") {
+            const content = form.form[1].querySelector("input");
+            content.oninput = e => {
+                widget.innerHTML = content.value;
+                WidgetProps[1] = {
+                    type: "input",
+                    valueType: "text",
+                    value: widget.innerHTML,
+                    label: "内容",
+                    placeholder: "内容",
+                }
+                widgetData.text = content.value;
+                if (content.value == "") {
+                    widget.innerHTML = " ";
+                }
+                widget.style.maxWidth = `${doc.offsetWidth - 1}px`;
+                if (widget.offsetWidth >= doc.offsetWidth - Number(widget.style.left.slice(0, widget.style.left.length - 2))) {
+                    widget.style.left = `101px`;
+                }
+            }
+            const X = form.form[2].querySelector("input");
+            X.oninput = e => {
+                if (X.value >= 100 || X.value <= (docmain.offsetWidth + 100) - docWidget.offsetWidth) {
+                    widget.style.left = `${X.value}px`;
+                    widgetData.x = X.value;
+                }
+            }
+            const Y = form.form[3].querySelector("input");
+            Y.oninput = e => {
+                if (Y.value >= 0 && Y.value <= docmain.offsetHeight - widget.offsetHeight) {
+                    widget.style.top = `${Y.value}px`;
+                    widgetData.y = Y.value;
+                }
+            }
+        } else if (widgetData.type == "H3") {
             const content = form.form[1].querySelector("input");
             content.oninput = e => {
                 widget.innerHTML = content.value;
