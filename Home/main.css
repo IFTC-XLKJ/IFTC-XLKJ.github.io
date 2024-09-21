@@ -83,3 +83,11 @@
     transform: scale(1.01);
     z-index: 1000;
 }
+
+.icp {
+    height: 25px;
+    color: deepskyblue;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+}
