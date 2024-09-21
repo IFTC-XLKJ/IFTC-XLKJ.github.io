@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var winheight = window.innerHeight;
     var app = document.querySelector('#app');
     app.style.width = winwidth + 'px';
-    app.style.height = (winheight - 90) + 'px';
+    app.style.height = (winheight - 90 - 25) + 'px';
     var player = document.querySelector('#player');
     player.style.width = winwidth + 'px';
     player.style.height = 60 + 'px';
@@ -699,7 +699,7 @@ window.addEventListener('resize', function () {
     var winheight = window.innerHeight;
     var app = document.querySelector('#app');
     app.style.width = winwidth + 'px';
-    app.style.height = (winheight - 90) + 'px';
+    app.style.height = (winheight - 90 - 25) + 'px';
     var player = document.querySelector('#player');
     player.style.width = winwidth + 'px';
     player.style.height = 60 + 'px';
