@@ -62,6 +62,29 @@ onload = () => {
             },
             {
                 kind: "category",
+                name: "样式",
+                colour: 120,
+                contents: [
+                    {
+                        kind: "block",
+                        type: "style_selector",
+                    },
+                    {
+                        kind: "block",
+                        type: "style_color",
+                    },
+                    {
+                        kind: "block",
+                        type: "style_bgcolor"
+                    },
+                    {
+                        kind: "block",
+                        type: "style_custom"
+                    },
+                ]
+            },
+            {
+                kind: "category",
                 name: "控制",
                 colour: 200,
                 contents: [
@@ -168,7 +191,6 @@ onload = () => {
             this.setPreviousStatement(true);
             this.appendDummyInput()
                 .appendField('级')
-            this.appendValueInput("content")
                 .appendField(new Blockly.FieldTextInput("文本", null, null, 'blocklyHidden'), "content")
             this.appendStatementInput('html')
                 .appendField('');
@@ -194,7 +216,6 @@ onload = () => {
             this.setPreviousStatement(true);
             this.appendDummyInput()
                 .appendField('一级标题')
-            this.appendValueInput("content")
                 .appendField(new Blockly.FieldTextInput("标题", null, null, 'blocklyHidden'), "content")
             this.appendStatementInput('html')
                 .appendField('');
@@ -245,6 +266,77 @@ onload = () => {
     Blockly.JavaScript.forBlock['prop_class'] = function (block) {
         var Class = block.getFieldValue("class")
         var code = `class="${Class}"\n`;
+        return code;
+    }
+    // 样式 积木
+    Blockly.Blocks['style_selector'] = {
+        init: function () {
+            this.setNextStatement(true);
+            this.setPreviousStatement(true);
+            this.appendDummyInput()
+                .appendField('样式')
+                .appendField('选择器')
+                .appendField(new Blockly.FieldTextInput("body", null, null, 'blocklyHidden'), "selector")
+            this.appendStatementInput('styles')
+                .appendField('');
+            this.setOutput(false, "String");
+            this.setColour(160);
+        }
+    };
+    Blockly.JavaScript.forBlock['style_selector'] = function (block) {
+        var selector = block.getFieldValue("selector")
+        var style = Blockly.JavaScript.statementToCode(block, 'styles')
+        var code = `${selector}{\n${style}\n}`;
+        return code;
+    }
+    Blockly.Blocks['style_color'] = {
+        init: function () {
+            this.setNextStatement(true);
+            this.setPreviousStatement(true);
+            this.appendDummyInput()
+                .appendField('颜色')
+                .appendField(new Blockly.FieldTextInput("#333", null, null, 'blocklyHidden'), "color")
+            this.setOutput(false, "String");
+            this.setColour(160);
+        }
+    };
+    Blockly.JavaScript.forBlock['style_color'] = function (block) {
+        var color = block.getFieldValue("color")
+        var code = `color: ${color};\n`;
+        return code;
+    }
+    Blockly.Blocks['style_bgcolor'] = {
+        init: function () {
+            this.setNextStatement(true);
+            this.setPreviousStatement(true);
+            this.appendDummyInput()
+                .appendField('背景颜色')
+                .appendField(new Blockly.FieldTextInput("#333", null, null, 'blocklyHidden'), "color")
+            this.setOutput(false, "String");
+            this.setColour(160);
+        }
+    };
+    Blockly.JavaScript.forBlock['style_bgcolor'] = function (block) {
+        var color = block.getFieldValue("color")
+        var code = `background-color: ${color};\n`;
+        return code;
+    }
+    Blockly.Blocks['style_custom'] = {
+        init: function () {
+            this.setNextStatement(true);
+            this.setPreviousStatement(true);
+            this.appendDummyInput()
+                .appendField('自定义样式')
+                .appendField(new Blockly.FieldTextInput("样式名", null, null, 'blocklyHidden'), "style")
+                .appendField(new Blockly.FieldTextInput("样式值", null, null, 'blocklyHidden'), "value")
+            this.setOutput(false, "String");
+            this.setColour(160);
+        }
+    };
+    Blockly.JavaScript.forBlock['style_custom'] = function (block) {
+        var style = block.getFieldValue("style")
+        var value = block.getFieldValue("value")
+        var code = `${style}: ${value};\n`;
         return code;
     }
 
