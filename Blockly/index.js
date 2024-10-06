@@ -352,6 +352,7 @@ onload = () => {
             length: 3,
             colour: '#ccc',
         },
+        trashcan: false,
     });
     console.log('Workspace initialized:', workspace);
     function updateCode(event) {
@@ -359,13 +360,83 @@ onload = () => {
         div_block_blocklyOutlinePaths.forEach(blocklyOutlinePath => {
             blocklyOutlinePath.remove()
         })
+        function getBlockInfo() {
+            const blocks = Blockly.Xml.workspaceToDom(workspace);
+            return blocks;
+        }
         if (workspace && Blockly.JavaScript) {
             const code = Blockly.JavaScript.workspaceToCode(workspace);
             console.log(code);
+            console.log(getBlockInfo())
             preview.innerHTML = code;
+            const xml = Blockly.Xml.workspaceToDom(workspace);
+            const xmlText = Blockly.Xml.domToText(xml).replaceAll(' xmlns="https://developers.google.com/blockly/xml"', "");
+            if (xmlText != '<xml></xml>') {
+                localStorage.setItem('blocklyData', xmlText);
+            }
         } else {
             console.error('Workspace or Blockly.JavaScript is not defined.');
         }
     }
     workspace.addChangeListener(updateCode);
+    preview.addEventListener("contextmenu", e => {
+        previewMenu(e)
+        e.preventDefault();
+    })
+    function previewMenu(e) {
+        const { offsetX, offsetY } = e;
+        console.log(offsetX, offsetY)
+        var menuMain = document.createElement("div");
+        menuMain.className = `menu-main`;
+        menuMain.style.left = `${offsetX + (innerWidth - 360)}px`;
+        menuMain.style.top = `${offsetY + 50}px`;
+        preview.appendChild(menuMain)
+        var refresh = document.createElement("div")
+        refresh.innerText = "刷新";
+        refresh.id = "pre-refresh"
+        refresh.addEventListener("click", e => {
+            preview.innerHTML = "";
+            setTimeout(() => {
+                if (workspace && Blockly.JavaScript) {
+                    const code = Blockly.JavaScript.workspaceToCode(workspace);
+                    console.log(code);
+                    preview.innerHTML = code;
+                } else {
+                    console.error('Workspace or Blockly.JavaScript is not defined.');
+                }
+            }, 50)
+        })
+        menuMain.appendChild(refresh)
+        console.log(innerWidth - (offsetX + (innerWidth - 360)))
+        if (innerWidth - (offsetX + (innerWidth - 360)) < 100) {
+            menuMain.style.left = `${offsetX + (innerWidth - 360) - 100}px`
+        }
+        if (innerHeight - (offsetY + 50) - 50 < menuMain.offsetHeight) {
+            menuMain.style.top = `${(offsetY + 50) - menuMain.offsetHeight}px`
+        }
+        menuMain.addEventListener("contextmenu", event => {
+            menuMain.remove()
+            previewMenu(e)
+            e.preventDefault();
+        })
+        window.addEventListener("click", e => {
+            menuMain.remove();
+        })
+        setTimeout(() => {
+            document.addEventListener("contextmenu", e => {
+                menuMain.remove();
+            })
+        }, 10)
+    }
+    const blocklyFlyoutBackground = document.querySelector(".blocklyFlyoutBackground");
+    blocklyFlyoutBackground.style.fill = "white";
+    blocklyFlyoutBackground.style.fillOpacity = "0.5"
+    const savedXmlText = localStorage.getItem('blocklyData');
+    if (savedXmlText) {
+        console.log('Loaded XML on page load:', savedXmlText);
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(savedXmlText, 'text/xml');
+        console.log('Parsed XML on page load:', xml);
+        Blockly.Xml.domToWorkspace(xml, workspace);
+    }
 }
