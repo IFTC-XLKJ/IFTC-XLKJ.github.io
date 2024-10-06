@@ -21,8 +21,18 @@ body {
     grid-template-columns: 1fr 360px;
 }
 
+.blocklyToolboxDiv {
+    background-color: white;
+    box-shadow: 0 0 5px #47474788;
+    border-radius: 0 5px 5px 0;
+}
+
 .blocklyHidden {
     display: none !important;
+}
+
+.blocklyTreeRow {
+    border-radius: 10px;
 }
 
 input::selection {
@@ -31,9 +41,28 @@ input::selection {
     font-weight: normal;
 }
 
+#preview {
+    overflow-y: auto;
+    height: calc(100vh - 50px);
+}
+
 #preciew div {
     word-wrap: break-word;
     word-break: keep-all;
     white-space: pre-wrap;
     overflow-wrap: break-word;
+}
+
+.menu-main {
+    position: fixed;
+    width: 100px;
+    height: fit-content;
+    padding: 3px;
+    border-radius: 7px;
+    box-shadow: 0 0 3px #47474788;
+}
+
+#pre-refresh {
+    text-align: center;
+    cursor: pointer;
 }
