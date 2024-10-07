@@ -603,52 +603,75 @@ onload = () => {
             }
         }
     })
+    function renderImg(image, index) {
+        const imageList = document.querySelector(".images");
+        var img = document.createElement("img");
+        img.src = image[1];
+        img.alt = image[0];
+        img.dataset.num = index;
+        img.style.cursor = "pointer"
+        img.addEventListener("click", e => {
+            var operation = document.createElement("dialog")
+            operation.className = "op-img"
+            var h1 = document.createElement("h1")
+            h1.innerText = "“" + img.alt + "”的操作"
+            operation.appendChild(h1)
+            var name = document.createElement("input")
+            name.value = img.alt
+            const imgName = img.alt;
+            name.placeholder = "请输入图片名"
+            name.className = "op-img-name"
+            name.addEventListener("input", e => {
+                images[index][0] = name.value;
+                img.alt = name.value
+                h1.innerText = "“" + name.value + "”的操作"
+            })
+            operation.appendChild(name)
+            var Delete = document.createElement("button")
+            Delete.innerText = "删除"
+            Delete.className = "op-img-delete"
+            Delete.addEventListener("click", e => {
+                delete images[index]
+                operation.remove()
+                renderSources()
+            })
+            operation.appendChild(Delete)
+            var cancel = document.createElement("button")
+            cancel.innerText = "取消"
+            cancel.className = "op-img-cancel"
+            cancel.addEventListener("click", e => {
+                operation.remove()
+            })
+            operation.appendChild(cancel)
+            document.body.appendChild(operation)
+            operation.showModal();
+        })
+        imageList.appendChild(img)
+    }
     function renderSources() {
         const imageList = document.querySelector(".images");
         imageList.innerHTML = ""
-        images.forEach((image, index) => {
-            var img = document.createElement("img");
-            img.src = image[1];
-            img.alt = image[0];
-            img.dataset.num = index;
-            img.style.cursor = "pointer"
-            img.addEventListener("click", e => {
-                var operation = document.createElement("dialog")
-                operation.className = "op-img"
-                var h1 = document.createElement("h1")
-                h1.innerText = "“" + img.alt + "”的操作"
-                operation.appendChild(h1)
-                var name = document.createElement("input")
-                name.value = img.alt
-                const imgName = img.alt;
-                name.placeholder = "请输入图片名"
-                name.className = "op-img-name"
-                name.addEventListener("input", e => {
-                    images[index][0] = name.value;
-                    img.alt = name.value
-                    h1.innerText = "“" + name.value + "”的操作"
-                })
-                operation.appendChild(name)
-                var Delete = document.createElement("button")
-                Delete.innerText = "删除"
-                Delete.className = "op-img-delete"
-                Delete.addEventListener("click", e => {
-                    delete images[index]
-                    operation.remove()
-                    renderSources()
-                })
-                operation.appendChild(Delete)
-                var cancel = document.createElement("button")
-                cancel.innerText = "取消"
-                cancel.className = "op-img-cancel"
-                cancel.addEventListener("click", e => {
-                    operation.remove()
-                })
-                operation.appendChild(cancel)
-                document.body.appendChild(operation)
-                operation.showModal();
-            })
-            imageList.appendChild(img)
-        })
+        images.forEach(renderImg)
     }
+    imgUpload.addEventListener("click", e => {
+        var fileInput = document.createElement("input")
+        fileInput.type = "file"
+        fileInput.accept = "image/*"
+        fileInput.hidden = true
+        fileInput.addEventListener("change", e => {
+            var file = e.target.files[0]
+            if (file) {
+                const reader = new FileReader();
+                reader.onloadend = function () {
+                    const dataURL = reader.result;
+                    console.log('Data URL:', dataURL);
+                    images.push([file.name, dataURL])
+                    renderImg(images[images.length - 1], images.length - 1)
+                };
+                reader.readAsDataURL(file);
+            }
+        })
+        document.body.appendChild(fileInput)
+        fileInput.click();
+    })
 }
