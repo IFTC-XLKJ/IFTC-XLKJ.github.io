@@ -235,6 +235,56 @@ onload = () => {
         var code = `<h1 style="${style}" ${prop}>\n${htmlText(content)}${html}</h1>\n`;
         return code;
     }
+    Blockly.Blocks['element_h2'] = {
+        init: function () {
+            this.setNextStatement(true);
+            this.setPreviousStatement(true);
+            this.appendDummyInput()
+                .appendField('二级标题')
+                .appendField(new Blockly.FieldTextInput("标题", null, null, 'blocklyHidden'), "content")
+            this.appendStatementInput('html')
+                .appendField('');
+            this.appendStatementInput('prop')
+                .appendField('属性');
+            this.appendStatementInput('style')
+                .appendField('样式');
+            this.setOutput(false, "String");
+            this.setColour(160);
+        }
+    };
+    Blockly.JavaScript.forBlock['element_h2'] = function (block) {
+        var html = Blockly.JavaScript.statementToCode(block, 'html')
+        var style = Blockly.JavaScript.statementToCode(block, 'style')
+        var prop = Blockly.JavaScript.statementToCode(block, 'prop')
+        var content = block.getFieldValue("content")
+        var code = `<h2 style="${style}" ${prop}>\n${htmlText(content)}${html}</h2>\n`;
+        return code;
+    }
+    Blockly.Blocks['element_h3'] = {
+        init: function () {
+            this.setNextStatement(true);
+            this.setPreviousStatement(true);
+            this.appendDummyInput()
+                .appendField('三级标题')
+                .appendField(new Blockly.FieldTextInput("标题", null, null, 'blocklyHidden'), "content")
+            this.appendStatementInput('html')
+                .appendField('');
+            this.appendStatementInput('prop')
+                .appendField('属性');
+            this.appendStatementInput('style')
+                .appendField('样式');
+            this.setOutput(false, "String");
+            this.setColour(160);
+        }
+    };
+    Blockly.JavaScript.forBlock['element_h3'] = function (block) {
+        var html = Blockly.JavaScript.statementToCode(block, 'html')
+        var style = Blockly.JavaScript.statementToCode(block, 'style')
+        var prop = Blockly.JavaScript.statementToCode(block, 'prop')
+        var content = block.getFieldValue("content")
+        var code = `<h3 style="${style}" ${prop}>\n${htmlText(content)}${html}</h3>\n`;
+        return code;
+    }
     // 属性 积木
     Blockly.Blocks['prop_id'] = {
         init: function () {
