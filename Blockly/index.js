@@ -285,6 +285,31 @@ onload = () => {
         var code = `<h3 style="${style}" ${prop}>\n${htmlText(content)}${html}</h3>\n`;
         return code;
     }
+    Blockly.Blocks['element_img'] = {
+        init: function () {
+            this.setNextStatement(true);
+            this.setPreviousStatement(true);
+            this.appendDummyInput()
+                .appendField('图片')
+                .appendField(new Blockly.FieldTextInput("标题", null, null, 'blocklyHidden'), "content")
+            this.appendStatementInput('html')
+                .appendField('');
+            this.appendStatementInput('prop')
+                .appendField('属性');
+            this.appendStatementInput('style')
+                .appendField('样式');
+            this.setOutput(false, "String");
+            this.setColour(160);
+        }
+    };
+    Blockly.JavaScript.forBlock['element_h1'] = function (block) {
+        var html = Blockly.JavaScript.statementToCode(block, 'html')
+        var style = Blockly.JavaScript.statementToCode(block, 'style')
+        var prop = Blockly.JavaScript.statementToCode(block, 'prop')
+        var content = block.getFieldValue("content")
+        var code = `<h1 style="${style}" ${prop}>\n${htmlText(content)}${html}</h1>\n`;
+        return code;
+    }
     // 属性 积木
     Blockly.Blocks['prop_id'] = {
         init: function () {
@@ -403,6 +428,21 @@ onload = () => {
             colour: '#ccc',
         },
         trashcan: false,
+        move: {
+            scrollbars: {
+                horizontal: true,
+                vertical: true
+            },
+            drag: true,
+            wheel: true
+        },
+        zoom: {
+            controls: true,
+            wheel: true,
+            maxScale: 5,
+            minScale: 0.1,
+            scaleSpeed: 1.5
+        }
     });
     console.log('Workspace initialized:', workspace);
     function updateCode(event) {
