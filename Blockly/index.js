@@ -3,8 +3,10 @@ const htmlText = html => {
         .replaceAll("<", "&lt;")
         .replaceAll(">", "&gt;")
 }
-window.image = [
+window.images = [
     ["空空如也.png", "https://creation.codemao.cn/884/l4zc7yiy.png?imageMogr2/thumbnail/!200x200r/blur/1x0/quality/100|imageslim"]
+]
+window.scripts = [
 ]
 onload = () => {
     console.log('Page loaded and Blockly is initializing...');
@@ -76,7 +78,11 @@ onload = () => {
                     {
                         kind: "block",
                         type: "prop_class"
-                    }
+                    },
+                    {
+                        kind: "block",
+                        type: "prop_dataset"
+                    },
                 ]
             },
             {
@@ -193,8 +199,9 @@ onload = () => {
             this.setPreviousStatement(true);
             this.appendDummyInput()
                 .appendField('脚本')
+                .appendField(new Blockly.FieldDropdown(scripts)
             this.appendStatementInput('js')
-                .appendField('');
+                        .appendField('');
             this.appendStatementInput('prop')
                 .appendField('属性');
             this.setOutput(false, "String");
@@ -204,7 +211,8 @@ onload = () => {
     Blockly.JavaScript.forBlock['element_script'] = function (block) {
         var js = Blockly.JavaScript.statementToCode(block, 'js')
         var prop = Blockly.JavaScript.statementToCode(block, 'prop')
-        var code = `<script ${prop}>\n${js}</script>\n`;
+        var url = block.getFieldValue("url")
+        var code = `<script src="${url}" ${prop}>\n${js}</script>\n`;
         return code;
     }
     Blockly.Blocks['element_style'] = {
@@ -330,7 +338,7 @@ onload = () => {
             this.setPreviousStatement(true);
             this.appendDummyInput()
                 .appendField('图片')
-                .appendField(new Blockly.FieldDropdown(image), "img")
+                .appendField(new Blockly.FieldDropdown(images), "img")
             this.appendStatementInput('prop')
                 .appendField('属性');
             this.appendStatementInput('style')
@@ -377,6 +385,24 @@ onload = () => {
     Blockly.JavaScript.forBlock['prop_class'] = function (block) {
         var Class = block.getFieldValue("class")
         var code = `class="${Class}"\n`;
+        return code;
+    }
+    Blockly.Blocks['prop_dataset'] = {
+        init: function () {
+            this.setNextStatement(true);
+            this.setPreviousStatement(true);
+            this.appendDummyInput()
+                .appendField('自定义属性')
+                .appendField(new Blockly.FieldTextInput("属性名", null, null, 'blocklyHidden'), "name")
+                .appendField(new Blockly.FieldTextInput("属性值", null, null, ""), "value")
+            this.setOutput(false, "String");
+            this.setColour(160);
+        }
+    };
+    Blockly.JavaScript.forBlock['prop_dataset'] = function (block) {
+        var name = block.getFieldValue("name")
+        var value = block.getFieldValue("value")
+        var code = `data-${name}="${value}"\n`;
         return code;
     }
     // 样式 积木
