@@ -32,9 +32,10 @@
 <body>
     <div class="nav">
         <div class="icon">
-            <img src="https://iftc.free.nf/VOCH.svg">
+            <img src="/VOCH.svg">
         </div>
-        <div id="soures">资源管理</div>
+        <div id="sources">资源管理</div>
+        <div id="none"></div>
     </div>
     <div id="app">
         <div id="blocklyDiv" style="width: calc(100vw - 360px);height: calc(100vh - 50px);"></div>
@@ -45,6 +46,11 @@
     <script src="blockly/package/blocks_compressed.js"></script>
     <script src="blockly/package/javascript_compressed.js"></script>
     <script src="blockly/package/msg/zh-hans.js"></script>
+    <div id="sources-mask" style="display: none;">
+        <div class="sources-main">
+            <h1 class="image-sources">图片</h1>
+        </div>
+    </div>
 </body>
 
 </html>
