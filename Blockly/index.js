@@ -33,6 +33,10 @@ onload = () => {
                     },
                     {
                         kind: "block",
+                        type: "element_script",
+                    },
+                    {
+                        kind: "block",
                         type: "element_style",
                     },
                     {
@@ -166,6 +170,26 @@ onload = () => {
     Blockly.JavaScript.forBlock['element_body'] = function (block) {
         var html = Blockly.JavaScript.statementToCode(block, 'html')
         var code = `<body>\n${html}</body>\n`;
+        return code;
+    }
+    Blockly.Blocks['element_script'] = {
+        init: function () {
+            this.setNextStatement(true);
+            this.setPreviousStatement(true);
+            this.appendDummyInput()
+                .appendField('脚本')
+            this.appendStatementInput('js')
+                .appendField('');
+            this.appendStatementInput('prop')
+                .appendField('属性');
+            this.setOutput(false, "String");
+            this.setColour(160);
+        }
+    };
+    Blockly.JavaScript.forBlock['element_script'] = function (block) {
+        var js = Blockly.JavaScript.statementToCode(block, 'js')
+        var prop = Blockly.JavaScript.statementToCode(block, 'prop')
+        var code = `<script ${prop}>\n${js}</script>\n`;
         return code;
     }
     Blockly.Blocks['element_style'] = {
@@ -446,10 +470,6 @@ onload = () => {
     });
     console.log('Workspace initialized:', workspace);
     function updateCode(event) {
-        const div_block_blocklyOutlinePaths = document.querySelectorAll(".blocklyOutlinePath")
-        div_block_blocklyOutlinePaths.forEach(blocklyOutlinePath => {
-            blocklyOutlinePath.remove()
-        })
         function getBlockInfo() {
             const blocks = Blockly.Xml.workspaceToDom(workspace);
             return blocks;
