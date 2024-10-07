@@ -108,3 +108,29 @@ input::selection {
     display: grid;
     grid-template-columns: auto auto auto auto;
 }
+
+dialog {
+    width: 30vw;
+    height: fit-content;
+    text-align: center;
+    border: none;
+    border-radius: 15px;
+}
+
+input {
+    outline: none;
+}
+
+button {
+    outline: none;
+    border: none;
+}
+
+.op-img-name {
+    width: 280px;
+}
+
+.op-img-delete {
+    background-color: red;
+    color: white;
+}
