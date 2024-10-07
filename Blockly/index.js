@@ -3,6 +3,9 @@ const htmlText = html => {
         .replaceAll("<", "&lt;")
         .replaceAll(">", "&gt;")
 }
+window.image = [
+    ["空空如也.png", "https://creation.codemao.cn/884/l4zc7yiy.png?imageMogr2/thumbnail/!200x200r/blur/1x0/quality/100|imageslim"]
+]
 onload = () => {
     console.log('Page loaded and Blockly is initializing...');
 
@@ -46,6 +49,18 @@ onload = () => {
                     {
                         kind: "block",
                         type: "element_h1",
+                    },
+                    {
+                        kind: "block",
+                        type: "element_h2",
+                    },
+                    {
+                        kind: "block",
+                        type: "element_h3",
+                    },
+                    {
+                        kind: "block",
+                        type: "element_img",
                     },
                 ]
             },
@@ -315,9 +330,7 @@ onload = () => {
             this.setPreviousStatement(true);
             this.appendDummyInput()
                 .appendField('图片')
-                .appendField(new Blockly.FieldTextInput("标题", null, null, 'blocklyHidden'), "content")
-            this.appendStatementInput('html')
-                .appendField('');
+                .appendField(new Blockly.FieldDropdown(image), "img")
             this.appendStatementInput('prop')
                 .appendField('属性');
             this.appendStatementInput('style')
@@ -326,12 +339,11 @@ onload = () => {
             this.setColour(160);
         }
     };
-    Blockly.JavaScript.forBlock['element_h1'] = function (block) {
-        var html = Blockly.JavaScript.statementToCode(block, 'html')
+    Blockly.JavaScript.forBlock['element_img'] = function (block) {
         var style = Blockly.JavaScript.statementToCode(block, 'style')
         var prop = Blockly.JavaScript.statementToCode(block, 'prop')
-        var content = block.getFieldValue("content")
-        var code = `<h1 style="${style}" ${prop}>\n${htmlText(content)}${html}</h1>\n`;
+        var img = block.getFieldValue("img")
+        var code = `<img src="${img}" style="${style}" ${prop}>\n`;
         return code;
     }
     // 属性 积木
