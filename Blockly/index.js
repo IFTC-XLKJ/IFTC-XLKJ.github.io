@@ -605,6 +605,7 @@ onload = () => {
     })
     function renderSources() {
         const imageList = document.querySelector(".images");
+        imageList.innerHTML = ""
         images.forEach((image, index) => {
             var img = document.createElement("img");
             img.src = image[1];
@@ -613,8 +614,37 @@ onload = () => {
             img.style.cursor = "pointer"
             img.addEventListener("click", e => {
                 var operation = document.createElement("dialog")
+                operation.className = "op-img"
                 var h1 = document.createElement("h1")
-                h1.innerText = img.alt + "的操作"
+                h1.innerText = "“" + img.alt + "”的操作"
+                operation.appendChild(h1)
+                var name = document.createElement("input")
+                name.value = img.alt
+                const imgName = img.alt;
+                name.placeholder = "请输入图片名"
+                name.className = "op-img-name"
+                name.addEventListener("input", e => {
+                    images[index][0] = name.value;
+                })
+                operation.appendChild(name)
+                var Delete = document.createElement("button")
+                Delete.innerText = "删除"
+                Delete.className = "op-img-delete"
+                Delete.addEventListener("click", e => {
+                    delete images[index]
+                    operation.remove()
+                    renderSources()
+                })
+                operation.appendChild(Delete)
+                var cancel = document.createElement("button")
+                cancel.innerText = "取消"
+                cancel.className = "op-img-cancel"
+                cancel.addEventListener("click", e => {
+                    operation.remove()
+                })
+                operation.appendChild(cancel)
+                document.body.appendChild(operation)
+                operation.showModal();
             })
             imageList.appendChild(img)
         })
