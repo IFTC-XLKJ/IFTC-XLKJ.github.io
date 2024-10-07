@@ -202,7 +202,7 @@ onload = () => {
                 .appendField('脚本')
                 .appendField(new Blockly.FieldDropdown(scripts), "url")
             this.appendStatementInput('js')
-                        .appendField('');
+                .appendField('');
             this.appendStatementInput('prop')
                 .appendField('属性');
             this.setOutput(false, "String");
@@ -594,6 +594,7 @@ onload = () => {
     const sourcesMask = document.getElementById("sources-mask")
     sources.addEventListener("click", e => {
         sourcesMask.style.display = "flex"
+        renderSources();
         sourcesMask.addEventListener("click", closeSources)
         function closeSources(e) {
             if (e.target.id == "sources-mask") {
@@ -602,4 +603,20 @@ onload = () => {
             }
         }
     })
+    function renderSources() {
+        const imageList = document.querySelector(".images");
+        images.forEach((image, index) => {
+            var img = document.createElement("img");
+            img.src = image[1];
+            img.alt = image[0];
+            img.dataset.num = index;
+            img.style.cursor = "pointer"
+            img.addEventListener("click", e => {
+                var operation = document.createElement("dialog")
+                var h1 = document.createElement("h1")
+                h1.innerText = img.alt + "的操作"
+            })
+            imageList.appendChild(img)
+        })
+    }
 }
