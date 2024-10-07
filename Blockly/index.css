@@ -103,3 +103,8 @@ input::selection {
     margin: auto;
     border-radius: 15px;
 }
+
+.images {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
