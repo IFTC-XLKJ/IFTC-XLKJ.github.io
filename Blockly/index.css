@@ -128,6 +128,7 @@ button {
 
 .op-img-name {
     width: 280px;
+    border: none;
 }
 
 .op-img-delete {
