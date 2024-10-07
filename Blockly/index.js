@@ -7,6 +7,7 @@ window.images = [
     ["空空如也.png", "https://creation.codemao.cn/884/l4zc7yiy.png?imageMogr2/thumbnail/!200x200r/blur/1x0/quality/100|imageslim"]
 ]
 window.scripts = [
+    ["空脚本", "\\null\\"]
 ]
 onload = () => {
     console.log('Page loaded and Blockly is initializing...');
@@ -199,7 +200,7 @@ onload = () => {
             this.setPreviousStatement(true);
             this.appendDummyInput()
                 .appendField('脚本')
-                .appendField(new Blockly.FieldDropdown(scripts)
+                .appendField(new Blockly.FieldDropdown(scripts), "url")
             this.appendStatementInput('js')
                         .appendField('');
             this.appendStatementInput('prop')
@@ -212,6 +213,9 @@ onload = () => {
         var js = Blockly.JavaScript.statementToCode(block, 'js')
         var prop = Blockly.JavaScript.statementToCode(block, 'prop')
         var url = block.getFieldValue("url")
+        if (url == "\\null\\") {
+            url = ""
+        }
         var code = `<script src="${url}" ${prop}>\n${js}</script>\n`;
         return code;
     }
