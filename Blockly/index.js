@@ -625,6 +625,8 @@ onload = () => {
                 name.className = "op-img-name"
                 name.addEventListener("input", e => {
                     images[index][0] = name.value;
+                    img.alt = name.value
+                    h1.innerText = "“" + name.value + "”的操作"
                 })
                 operation.appendChild(name)
                 var Delete = document.createElement("button")
