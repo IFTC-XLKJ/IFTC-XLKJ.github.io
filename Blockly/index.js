@@ -502,10 +502,10 @@ onload = () => {
     }
     workspace.addChangeListener(updateCode);
     preview.addEventListener("contextmenu", e => {
-        previewMenu(e)
+        //previewMenu(e)
         e.preventDefault();
     })
-    function previewMenu(e) {
+    /*function previewMenu(e) {
         const { offsetX, offsetY } = e;
         console.log(offsetX, offsetY)
         var menuMain = document.createElement("div");
@@ -549,7 +549,7 @@ onload = () => {
                 menuMain.remove();
             })
         }, 10)
-    }
+    }*/
     const blocklyFlyoutBackground = document.querySelector(".blocklyFlyoutBackground");
     blocklyFlyoutBackground.style.fill = "white";
     blocklyFlyoutBackground.style.fillOpacity = "0.5"
@@ -561,4 +561,15 @@ onload = () => {
         console.log('Parsed XML on page load:', xml);
         Blockly.Xml.domToWorkspace(xml, workspace);
     }
+    const sourcesMask = document.getElementById("sources-mask")
+    sources.addEventListener("click", e => {
+        sourcesMask.style.display = "flex"
+        sourcesMask.addEventListener("click", closeSources)
+        function closeSources(e) {
+            if (e.target.id == "sources-mask") {
+                sourcesMask.style.display = "none"
+                sourcesMask.removeEventListener("click", closeSources)
+            }
+        }
+    })
 }
