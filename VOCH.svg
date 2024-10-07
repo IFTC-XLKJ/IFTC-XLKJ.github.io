@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 50 50" fill="none">
+<g  clip-path="url(#clip-path-0_1)">
+<path     fill="#FFFFFF" fill-opacity="0" d="M0 50L50 50L50 0L0 0L0 50Z">
+</path>
+<g >
+<text transform="translate(0, 13)">
+<tspan x="0" y="20.169921875" font-size="23" line-height="0"  fill="url(#linear_text_0_2})" opacity="20" font-family="xiaowei" letter-spacing="0" >
+Voch</tspan>
+<tspan x="0" y="20.169921875" font-size="23" line-height="0"  fill="url(#linear_text_0_2})" opacity="20" font-family="xiaowei" letter-spacing="0" >
+Voch</tspan>
+<tspan x="0" y="20.169921875" font-size="23" line-height="0"  fill="url(#linear_text_0_2})" opacity="100" font-family="xiaowei" letter-spacing="0" >
+Voch</tspan>
+</text>
+</g>
+</g>
+<defs>
+<clipPath id="clip-path-0_1">
+<path d="M0 50L50 50L50 0L0 0L0 50Z" fill="white"/>
+</clipPath>
+<linearGradient id="linear_text_0_2}" x1="47.6105" y1="40.205671875" x2="0" y2="24.631921875" gradientUnits="userSpaceOnUse">
+<stop offset="0" stop-color="#0073FF"  />
+<stop offset="1" stop-color="#00D0FF"  />
+</linearGradient>
+<radialGradient id="linear_text_0_2}" cx="0" cy="0" r="1" gradientTransform="translate(25 32.669921875) rotate(90) scale(25, 25)" gradientUnits="userSpaceOnUse">
+<stop offset="0.2499" stop-color="#00BBFF"  />
+<stop offset="0.7519" stop-color="#0091FF"  />
+</radialGradient>
+<radialGradient id="linear_text_0_2}" cx="0" cy="0" r="1" gradientTransform="translate(25 32.669921875) rotate(-226.00745530462513) scale(33.114262600275424, 17.996881847975775)" gradientUnits="userSpaceOnUse">
+<stop offset="0" stop-color="#00BBFF"  />
+<stop offset="1" stop-color="#00FFD5" stop-opacity="0.01" />
+</radialGradient>
+</defs>
+</svg>
