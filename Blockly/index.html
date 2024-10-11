@@ -1,8 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <!--
+    <head>
+        <!--
   //                          _ooOoo_                               //
   //                         o8888888o                              //
   //                         88" . "88                              //
@@ -24,36 +23,40 @@
   //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        //
   //            佛祖保佑       永不报错     永无BUG                   //
     -->
-    <meta charset="UTF-8">
-    <title>Blockly Example</title>
-    <link rel="stylesheet" href="index.css">
-</head>
+        <meta charset="UTF-8" />
+        <title>Blockly Example</title>
+        <link rel="stylesheet" href="index.css" />
+    </head>
 
-<body>
-    <div class="nav">
-        <div class="icon">
-            <img src="/VOCH.svg">
+    <body>
+        <div class="nav">
+            <div class="icon">
+                <img src="/VOCH.svg" />
+            </div>
+            <div id="sources">资源库</div>
+            <div id="none"></div>
         </div>
-        <div id="sources">资源库</div>
-        <div id="none"></div>
-    </div>
-    <div id="app">
-        <div id="blocklyDiv" style="width: calc(100vw - 360px);height: calc(100vh - 50px);"></div>
-        <div id="preview"></div>
-    </div>
-    <script src="index.js"></script>
-    <script src="blockly/package/blockly_compressed.js"></script>
-    <script src="blockly/package/blocks_compressed.js"></script>
-    <script src="blockly/package/javascript_compressed.js"></script>
-    <script src="blockly/package/msg/zh-hans.js"></script>
-    <div id="sources-mask" style="display: none;">
-        <div class="sources-main">
-            <h1 class="image-sources">图片</h1>
-            <div class="images"></div>
-            <button id="imgUpload">上传图片</button>
-            <h1 class="script-sources">脚本</h1>
+        <div id="app">
+            <div
+                id="blocklyDiv"
+                style="
+                    width: calc(100vw - 360px);
+                    height: calc(100vh - 50px);
+                "></div>
+            <div id="preview"></div>
         </div>
-    </div>
-</body>
-
+        <script src="index.js"></script>
+        <script src="blockly/package/blockly_compressed.js"></script>
+        <script src="blockly/package/blocks_compressed.js"></script>
+        <script src="blockly/package/javascript_compressed.js"></script>
+        <script src="blockly/package/msg/zh-hans.js"></script>
+        <div id="sources-mask" style="display: none">
+            <div class="sources-main">
+                <h1 class="image-sources">图片</h1>
+                <div class="images"></div>
+                <button id="imgUpload">上传图片</button>
+                <h1 class="script-sources">脚本</h1>
+            </div>
+        </div>
+    </body>
 </html>
