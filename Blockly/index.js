@@ -610,6 +610,8 @@ onload = () => {
         img.alt = image[0];
         img.dataset.num = index;
         img.style.cursor = "pointer"
+        img.style.width = "25%"
+        img.style.height = "25%"
         img.addEventListener("click", e => {
             var operation = document.createElement("dialog")
             operation.className = "op-img"
